@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
+import {MainRoute} from './app.routes';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
     LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MainRoute
   ],
   providers: [],
   bootstrap: [AppComponent]

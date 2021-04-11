@@ -23,12 +23,12 @@
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "src/favicon.ico",
+                            "src/assets/img/favicon.ico",
                             "src/assets",
                             "src/assets/*"
                         ],
                         "styles": [
-                            "src/assets/sass/app.scss"
+                            "src/assets/scss/app.scss"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
@@ -89,7 +89,7 @@
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
                         "assets": [
-                            "src/favicon.ico",
+                            "src/assets/img/favicon.ico",
                             "src/assets"
                         ],
                         "styles": [

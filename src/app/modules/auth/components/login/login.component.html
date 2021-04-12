@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="card">
+  <form #loginForm='ngForm' (ngSubmit)="login(loginForm)" class="card-body" ngNativeValidate>
+    <div class="row g-3">
+      <div class="col-12">
+        <input type="email"
+              [(ngModel)]="user"
+               name="email"
+               class="form-control" placeholder="Correo/Usuario" required>
+      </div>
+      <div class="col-12">
+        <input type="password"
+               [(ngModel)]="password"
+               name="password"
+               class="form-control" placeholder="*********" required>
+      </div>
+      <alert></alert>
+      <div class="col-12 text-center">
+        <bs-button [loader]="false" >Iniciar</bs-button>
+      </div>
+    </div>
+  </form>
+</div>

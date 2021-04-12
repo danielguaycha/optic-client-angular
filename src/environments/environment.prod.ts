@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  secretKey: `@JIVScoobyDooPaPA!2021Covid1954321`,
+  apiUrl: `http://127.0.0.1:8000/api`
 };

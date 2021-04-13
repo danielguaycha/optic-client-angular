@@ -1,6 +1,10 @@
 .btn-loader {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
-    width: 100%;
+}
+.s-btn {
+  background: none;
+  border: none;
+  margin: 0 2.5px;
 }

@@ -1,35 +1,40 @@
-document.addEventListener("DOMContentLoaded", function(){
+// (c) 2020 Written by Simon Köhler in Panama
+// github.com/koehlersimon
+// simon-koehler.com
+document.addEventListener('DOMContentLoaded', function () {
+  var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+  var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+    return new bootstrap.Dropdown(dropdownToggleEl)
+  });
 
-  // make it as accordion for smaller screens
-  if (window.innerWidth < 992) {
+  var dropdownSubmenuElementList = [].slice.call(document.querySelectorAll('.dropdown-submenu-toggle'));
 
-    // close all inner dropdowns when parent is closed
-    document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
-      everydropdown.addEventListener('hidden.bs.dropdown', function () {
-        // after dropdown is hidden, then find all submenus
-        this.querySelectorAll('.submenu').forEach(function(everysubmenu){
-          // hide every submenu as well
-          everysubmenu.style.display = 'none';
-        });
-      })
-    });
+  var submenuList = dropdownSubmenuElementList.map(function(e) {
+    e.onclick = function(e){
+      e.target.parentNode.querySelector('ul').classList.toggle('show');
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  });
 
-    document.querySelectorAll('.dropdown-menu a').forEach(function(element){
-      element.addEventListener('click', function (e) {
+  var masterClickEvent = document.addEventListener('click',function(e){
 
-        let nextEl = this.nextElementSibling;
-        if(nextEl && nextEl.classList.contains('submenu')) {
-          // prevent opening link if link needs to open dropdown
-          e.preventDefault();
+    // Function to remove show class from dropdowns that are open
+    closeAllSubmenus();
 
-          if(nextEl.style.display == 'block'){
-            nextEl.style.display = 'none';
-          } else {
-            nextEl.style.display = 'block';
-          }
+    // Hamburger menu
+    if(e.target.classList.contains('hamburger-toggle')){
+      e.target.children[0].classList.toggle('active');
+    }
 
-        }
-      });
-    })
-  }
-});
+  });
+
+
+})
+function closeAllSubmenus(){
+  // Function to remove show class from dropdowns that are open
+  var dropdownMenus = [].slice.call(document.querySelectorAll('.dropdown-submenu'));
+  dropdownMenus.map(function (menu) {
+    menu.classList.remove('show');
+  });
+}

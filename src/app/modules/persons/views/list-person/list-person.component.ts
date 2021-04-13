@@ -28,4 +28,8 @@ export class ListPersonComponent implements OnInit {
     })
   }
 
+  onCreateClient(event) {
+    this.persons.push(event);
+    
+  }
 }

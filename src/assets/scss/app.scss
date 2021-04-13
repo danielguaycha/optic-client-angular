@@ -1,6 +1,13 @@
 @import "variables";
 @import "mixings";
+@import "components/dropdown_mutilevel";
 @import "~bootstrap/scss/bootstrap";
 //Imports
 @import "./components/btn";
 @import "./components/login";
+@import "./components/form";
+@import "./components/alert";
+@import "components/table";
+@import "components/main";
+
+

@@ -11,6 +11,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(catchError(err => {
+            if(err.status === 0) {
+              return throwError('Ha ocurrido un error al comunicar con el servidor');
+            }
             if (err.status === 401) {
               if (this.authServ.getToken()) {
                 this.authServ.removeToken();
@@ -18,6 +21,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 location.reload();
               }
             }
+
+          if (err.error && err.error.errors) {
+            const errObj = err.error.errors;
+            const text = errObj.join(",");
+            return throwError(text);
+          }
 
             const error = err.error.message || err.statusText;
             return throwError(error);

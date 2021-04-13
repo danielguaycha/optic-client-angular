@@ -10,6 +10,7 @@ export class ButtonComponent implements OnInit {
   @Input() type:string = 'primary'
   @Input() loadingMsg:string = 'Cargando...'
   @Input() loader:boolean = true;
+  @Input() width !:string;
   constructor() {
 
   }

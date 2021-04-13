@@ -1,14 +1,15 @@
 <div class="modal fade" [id]="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title" id="exampleModalLabel">{{ title }}</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="/assets/img/startlogin.png" alt="logo" height="30px">
+        <h6 class="modal-title" id="exampleModalLabel">{{ title ? title + ' | ' +appName  : title }}</h6>
+        <button type="button" #closebutton class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <ng-content select="[body]"></ng-content>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" *ngIf="showFooter">
         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
         <ng-content select="[btn]"></ng-content>
       </div>

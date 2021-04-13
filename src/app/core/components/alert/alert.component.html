@@ -1,1 +1,4 @@
-<div *ngIf="message" [ngClass]="message.cssClass" style="margin-bottom: 1rem">{{message.text}}</div>
+<div *ngIf="message" [ngClass]="message.cssClass" style="margin-bottom: 1rem">
+  <i class="fa fa-exclamation-circle me-1" *ngIf="message.type ==='error'"></i>
+  {{message.text}}
+</div>

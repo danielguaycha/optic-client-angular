@@ -31,7 +31,7 @@ export class AlertService {
         this.subject.next({ type: 'success', text: message });
     }
 
-    error(message: string, keepAfterRouteChange = false, autoClose = true) {
+    error(message: string, keepAfterRouteChange = false, autoClose = false  ) {
         this.keepAfterRouteChange = keepAfterRouteChange;
         this.subject.next({ type: 'error', text: message });
         if (autoClose)

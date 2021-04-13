@@ -12,4 +12,8 @@ export class PersonService {
   getPersons(): Observable<any> {
     return this.http.get('person');
   }
+
+  savePerson(data: any) : Observable<any> {
+    return this.http.post('person', data);
+  }
 }

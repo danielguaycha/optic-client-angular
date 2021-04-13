@@ -16,7 +16,10 @@ import { ListPersonComponent } from './modules/persons/views/list-person/list-pe
 import {AuthGuard} from './modules/auth/services/auth.guard';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { ModalComponent } from './core/components/modal/modal.component';
-import { AddClientComponent } from './modules/persons/components/add-client/add-client.component';
+import { DialogAddClientComponent } from './modules/persons/components/dialog-add-client/dialog-add-client.component';
+import { FrmClientComponent } from './modules/persons/components/frm-client/frm-client.component';
+import {ToastNotificationsModule} from 'ngx-toast-notifications';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { AddClientComponent } from './modules/persons/components/add-client/add-
     ListPersonComponent,
     NavbarComponent,
     ModalComponent,
-    AddClientComponent,
+    DialogAddClientComponent,
+    FrmClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,8 @@ import { AddClientComponent } from './modules/persons/components/add-client/add-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastNotificationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

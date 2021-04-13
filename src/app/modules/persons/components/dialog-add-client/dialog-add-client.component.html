@@ -1,0 +1,5 @@
+<button class="btn btn-sm btn-success" type="button" data-bs-toggle="modal"
+        data-bs-target="#modalAddPerson"><i class="fa fa-plus"></i></button>
+<app-modal idModal="modalAddPerson" [showFooter]="false" title="Agregar Cliente">
+  <app-frm-client body (create)="onCreateClient($event)"></app-frm-client>
+</app-modal>

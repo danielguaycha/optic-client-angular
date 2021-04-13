@@ -12,5 +12,7 @@ export class AppComponent {
     this.auth = !!authService.getToken();
   }
 
-  
+  ngDoCheck() {
+    this.auth = !!this.authService.getToken();
+  }
 }

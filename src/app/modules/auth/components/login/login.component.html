@@ -7,18 +7,19 @@
             </div>
             <div class="card-body">
                 <form #loginForm='ngForm' (ngSubmit)="login(loginForm)" class="card-body row g-3" ngNativeValidate>
-
-                    <div class="col-md-12">
+                    <div class="col-md-12 form-icon">
+                        <i class="fa fa-user"></i>
                         <input type="email" [(ngModel)]="user" name="email" class="form-control" placeholder="Correo/Usuario" required>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 form-icon">
+                        <i class="fa fa-lock"></i>
                         <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="*********" required>
                     </div>
 
                     <alert></alert>
                     <div class="col-md-12 text-center">
-                        <bs-button [loader]="false" class="btn-loader w-100">Iniciar</bs-button>
+                        <bs-button [loader]="loader" width="100" class="btn-loader w-100">Iniciar</bs-button>
                     </div>
                 </form>
             </div>

@@ -28,14 +28,18 @@
                             "src/assets/*"
                         ],
                         "styles": [
-                            "src/assets/scss/app.scss"
+                            "src/assets/scss/app.scss",
+                            "./node_modules/font-awesome/css/font-awesome.css"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
                                 "./node_modules/bootstrap/scss"
                             ]
                         },
-                        "scripts": []
+                        "scripts": [
+                          "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+                          "./src/assets/plugins/multilevel.js"
+                        ]
                     },
                     "configurations": {
                         "production": {

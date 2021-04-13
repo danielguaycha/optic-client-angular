@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  appName: 'SysVentas',
   secretKey: `@JIVScoobyDooPaPA!2021Covid1954321`,
   apiUrl: `http://127.0.0.1:8000/api`,
 };

@@ -31,9 +31,11 @@ export class AlertService {
         this.subject.next({ type: 'success', text: message });
     }
 
-    error(message: string, keepAfterRouteChange = false) {
+    error(message: string, keepAfterRouteChange = false, autoClose = true) {
         this.keepAfterRouteChange = keepAfterRouteChange;
         this.subject.next({ type: 'error', text: message });
+        if (autoClose)
+          setTimeout(() => {this.clear();},  5000)
     }
 
     clear() {

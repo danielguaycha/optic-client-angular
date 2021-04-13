@@ -1,0 +1,26 @@
+<app-add-client></app-add-client>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombres y Apellidos</th>
+      <th scope="col">RUC/CI</th>
+      <th scope="col">Celular</th>
+      <th scope="col">Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of persons">
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.doc }}</td>
+      <td>{{ p.phone }}</td>
+      <td>{{ p.email }}</td>
+      <td></td>
+    </tr>
+    <tr *ngIf="persons.length <= 0">
+      <td colspan="6" class="text-center text-muted">Aun no se han registrado clientes</td>
+    </tr>
+  </tbody>
+</table>

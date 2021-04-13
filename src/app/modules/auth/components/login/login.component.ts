@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  startImageUrl = '../assets/img/startlogin.png';
+
   public user:string;
   public password:string;
   public loader: boolean

@@ -1,22 +1,27 @@
-<div class="card">
-  <form #loginForm='ngForm' (ngSubmit)="login(loginForm)" class="card-body" ngNativeValidate>
-    <div class="row g-3">
-      <div class="col-12">
-        <input type="email"
-              [(ngModel)]="user"
-               name="email"
-               class="form-control" placeholder="Correo/Usuario" required>
-      </div>
-      <div class="col-12">
-        <input type="password"
-               [(ngModel)]="password"
-               name="password"
-               class="form-control" placeholder="*********" required>
-      </div>
-      <alert></alert>
-      <div class="col-12 text-center">
-        <bs-button [loader]="loader" >Iniciar</bs-button>
-      </div>
+<div class="divElement">
+    <div class="login">
+        <div class="card">
+            <div class="card-body login-title">
+                <img [src]="startImageUrl" height="150px" alt="">
+                <b>Iniciar sesión</b>
+            </div>
+            <div class="card-body">
+                <form #loginForm='ngForm' (ngSubmit)="login(loginForm)" class="card-body row g-3" ngNativeValidate>
+
+                    <div class="col-md-12">
+                        <input type="email" [(ngModel)]="user" name="email" class="form-control" placeholder="Correo/Usuario" required>
+                    </div>
+
+                    <div class="col-md-12">
+                        <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="*********" required>
+                    </div>
+
+                    <alert></alert>
+                    <div class="col-md-12 text-center">
+                        <bs-button [loader]="false" class="btn-loader w-100">Iniciar</bs-button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </form>
 </div>

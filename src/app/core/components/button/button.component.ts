@@ -7,10 +7,11 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
-  @Input() type:string = 'primary'
+  @Input() variant:string = 'primary'
   @Input() loadingMsg:string = 'Cargando...'
   @Input() loader:boolean = true;
   @Input() width !:string;
+  @Input() type :string = 'submit';
   constructor() {
 
   }

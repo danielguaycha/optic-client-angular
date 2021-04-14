@@ -3,9 +3,9 @@ import {ModalComponent} from '../../../../core/components/modal/modal.component'
 
 @Component({
   selector: 'app-add-client',
-  templateUrl: './dialog-add-client.component.html',
+  templateUrl: './dialog-add-person.component.html',
 })
-export class DialogAddClientComponent implements OnInit {
+export class DialogAddPersonComponent implements OnInit {
 
   @Output() create : EventEmitter<any> = new EventEmitter<any>();
   @ViewChild(ModalComponent) child:ModalComponent;

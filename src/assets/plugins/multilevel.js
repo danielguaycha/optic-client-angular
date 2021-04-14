@@ -1,6 +1,3 @@
-// (c) 2020 Written by Simon Köhler in Panama
-// github.com/koehlersimon
-// simon-koehler.com
 document.addEventListener('DOMContentLoaded', function () {
   var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
   var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {

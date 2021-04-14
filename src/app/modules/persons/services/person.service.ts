@@ -16,4 +16,16 @@ export class PersonService {
   savePerson(data: any) : Observable<any> {
     return this.http.post('person', data);
   }
+
+  getPerson(id) : Observable<any> {
+    return this.http.get(`person/${id}`);
+  }
+
+  updatePerson(id, data) : Observable<any> {
+    return this.http.put(`person/${id}`, data);
+  }
+
+  deletePerson(id) : Observable<any>{
+    return this.http.delete(`person/${id}`);
+  }
 }

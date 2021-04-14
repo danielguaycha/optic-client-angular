@@ -10,16 +10,19 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './modules/auth/services/auth.service';
 import {ErrorInterceptor} from './core/err.interceptor';
 import { AlertComponent } from './core/components/alert/alert.component';
-import {AlertService} from './core/alert.service';
+import {AlertService} from './core/services/alert.service';
 import { ButtonComponent } from './core/components/button/button.component';
 import { ListPersonComponent } from './modules/persons/views/list-person/list-person.component';
 import {AuthGuard} from './modules/auth/services/auth.guard';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { ModalComponent } from './core/components/modal/modal.component';
-import { DialogAddClientComponent } from './modules/persons/components/dialog-add-client/dialog-add-client.component';
-import { FrmClientComponent } from './modules/persons/components/frm-client/frm-client.component';
+import { DialogAddPersonComponent } from './modules/persons/components/dialog-add-person/dialog-add-person.component';
+import { FrmPersonComponent } from './modules/persons/components/frm-person/frm-person.component';
 import {ToastNotificationsModule} from 'ngx-toast-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AddPersonComponent } from './modules/persons/views/add-person/add-person.component';
+import { EditPersonComponent } from './modules/persons/views/edit-person/edit-person.component';
+import { ModalConfirmComponent } from './core/components/modal-confirm/modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +33,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ListPersonComponent,
     NavbarComponent,
     ModalComponent,
-    DialogAddClientComponent,
-    FrmClientComponent,
+    DialogAddPersonComponent,
+    FrmPersonComponent,
+    AddPersonComponent,
+    EditPersonComponent,
+    ModalConfirmComponent,
   ],
   imports: [
     BrowserModule,

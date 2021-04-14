@@ -22,8 +22,8 @@
       <td>{{ p.phone }}</td>
       <td>{{ p.email }}</td>
       <td class="text-center">
-        <button class="s-btn text-danger"><i class="fa fa-trash"></i></button>
-        <button class="s-btn text-info"><i class="fa fa-pencil"></i></button>
+        <button class="s-btn text-danger"  (click)="deletePerson(p)"><i class="fa fa-trash"></i></button>
+        <a class="s-btn text-info" [routerLink]="'/persons/'+p.doc+'/edit'"><i class="fa fa-pencil"></i></a>
       </td>
     </tr>
     <tr *ngIf="persons.length <= 0">
@@ -31,5 +31,6 @@
     </tr>
     </tbody>
   </table>
+  <app-modal-confirm></app-modal-confirm>
 </div>
 

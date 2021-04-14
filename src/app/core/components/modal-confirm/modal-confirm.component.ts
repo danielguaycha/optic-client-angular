@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ConfirmService} from '../../services/confirm.service';
+import {Modal} from 'bootstrap';
 
 
 @Component({

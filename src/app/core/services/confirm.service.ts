@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import * as bootstrap from 'bootstrap';
+import {Modal} from 'bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +8,12 @@ import * as bootstrap from 'bootstrap';
 export class ConfirmService {
 
   private subject = new Subject<any>();
-  private modal: any;
+  private modal: Modal;
   constructor() {
   }
 
   confirm(message: string, ok: () => void): any {
-    this.modal = new bootstrap.Modal(document.getElementById('modalConfirm'), {
+   this.modal = new Modal(document.getElementById('modalConfirm'), {
       keyboard: true
     });
     this.modal.show();

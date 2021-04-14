@@ -1,7 +1,3 @@
-* {
-    font-family: "Source Sans Pro", "Roboto", Arial, sans-serif;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -9,6 +5,17 @@
     to {
         opacity: 1;
     }
+}
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 3rem .5rem 1rem !important;
+  position: relative;
+  .icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: bottom;
+    margin-right: 1rem;
+  }
 }
 
 .dropdown-menu.show {
@@ -22,7 +29,6 @@
 .dropdown-submenu-toggle::after,
 .dropdown-toggle::after {
     display: inline-block;
-    font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
     font-size: inherit;
     margin: 0;
     border: none;
@@ -32,14 +38,17 @@
 }
 
 .dropdown-toggle::after {
-    content: "😀";
+    content: "";
     width: auto;
     padding-left: 0.2rem;
 }
 
 .dropdown-submenu-toggle::after {
-    text-align: center;
-    content: "▷";
+    text-align: end;
+    content: "🢒";
+    position: absolute;
+    right: 10px;
+    color: rgba(#e9eaea, .9);
 }
 
 .dropdown-submenu-toggle.icon-left::after {

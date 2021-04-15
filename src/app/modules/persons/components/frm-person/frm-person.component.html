@@ -1,16 +1,12 @@
 <form class="row g-2" #clientForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
-  <label class="label-title"><span>Datos de básicos</span></label>
-  <div class="col-12 col-md-6">
-    <label for="ruc" class="form-label">CI/Ruc: * </label>
-    <input type="text" autofocus
-           [(ngModel)]="formData.doc"
-           name="doc"
-           class="form-control" id="ruc" required>
-  </div>
-  <div class="col-12 col-md-6">
-    <label for="doc_type" class="form-label">Tipo Doc.: *</label>
-    <select [(ngModel)]="formData.doc_type"
-      name="doc_type" id="doc_type" class="form-select" required>
+    <label class="label-title"><span>Datos de básicos</span></label>
+    <div class="col-12 col-md-6">
+        <label for="ruc" class="form-label">CI/Ruc: * </label>
+        <input type="text" autofocus [(ngModel)]="formData.doc" name="doc" class="form-control" id="ruc" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="doc_type" class="form-label">Tipo Doc.: *</label>
+        <select [(ngModel)]="formData.doc_type" name="doc_type" id="doc_type" class="form-select" required>
       <option value="CI" selected>Cedula</option>
       <option value="RUC">Ruc</option>
       <option value="PASAPORTE" >Pasaporte</option>
@@ -56,9 +52,9 @@
         </div>
     </div>
 
-  <div class="col-12 text-end mt-4">
-    <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
-    <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i> Guardar Cliente</bs-button>
-    <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-refresh me-1"></i> Actualizar Cliente</bs-button>
-  </div>
+    <div class="col-12 text-end mt-4">
+        <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
+        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i> Guardar Cliente</bs-button>
+        <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-refresh me-1"></i> Actualizar Cliente</bs-button>
+    </div>
 </form>

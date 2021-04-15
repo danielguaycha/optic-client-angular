@@ -4,14 +4,14 @@
         <label for="product_cod" class="form-label">Codigo / Codigo Barra: *</label>
         <input type="text" [(ngModel)]="formData.product_cod" name="product_cod" class="form-control" id="product_cod" required>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
         <label for="product_category" class="form-label">Categoria: *</label>
-        <select [(ngModel)]="formData.product_category" name="product_category" id="product_category" class="form-select">
-      <option value="Case1" selected>Opción 1</option>
-      <option value="Case2">Opción 2</option>
-      <option value="Case3" >Opción 3</option>
-      <option value="OTRO" >Otro</option>
-    </select>
+        <input [(ngModel)]="formData.product_category" name="product_category" id="product_category" class="form-control">
+    </div>
+    <div class="div col-12 col-md-2">
+        <app-add-category></app-add-category>
+        <!-- <button class="btn btn-sm btn btn-secondary" type="button"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-sm btn btn-secondary" type="button"><i class="fa fa-search"></i></button> -->
     </div>
 
     <div class="col-12 col-md-6">

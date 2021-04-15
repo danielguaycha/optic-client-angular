@@ -1,0 +1,17 @@
+<form class="row g-2" #clientForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
+    <label class="label-title"><span>Categoria</span></label>
+
+    <div class="col-12 col-md-6">
+        <label for="category_name" class="form-label">Nombre: *</label>
+        <input type="text" [(ngModel)]="formData.name" name="category_name" class="form-control" id="category_name" required>
+    </div>
+    <div class="col-12 col-md-6">
+        <label for="category_desc" class="form-label">Descripcion: </label>
+        <input [(ngModel)]="formData.description" name="category_desc" id="category_desc" class="form-control">
+    </div>
+
+    <div class="col-12 text-end mt-4">
+        <button class="btn btn-outline-danger me-2" data-bs-dismiss="modal">Cancelar</button>
+        <bs-button [loader]="loader"><i class="fa fa-save me-1"></i>Registrar Categoria</bs-button>
+    </div>
+</form>

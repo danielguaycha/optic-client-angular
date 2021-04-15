@@ -30,6 +30,11 @@ import { CreateInvoiceComponent } from './modules/invoice/views/create-invoice/c
 import { DialogSearchPersonComponent } from './modules/persons/components/dialog-search-person/dialog-search-person.component';
 import { LoaderComponent } from './core/components/loader/loader.component';
 import { SelectPersonComponent } from './modules/persons/components/select-person/select-person.component';
+import { ListProductsComponent } from './modules/inventory/views/list-product/list-product.component';
+import { DialogAddProductComponent } from './modules/inventory/components/dialog-add-product/dialog-add-product.component';
+import { FrmProductComponent } from './modules/inventory/components/frm-product/frm-product.component';
+import { DialogAddCategoryComponent } from './modules/inventory/components/dialog-add-category/dialog-add-category.component';
+import { FrmCategoryComponent } from './modules/inventory/components/frm-category/frm-category.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +50,18 @@ import { SelectPersonComponent } from './modules/persons/components/select-perso
     AddPersonComponent,
     EditPersonComponent,
     ModalConfirmComponent,
+
     CreateInvoiceComponent,
     DialogSearchPersonComponent,
     LoaderComponent,
-    SelectPersonComponent
+    SelectPersonComponent,
+
+    ListProductsComponent,
+    DialogAddProductComponent,
+    FrmProductComponent,
+    DialogAddCategoryComponent,
+    FrmCategoryComponent
+
   ],
   imports: [
     BrowserModule,

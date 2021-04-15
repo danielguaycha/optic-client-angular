@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../services/inventory.service';
 import {ConfirmService} from '../../../../core/services/confirm.service';
 import {ToastService} from '../../../../core/services/toast.service';
+import { Product } from '../../models/products.model';
 
 @Component({
     selector: 'app-list-products',
@@ -10,7 +11,7 @@ import {ToastService} from '../../../../core/services/toast.service';
   export class ListProductsComponent implements OnInit {
   
     public loader:boolean;
-    public products:Array<any> = [];
+    public products:Array<Product> = [];
     constructor(
         private inventoryService: InventoryService,
         private confirm: ConfirmService,
@@ -24,7 +25,6 @@ import {ToastService} from '../../../../core/services/toast.service';
     getProducts() {
       this.loader = true;
       this.inventoryService.getProducts().subscribe(res => {
-        console.log(res);
         if (res.ok && res.body) {
           this.products = res.body;
         }

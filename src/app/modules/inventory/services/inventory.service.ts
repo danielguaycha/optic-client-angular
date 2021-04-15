@@ -14,7 +14,7 @@ export class InventoryService {
   }
 
   saveProduct(data: any) : Observable<any> {
-    return this.http.post('categories', data);
+    return this.http.post('article', data);
   }
   
   //Categorias  

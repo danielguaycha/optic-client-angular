@@ -28,6 +28,7 @@ import { DialogAddProductComponent } from './modules/inventory/components/dialog
 import { FrmProductComponent } from './modules/inventory/components/frm-product/frm-product.component';
 import { DialogAddCategoryComponent } from './modules/inventory/components/dialog-add-category/dialog-add-category.component';
 import { FrmCategoryComponent } from './modules/inventory/components/frm-category/frm-category.component';
+import { AddProductComponent } from './modules/inventory/views/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FrmCategoryComponent } from './modules/inventory/components/frm-categor
     DialogAddProductComponent,
     FrmProductComponent,
     DialogAddCategoryComponent,
-    FrmCategoryComponent
+    FrmCategoryComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

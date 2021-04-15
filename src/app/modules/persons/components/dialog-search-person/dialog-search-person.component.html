@@ -1,0 +1,46 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="modal"
+        data-bs-target="#modalSearchPerson"><i class="fa fa-search"></i></button>
+<app-modal idModal="modalSearchPerson" [showFooter]="false" title="Buscar Cliente">
+    <div body>
+      <input type="search"
+             [(ngModel)]="search"
+             (input)="searchClient()"
+             (keypress)="onEnterPress($event)"
+             name="search" id="search"
+             autofocus class="form-control" placeholder="Buscar por: nombres, ruc, ci, cod">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres y Apellidos</th>
+            <th>Doc.</th>
+            <th>Celular</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of persons; index as i">
+          <td>{{ p.id }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.doc }}</td>
+          <td>{{ p.phone }}</td>
+          <td>{{ p.email }}</td>
+          <td>
+            <button (click)="onSelectPerson(p)"
+                    class="s-btn text-secondary" [id]="'addClient'+i"><i class="fa fa-plus"></i></button>
+          </td>
+        </tr>
+        <tr *ngIf="!search && persons.length <= 0 && !loader">
+          <td colspan="6" class="text-center text-muted">Ingrese un dato para comenzar la búsqueda</td>
+        </tr>
+        <tr *ngIf="search && persons.length <= 0 && !loader">
+          <td colspan="6" class="text-center text-muted">No se encontró resultados para la búsqueda</td>
+        </tr>
+        <tr *ngIf="loader">
+          <td colspan="6"><loader [loader]="loader" [dense]="true" variante="secondary"></loader></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+</app-modal>

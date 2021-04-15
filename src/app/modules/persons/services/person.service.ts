@@ -9,8 +9,15 @@ export class PersonService {
 
   constructor(private http: HttpClient) { }
 
-  getPersons(): Observable<any> {
-    return this.http.get('person');
+  getPersons(search:string = '', provider: boolean = false): Observable<any> {
+    let url = `person?`;
+    if (provider) {
+      url+=`provider=true`;
+    }
+    if (search.trim().length > 0) {
+      url+=`search=${search}`
+    }
+    return this.http.get(url);
   }
 
   savePerson(data: any) : Observable<any> {

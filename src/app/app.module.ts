@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MomentModule } from 'ngx-moment';
+
+import 'moment/locale/es';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
@@ -23,6 +26,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AddPersonComponent } from './modules/persons/views/add-person/add-person.component';
 import { EditPersonComponent } from './modules/persons/views/edit-person/edit-person.component';
 import { ModalConfirmComponent } from './core/components/modal-confirm/modal-confirm.component';
+import { CreateInvoiceComponent } from './modules/invoice/views/create-invoice/create-invoice.component';
+import { DialogSearchPersonComponent } from './modules/persons/components/dialog-search-person/dialog-search-person.component';
+import { LoaderComponent } from './core/components/loader/loader.component';
+import { SelectPersonComponent } from './modules/persons/components/select-person/select-person.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +45,10 @@ import { ModalConfirmComponent } from './core/components/modal-confirm/modal-con
     AddPersonComponent,
     EditPersonComponent,
     ModalConfirmComponent,
+    CreateInvoiceComponent,
+    DialogSearchPersonComponent,
+    LoaderComponent,
+    SelectPersonComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +58,7 @@ import { ModalConfirmComponent } from './core/components/modal-confirm/modal-con
     HttpClientModule,
     BrowserAnimationsModule,
     ToastNotificationsModule,
+    MomentModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

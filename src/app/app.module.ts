@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MomentModule } from 'ngx-moment';
+
+import 'moment/locale/es';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './modules/auth/components/login/login.component';
@@ -23,6 +26,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AddPersonComponent } from './modules/persons/views/add-person/add-person.component';
 import { EditPersonComponent } from './modules/persons/views/edit-person/edit-person.component';
 import { ModalConfirmComponent } from './core/components/modal-confirm/modal-confirm.component';
+import { CreateInvoiceComponent } from './modules/invoice/views/create-invoice/create-invoice.component';
+import { DialogSearchPersonComponent } from './modules/persons/components/dialog-search-person/dialog-search-person.component';
+import { LoaderComponent } from './core/components/loader/loader.component';
+import { SelectPersonComponent } from './modules/persons/components/select-person/select-person.component';
 import { ListProductsComponent } from './modules/inventory/views/list-product/list-product.component';
 import { DialogAddProductComponent } from './modules/inventory/components/dialog-add-product/dialog-add-product.component';
 import { FrmProductComponent } from './modules/inventory/components/frm-product/frm-product.component';
@@ -44,12 +51,19 @@ import { AddProductComponent } from './modules/inventory/views/add-product/add-p
     AddPersonComponent,
     EditPersonComponent,
     ModalConfirmComponent,
+
+    CreateInvoiceComponent,
+    DialogSearchPersonComponent,
+    LoaderComponent,
+    SelectPersonComponent,
+
     ListProductsComponent,
     DialogAddProductComponent,
     FrmProductComponent,
     DialogAddCategoryComponent,
     FrmCategoryComponent,
     AddProductComponent
+
   ],
   imports: [
     BrowserModule,
@@ -59,6 +73,7 @@ import { AddProductComponent } from './modules/inventory/views/add-product/add-p
     HttpClientModule,
     BrowserAnimationsModule,
     ToastNotificationsModule,
+    MomentModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

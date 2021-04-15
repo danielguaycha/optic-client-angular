@@ -23,6 +23,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AddPersonComponent } from './modules/persons/views/add-person/add-person.component';
 import { EditPersonComponent } from './modules/persons/views/edit-person/edit-person.component';
 import { ModalConfirmComponent } from './core/components/modal-confirm/modal-confirm.component';
+import { ListProductsComponent } from './modules/inventory/views/list-product/list-product.component';
+import { DialogAddProductComponent } from './modules/inventory/components/dialog-add-product/dialog-add-product.component';
+import { FrmProductComponent } from './modules/inventory/components/frm-product/frm-product.component';
+import { DialogAddCategoryComponent } from './modules/inventory/components/dialog-add-category/dialog-add-category.component';
+import { FrmCategoryComponent } from './modules/inventory/components/frm-category/frm-category.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,11 @@ import { ModalConfirmComponent } from './core/components/modal-confirm/modal-con
     AddPersonComponent,
     EditPersonComponent,
     ModalConfirmComponent,
+    ListProductsComponent,
+    DialogAddProductComponent,
+    FrmProductComponent,
+    DialogAddCategoryComponent,
+    FrmCategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,7 @@ import { DialogAddCategoryComponent } from './modules/inventory/components/dialo
 import { FrmCategoryComponent } from './modules/inventory/components/frm-category/frm-category.component';
 import { AddProductComponent } from './modules/inventory/views/add-product/add-product.component';
 import { ListCategoriesComponent } from './modules/inventory/views/list-category/list-categories.component';
+import { DialogSearchCategoryComponent } from './modules/inventory/components/dialog-search-category/dialog-search-category.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ListCategoriesComponent } from './modules/inventory/views/list-category
     FrmCategoryComponent,
     AddProductComponent,
     
-    ListCategoriesComponent
+    ListCategoriesComponent,
+    DialogSearchCategoryComponent
 
   ],
   imports: [

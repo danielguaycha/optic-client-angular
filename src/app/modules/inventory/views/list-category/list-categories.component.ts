@@ -17,6 +17,7 @@ import { Category } from '../../models/categories.model';
         private confirm: ConfirmService,
         private toast: ToastService) {  
     }
+    
   
     ngOnInit(): void {
       this.getProducts();
@@ -24,7 +25,7 @@ import { Category } from '../../models/categories.model';
   
     getProducts() {
       this.loader = true;
-      this.inventoryService.getCategories().subscribe(res => {
+      this.inventoryService.getCategories("").subscribe(res => {
         if (res.ok && res.body) {
           this.categories = res.body;
         }

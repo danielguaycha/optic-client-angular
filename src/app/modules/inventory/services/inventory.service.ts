@@ -18,8 +18,12 @@ export class InventoryService {
   }
   
   //Categorias  
-  getCategories(): Observable<any> {
-    return this.http.get('category');
+  getCategories(search:string): Observable<any> {
+    let url = `category?`;
+    if (search.trim().length > 0) {
+      url+=`search=${search}`
+    }
+    return this.http.get(url);
   }
 
   saveCategroy(data: any) : Observable<any> {

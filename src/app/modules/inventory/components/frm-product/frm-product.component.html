@@ -6,12 +6,19 @@
     </div>
     <div class="col-12 col-md-4">
         <label for="product_category" class="form-label">Categoria: *</label>
-        <select [(ngModel)]="formData.category_id" name="product_category" id="product_category" class="form-control">
-            <option *ngFor="let c of categories" value="{{c.id}}">{{ c.name }}</option>
+
+        <select *ngIf="category == null" [(ngModel)]="formData.category_id" name="product_category" id="product_category" class="form-control">
+            <option  *ngFor="let c of categories" value="{{c.id}}">{{ c.name }}</option>
+        </select>
+
+        <select *ngIf="category != null" [(ngModel)]="formData.category_id" name="product_category" id="product_category" class="form-control">
+            <option value="{{category.id}}" selected >{{ category.name }}</option>
         </select>
     </div>
     <div class="div col-12 col-md-2">
         <app-add-category></app-add-category>
+        <app-dialog-search-category (select)="onSelect($event)"></app-dialog-search-category>
+
         <!-- <button class="btn btn-sm btn btn-secondary" type="button"><i class="fa fa-plus"></i></button>
         <button class="btn btn-sm btn btn-secondary" type="button"><i class="fa fa-search"></i></button> -->
     </div>

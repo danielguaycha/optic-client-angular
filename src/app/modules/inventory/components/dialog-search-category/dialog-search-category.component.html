@@ -1,0 +1,37 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSearchCategory"><i class="fa fa-search"></i></button>
+<app-modal idModal="modalSearchCategory" [showFooter]="false" title="Buscar Categoria">
+    <div body>
+        <input type="search" [(ngModel)]="search" (input)="searchCategory()" (keypress)="onEnterPress($event)" name="search" id="search" autofocus class="form-control" placeholder="Buscar por nombres">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of categories; index as i">
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.description }}</td>
+                    <td>
+                        <button (click)="onSelectCategory(c)" class="s-btn text-secondary" [id]="'addCategory'+i"><i class="fa fa-plus"></i></button>
+                    </td>
+                </tr>
+                <tr *ngIf="!search && categories.length <= 0 && !loader">
+                    <td colspan="6" class="text-center text-muted">Ingrese un dato para comenzar la búsqueda</td>
+                </tr>
+                <tr *ngIf="search && categories.length <= 0 && !loader">
+                    <td colspan="6" class="text-center text-muted">No se encontró resultados para la búsqueda</td>
+                </tr>
+                <tr *ngIf="loader">
+                    <td colspan="6">
+                        <loader [loader]="loader" [dense]="true" variante="secondary"></loader>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-modal>

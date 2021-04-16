@@ -22,6 +22,7 @@ export class FrmProductComponent implements OnInit {
   @Input() edit:boolean = false;
   public loader: boolean = false;
   public categories:Array<Category> = [];
+  public category:Category;
 
   constructor(private inventoryService : InventoryService, private toast: ToastService) {
     this.formData = {
@@ -34,6 +35,12 @@ export class FrmProductComponent implements OnInit {
         iva: 1,
         category_id: 1,
     };
+
+    this.category = {
+      id: "1",
+      name: '',
+      description: '',      
+    }
   }
 
   ngOnInit(): void {
@@ -67,7 +74,7 @@ export class FrmProductComponent implements OnInit {
 
   getCategories() {
     this.loader = true;
-    this.inventoryService.getCategories().subscribe(res => {
+    this.inventoryService.getCategories("").subscribe(res => {
       if (res.ok && res.body) {
         this.categories = res.body;
       }
@@ -86,6 +93,11 @@ export class FrmProductComponent implements OnInit {
   onInputUtility(value: string) {
     this.utility = value;
     this.priceFinalPlusIva = this.CalculateTax(this.priceValuePlusIva, this.utility);
+  }
+
+  onSelect(category) {
+    this.category = category;
+    this.create.emit(category);
   }
 
   CalculateTax(value:string, tax:string):string{

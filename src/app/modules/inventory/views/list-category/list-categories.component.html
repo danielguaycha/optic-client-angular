@@ -1,0 +1,32 @@
+<div class="page-header">
+    <h5>Listado de Categorias</h5>
+    <app-add-category (create)="onCreateCategory($event)"></app-add-category>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th class="text-center"><i class="fa fa-cog"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of categories">
+                <td>{{ c.id }}</td>
+                <td>{{ c.name }}</td>
+                <td>{{ c.description }}</td>
+                <td class="text-center">
+                    <button class="s-btn text-danger" (click)="deleteProduct(c)"><i class="fa fa-trash"></i></button>
+                    <!-- <a class="s-btn text-info" [routerLink]="'/persons/'+p.doc+'/edit'"><i class="fa fa-pencil"></i></a> -->
+                </td>
+            </tr>
+            <tr *ngIf="categories.length <= 0">
+                <td colspan="10" class="text-center text-muted">Aun no se han registrado categorias</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <app-modal-confirm></app-modal-confirm> -->
+</div>

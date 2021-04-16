@@ -19,7 +19,7 @@ export class InventoryService {
   
   //Categorias  
   getCategories(): Observable<any> {
-    return this.http.get('categories');
+    return this.http.get('category');
   }
 
   saveCategroy(data: any) : Observable<any> {

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { Category } from '../../models/categories.model';
 import { InventoryService } from '../../services/inventory.service';
 
 @Component({
@@ -10,14 +11,14 @@ export class FrmCategoryComponent implements OnInit {
 
   @Output() create: EventEmitter<any> = new EventEmitter();
   @Input() edit:boolean = false;
-  @Input() formData!:any;
+  @Input() formData!:Category;
 
   public loader: boolean = false;
   
   constructor(private inventoryService : InventoryService, private toast: ToastService) {
     this.formData = {
         name: '',
-        description: '',
+        description: '',        
     };
 
   }

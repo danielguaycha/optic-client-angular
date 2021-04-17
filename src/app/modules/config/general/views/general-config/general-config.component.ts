@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ConfirmService } from '../../../../../core/services/confirm.service';
 import { ConfigService } from '../../services/config.service';
+import { ConfigTaxService } from '../../services/configTax.service';
+import { SecureStorageService } from '../../../../auth/services/secure-storage.service';
 
 @Component({
   selector: 'app-general-config',
@@ -16,7 +18,8 @@ export class GeneralConfigComponent implements OnInit {
   @Input() edit:boolean = false;
   public loader: boolean = false;
   
-  constructor(private configService : ConfigService, private toast: ToastService) {
+  // public configService: any;
+  constructor(private storage: SecureStorageService, private configService : ConfigService, private toast: ToastService) {
     this.formData = {
       iva: 0,
       decimals: 0
@@ -36,6 +39,11 @@ export class GeneralConfigComponent implements OnInit {
       if (res.ok) {
         this.create.emit(res.body);
         this.toast.ok(res.message);
+        this.formData = res.body;
+        this.configService.iva = res.body.iva;
+        this.configService.decimals = res.body.decimals;
+        // this.storage.set('config', JSON.stringify(res.body));
+        // this.configService = new ConfigService(this.formData);
       }
       this.loader = false;
     }, error => {

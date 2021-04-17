@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { ConfirmService } from '../../../../../core/services/confirm.service';
 import { ConfigService } from '../../services/config.service';
-import { ConfigTaxService } from '../../services/configTax.service';
 import { SecureStorageService } from '../../../../auth/services/secure-storage.service';
 
 @Component({

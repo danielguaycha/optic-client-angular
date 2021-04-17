@@ -42,8 +42,6 @@ export class GeneralConfigComponent implements OnInit {
         this.formData = res.body;
         this.configService.iva = res.body.iva;
         this.configService.decimals = res.body.decimals;
-        // this.storage.set('config', JSON.stringify(res.body));
-        // this.configService = new ConfigService(this.formData);
       }
       this.loader = false;
     }, error => {

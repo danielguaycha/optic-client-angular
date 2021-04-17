@@ -43,6 +43,8 @@ import { userReducer } from './modules/auth/store/user.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 
+import { ListCategoriesComponent } from './modules/inventory/views/list-category/list-categories.component';
+import { DialogSearchCategoryComponent } from './modules/inventory/components/dialog-search-category/dialog-search-category.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import {environment} from '../environments/environment';
     FrmCategoryComponent,
     AddProductComponent,
     SelectProductComponent,
-    GeneralConfigComponent
+    GeneralConfigComponent,
+    ListCategoriesComponent,
+    DialogSearchCategoryComponent
 
   ],
   imports: [

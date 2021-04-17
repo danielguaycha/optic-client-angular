@@ -1,62 +1,69 @@
-<div class="row">
-  <div class="col-12 col-md-6">
-    <app-select-person></app-select-person>
-  </div>
-  <div class="col-12 col-md-6">
-    <div class="row g-2">
-      <div class="col-12 col-md-4">
-        <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="formData.date">
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <app-select-person></app-select-person>
       </div>
-      <div class="col-12 col-md-4">
-        <input type="text" class="form-control" placeholder="N. Factura" readonly>
-      </div>
+      <div class="col-12 col-md-6">
+        <div class="row g-2">
+          <div class="col-12 col-md-4">
+            <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="formData.date">
+          </div>
+          <div class="col-12 col-md-4">
+            <input type="text" class="form-control" placeholder="N. Factura" readonly>
+          </div>
 
-      <div class="col-12 col-md-4">
-        <input type="text" class="form-control" placeholder="Vendedor" readonly>
-      </div>
+          <div class="col-12 col-md-4">
+            <input type="text" class="form-control" placeholder="Vendedor" readonly>
+          </div>
 
-      <div class="col-12 col-md-4">
-        <select class="form-select" disabled>
-          <option value="FACTURA" selected>Factura</option>
-        </select>
-      </div>
+          <div class="col-12 col-md-4">
+            <select class="form-select" disabled>
+              <option value="FACTURA" selected>Factura</option>
+            </select>
+          </div>
 
-      <div class="col-12 col-md-4">
-        <input type="text" class="form-control" placeholder="Caja/Pt. Emisión" readonly>
+          <div class="col-12 col-md-4">
+            <input type="text" class="form-control" placeholder="Caja/Pt. Emisión" readonly>
+          </div>
+        </div>
+
+      </div>
+      <app-select-product></app-select-product>
+      <label class="label-title">Detalles</label>
+      <div class="col-12">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+          <tr>
+            <th>COD</th>
+            <th>DETALLE</th>
+            <th>P. UNIT</th>
+            <th>CANTIDAD</th>
+            <th>DESC %</th>
+            <th>TOTAL</th>
+            <th>TOTAL+IVA</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of products">
+            <td>{{ p.code }}</td>
+            <td>{{ p.name }}</td>
+            <td [contentEditable]="true">{{ p.pvp }}</td>
+            <td [contentEditable]="true">0</td>
+            <td [contentEditable]="true">0</td>
+            <td>0</td>
+            <td>0</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="8" *ngIf="products.length <= 0"
+                class="text-center text-muted">Agregue productos a la Factura</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
   </div>
-  <app-select-product></app-select-product>
-  <label class="label-title">Detalles</label>
-  <table class="table table-striped table-hover">
-    <thead>
-    <tr>
-      <th>COD</th>
-      <th>DETALLE</th>
-      <th>P. UNIT</th>
-      <th>CANTIDAD</th>
-      <th>DESC %</th>
-      <th>TOTAL</th>
-      <th>TOTAL+IVA</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let p of products">
-      <td>{{ p.code }}</td>
-      <td>{{ p.name }}</td>
-      <td [contentEditable]="true">{{ p.pvp }}</td>
-      <td [contentEditable]="true">0</td>
-      <td [contentEditable]="true">0</td>
-      <td>0</td>
-      <td>0</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td colspan="8" *ngIf="products.length <= 0"
-          class="text-center text-muted">Agregue productos a la Factura</td>
-    </tr>
-    </tbody>
-  </table>
 </div>
+

@@ -3,6 +3,8 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { Product } from '../../models/products.model';
 import { InventoryService } from '../../services/inventory.service';
 import { Category } from '../../models/categories.model';
+import {ConfigService} from '../../../config/general/services/config.service';
+import {ValidateService} from '../../../../core/services/validate.service';
 
 @Component({
   selector: 'app-frm-product',
@@ -10,58 +12,43 @@ import { Category } from '../../models/categories.model';
 })
 export class FrmProductComponent implements OnInit {
 
-  priceValuePlusIva:string = "";
-  iva:string="0";
-  pricePurchase:string="0";
-  priceFinal:string = "0"
-  utility:string = "0"
-  priceFinalPlusIva:string = "0"
+  pvp:number = 0;
+  iva:number = 0;
+  price: number = 0;
+  utility:number = 0;
+  pvpIva:number = 0
+  ivaList: Array<number> = [0]
 
   @Output() create: EventEmitter<any> = new EventEmitter();
   @Input() formData!:Product;
   @Input() edit:boolean = false;
   public loader: boolean = false;
-  public categories:Array<Category> = [];
   public category:Category;
 
-  constructor(private inventoryService : InventoryService, private toast: ToastService) {
-    this.formData = {
-        code: '',
-        name: '',
-        description: '',
-        pvp: 0,
-        price_purchase: '',
-        type: '',
-        iva: 1,
-        category_id: 1,
-    };
-
-    this.category = {
-      id: "1",
-      name: '',
-      description: '',      
-    }
+  constructor(private inventoryService : InventoryService,
+              private toast: ToastService, private cfg : ConfigService, private validate: ValidateService) {
+    this.initFormData();
+    this.ivaList.push(cfg.iva);
   }
 
   ngOnInit(): void {
-    this.getCategories();
     this.loader = false;
+    document.getElementById('product_cod').focus();
+  }
+  // storing products
+  onSubmit() {
+    if (!this.edit) this.storeProduct();
   }
 
-  onSubmit() {     
-    this.loader = true;
-    if (!this.edit) this.storeProduct(); 
-  }
-
-  onChangeIVA(value:string){
-    this.iva=value;
-    this.priceValuePlusIva = this.CalculateTax(this.pricePurchase, this.iva);
-    this.priceFinalPlusIva = this.CalculateTax(this.priceValuePlusIva, this.utility);
-  }
-
+  //products
   storeProduct(){
+    this.loader = true;
+    this.formData.pvp = this.pvpIva;
+    this.formData.iva = this.iva > 0 ? 1 : 0;
+    this.formData.category_id = this.category.id;
     this.inventoryService.saveProduct(this.formData).subscribe(res => {
       if (res.ok) {
+        this.initFormData();
         this.create.emit(res.body);
         this.toast.ok(res.message);
       }
@@ -72,38 +59,60 @@ export class FrmProductComponent implements OnInit {
     })
   }
 
-  getCategories() {
-    this.loader = true;
-    this.inventoryService.getCategories("").subscribe(res => {
+  //events for category
+  onSelectCategory(category) {
+    this.category = category;
+  }
+  onSearchCategory(key) {
+    if (key.keyCode !== 13) return;
+    if (!this.category.id) return;
+    key.preventDefault();
+    this.inventoryService.getCategroy(this.category.id).subscribe(res => {
       if (res.ok && res.body) {
-        this.categories = res.body;
+        this.category = res.body;
+        document.getElementById('product_name').focus();
       }
     }, error => {
-      this.loader = false;
+      console.log(error);
     })
   }
 
+  // calc
+  onChangeIVA(value:string){
+    this.iva= this.validate.parseDouble(value);
+    this.calcIva();
+  }
+  calcIva() {
+    this.pvp = this.validate.addPercent(this.price, this.iva);
+    this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
+  }
   onInputPrice(value: string) {
-    this.pricePurchase = value;
-    this.priceValuePlusIva = this.CalculateTax(value, this.iva);
-    this.priceFinalPlusIva = this.CalculateTax(this.priceValuePlusIva, this.utility);
-
+    this.price = this.validate.parseDouble(value);
+    this.calcIva();
   }
-
   onInputUtility(value: string) {
-    this.utility = value;
-    this.priceFinalPlusIva = this.CalculateTax(this.priceValuePlusIva, this.utility);
+    this.utility = this.validate.parseDouble(value);
+    this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
   }
 
-  onSelect(category) {
-    this.category = category;
-    this.create.emit(category);
-  }
-
-  CalculateTax(value:string, tax:string):string{
-    var precio = Number(value);
-    var iva = Number(tax);
-    precio = precio + (precio * (iva/100));
-    return precio.toFixed(2);
+  initFormData() {
+    this.formData = {
+      code: '',
+      name: '',
+      description: '',
+      pvp: 0,
+      price_purchase: '',
+      type: 'PRODUCTO',
+      iva: 1,
+      category_id: 1,
+    };
+    this.category = {
+      id: "",
+      name: '',
+      description: '',
+    };
+    this.pvpIva = 0;
+    this.price = 0;
+    this.pvp = 0;
   }
 }

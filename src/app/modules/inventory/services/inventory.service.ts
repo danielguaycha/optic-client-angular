@@ -15,11 +15,17 @@ export class InventoryService {
     return this.http.get(url);
   }
 
+  getProduct(idOrCode, isCode:boolean = false) : Observable<any> {
+    let url = `article/${idOrCode}`;
+    if (isCode) url+=`?code=true`
+    return this.http.get(url);
+  }
+
   saveProduct(data: any) : Observable<any> {
     return this.http.post('article', data);
   }
-  
-  //Categorias  
+
+  //Categorias
   getCategories(search:string): Observable<any> {
     let url = `category?`;
     if (search.trim().length > 0) {

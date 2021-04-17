@@ -16,7 +16,6 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
                               <li><a class="dropdown-item" routerLink="/persons">Listar Clientes</a></li>
                               <li><a class="dropdown-item" routerLink="/persons/add">Nuevo Cliente</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar Cliente</a></li>
                             </ul>
                         </li>
                         <!--Proveedores-->
@@ -25,7 +24,6 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
                                 <li><a class="dropdown-item" href="#">Nuevo Proveedor</a></li>
                                 <li><a class="dropdown-item" href="#">Modificar Proveedor</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar Proveedor</a></li>
                             </ul>
                         </li>
                         <!--Inventario-->
@@ -33,8 +31,9 @@
                             <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#inventory"/></svg>Inventario</a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
                                 <li><a class="dropdown-item" routerLink="/products/add">Nuevo Producto</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar Inventario</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar Inventario</a></li>
+                                <li><a class="dropdown-item" routerLink="/products">Listar Productos</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" routerLink="/products/categories">Categorías</a></li>
                             </ul>
                         </li>
                         <!--Compras-->

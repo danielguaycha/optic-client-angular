@@ -8,7 +8,7 @@ export interface Product{
     type: string,
     ice_code?: number,
     iva: number,
-    category_id: number,
+    category_id: number | string,
     category?: string,
     stock?: number,
     office_id?: number,

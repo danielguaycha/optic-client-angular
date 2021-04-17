@@ -11,7 +11,7 @@ export class SecureStorageService {
   constructor() {
     this.secureStorage = new SecureLS({
       encryptionSecret: environment.secretKey,
-      encodingType: 'aes'
+      encodingType: 'aes',
     });
   }
 

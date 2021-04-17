@@ -49,4 +49,8 @@ export class ValidateService {
     return this.round(total / (1 + (tarifaPercent/100)));
   }
 
+  // parse
+  parseDouble (number: any) {
+    return Number.parseFloat(number);
+  }
 }

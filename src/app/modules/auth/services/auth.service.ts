@@ -17,6 +17,10 @@ export class AuthService {
     return this.http.post(`login`, data);
   }
 
+  getUser() : Observable<any>{
+    return this.http.get('user');
+  }
+
   getToken () {
     return this.storageService.get('token');
   }

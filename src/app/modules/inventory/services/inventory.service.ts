@@ -9,15 +9,23 @@ export class InventoryService {
 
   constructor(private http: HttpClient) { }
   //Productos
-  getProducts(): Observable<any> {
-    return this.http.get('article');
+  getProducts(search: string = null, limit:number = 30): Observable<any> {
+    let url = `article?limit=${limit}`;
+    if (search) url += `&search=${search}`; // for search product
+    return this.http.get(url);
   }
 
   saveProduct(data: any) : Observable<any> {
     return this.http.post('article', data);
   }
-  
-  //Categorias  
+
+  getProduct(idOrCode, isCode:boolean = false) : Observable<any> {
+    let url = `article/${idOrCode}`;
+    if (isCode) url+=`?code=true`
+    return this.http.get(url);
+  }
+
+  //Categorias
   getCategories(): Observable<any> {
     return this.http.get('categories');
   }
@@ -34,7 +42,7 @@ export class InventoryService {
     return this.http.put(`categories/${id}`, data);
   }
 
-  deleteCategroy(id) : Observable<any>{
+  deleteCategory(id) : Observable<any>{
     return this.http.delete(`categories/${id}`);
   }
 }

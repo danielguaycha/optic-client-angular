@@ -1,5 +1,9 @@
 .page-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin-bottom: .5rem;
+  h5, h6 {
+    margin-bottom: 0;
+  }
 }

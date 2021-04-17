@@ -32,7 +32,7 @@
                         <li class="dropdown-submenu">
                             <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#inventory"/></svg>Inventario</a>
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
-                                <li><a class="dropdown-item" href="#">Nuevo Inventario</a></li>
+                                <li><a class="dropdown-item" routerLink="/products/add">Nuevo Producto</a></li>
                                 <li><a class="dropdown-item" href="#">Modificar Inventario</a></li>
                                 <li><a class="dropdown-item" href="#">Eliminar Inventario</a></li>
                             </ul>
@@ -56,6 +56,14 @@
                             </ul>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">Configuración</a>
+                  <ul class="dropdown-menu dropdown-menu-dark drop">
+                    <li class="dropdown-submenu">
+                      <a class="dropdown-item" routerLink="/config">Config. General</a>
+                    </li>
+                  </ul>
                 </li>
             </ul>
         </div>

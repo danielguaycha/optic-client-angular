@@ -36,6 +36,13 @@ import { FrmProductComponent } from './modules/inventory/components/frm-product/
 import { DialogAddCategoryComponent } from './modules/inventory/components/dialog-add-category/dialog-add-category.component';
 import { FrmCategoryComponent } from './modules/inventory/components/frm-category/frm-category.component';
 import { AddProductComponent } from './modules/inventory/views/add-product/add-product.component';
+import { SelectProductComponent } from './modules/inventory/components/select-product/select-product.component';
+import { GeneralConfigComponent } from './modules/config/general/views/general-config/general-config.component';
+import {StoreModule} from '@ngrx/store';
+import { userReducer } from './modules/auth/store/user.reducer';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +69,9 @@ import { AddProductComponent } from './modules/inventory/views/add-product/add-p
     FrmProductComponent,
     DialogAddCategoryComponent,
     FrmCategoryComponent,
-    AddProductComponent
+    AddProductComponent,
+    SelectProductComponent,
+    GeneralConfigComponent
 
   ],
   imports: [
@@ -73,7 +82,9 @@ import { AddProductComponent } from './modules/inventory/views/add-product/add-p
     HttpClientModule,
     BrowserAnimationsModule,
     ToastNotificationsModule,
-    MomentModule
+    MomentModule,
+    StoreModule.forRoot({data: userReducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

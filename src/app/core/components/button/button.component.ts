@@ -9,7 +9,7 @@ export class ButtonComponent implements OnInit {
 
   @Input() variant:string = 'primary'
   @Input() loadingMsg:string = 'Cargando...'
-  @Input() loader:boolean = true;
+  @Input() loader:boolean = false;
   @Input() width !:string;
   @Input() type :string = 'submit';
   constructor() {

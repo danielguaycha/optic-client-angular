@@ -1,0 +1,22 @@
+<form class="card" #formGeneralConfig ngNativeValidate>
+  <div class="card-body">
+    <label class="label-title d-block">Configuración General</label>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <label for="iva" class="form-label">Iva %</label>
+        <input type="number" id="iva" min="0" max="50" value="12" class="form-control" required>
+      </div>
+      <div class="col-12 col-md-6">
+        <label for="decimals" class="form-label"># Decimales</label>
+        <select name="decimals" id="decimals" class="form-select" required>
+          <option value="2">2 (0,00)</option>
+          <option value="3">3 (0,000)</option>
+          <option value="4">4 (0,0000)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-end">
+    <bs-button type="submit"><i class="fa fa-save"> </i> Guardar Config.</bs-button>
+  </div>
+</form>

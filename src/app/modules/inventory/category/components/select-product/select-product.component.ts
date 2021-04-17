@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {InventoryService} from '../../services/inventory.service';
+import {InventoryService} from '../../services/category.service';
 import {Product} from '../../models/products.model';
-import {ConfigService} from '../../../config/general/services/config.service';
+import {ConfigService} from '../../../../config/general/services/config.service';
 
 @Component({
   selector: 'app-select-product',

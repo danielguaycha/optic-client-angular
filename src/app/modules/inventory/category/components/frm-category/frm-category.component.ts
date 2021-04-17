@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Category } from '../../models/categories.model';
-import { InventoryService } from '../../services/inventory.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-frm-category',
@@ -15,7 +15,7 @@ export class FrmCategoryComponent implements OnInit {
 
   public loader: boolean = false;
   
-  constructor(private inventoryService : InventoryService, private toast: ToastService) {
+  constructor(private categoryService : CategoryService, private toast: ToastService) {
     this.formData = {
         name: '',
         description: '',        
@@ -33,7 +33,7 @@ export class FrmCategoryComponent implements OnInit {
   }
 
   storeCategory() {
-    this.inventoryService.saveCategroy(this.formData).subscribe(res => {
+    this.categoryService.saveCategroy(this.formData).subscribe(res => {
       if (res.ok) {
         this.create.emit(res.body);
         this.toast.ok(res.message);

@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Product } from '../../models/products.model';
-import { InventoryService } from '../../services/inventory.service';
+import { InventoryService } from '../../services/category.service';
 import { Category } from '../../models/categories.model';
-import {ConfigService} from '../../../config/general/services/config.service';
-import {ValidateService} from '../../../../core/services/validate.service';
+import {ConfigService} from '../../../../config/general/services/config.service';
+import {ValidateService} from '../../../../../core/services/validate.service';
 
 @Component({
   selector: 'app-frm-product',

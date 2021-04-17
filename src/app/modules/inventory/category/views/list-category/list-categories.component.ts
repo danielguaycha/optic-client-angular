@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryService } from '../../services/inventory.service';
-import {ConfirmService} from '../../../../core/services/confirm.service';
-import {ToastService} from '../../../../core/services/toast.service';
+import { CategoryService } from '../../services/category.service';
+import {ConfirmService} from '../../../../../core/services/confirm.service';
+import {ToastService} from '../../../../../core/services/toast.service';
 import { Category } from '../../models/categories.model';
 
 @Component({
@@ -13,7 +13,7 @@ import { Category } from '../../models/categories.model';
     public loader:boolean;
     public categories:Array<Category> = [];
     constructor(
-        private inventoryService: InventoryService,
+        private categoryService: CategoryService,
         private confirm: ConfirmService,
         private toast: ToastService) {  
     }
@@ -25,7 +25,7 @@ import { Category } from '../../models/categories.model';
   
     getProducts() {
       this.loader = true;
-      this.inventoryService.getCategories("").subscribe(res => {
+      this.categoryService.getCategories("").subscribe(res => {
         if (res.ok && res.body) {
           this.categories = res.body;
         }
@@ -37,10 +37,4 @@ import { Category } from '../../models/categories.model';
     onCreateCategory(event) {
       this.categories.push(event);
     }
-  
-    deleteProduct(category) {
-
-    }
-
-  }
-  
+}

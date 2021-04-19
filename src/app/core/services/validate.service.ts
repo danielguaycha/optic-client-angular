@@ -49,6 +49,10 @@ export class ValidateService {
     return this.round(total / (1 + (tarifaPercent/100)));
   }
 
+  getPercent(total: number, valueNeto: number) {
+    return this.round( ((total / valueNeto) - 1) * 100);
+  }
+
   // parse
   parseDouble (number: any) {
     return Number.parseFloat(number);

@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { Product } from '../../models/products.model';
-import { InventoryService } from '../../services/inventory.service';
-import { Category } from '../../models/categories.model';
-import {ConfigService} from '../../../config/general/services/config.service';
-import {ValidateService} from '../../../../core/services/validate.service';
+import { Articles } from '../../models/articles.model';
+import { ArticleService } from '../../services/articles.service';
+import {ConfigService} from '../../../../config/general/services/config.service';
+import {ValidateService} from '../../../../../core/services/validate.service';
+import { Category } from '../../../category/models/categories.model';
+import { CategoryService } from '../../../category/services/category.service';
 
 @Component({
   selector: 'app-frm-product',
@@ -20,13 +21,18 @@ export class FrmProductComponent implements OnInit {
   ivaList: Array<number> = [0]
 
   @Output() create: EventEmitter<any> = new EventEmitter();
-  @Input() formData!:Product;
+  @Input() formData!:Articles;
+  @Input() category!:Category;
   @Input() edit:boolean = false;
+  
   public loader: boolean = false;
-  public category:Category;
 
-  constructor(private inventoryService : InventoryService,
-              private toast: ToastService, private cfg : ConfigService, private validate: ValidateService) {
+  constructor(
+    private articleService : ArticleService,
+    private categoryService : CategoryService,
+    private toast: ToastService,
+    private cfg : ConfigService,
+    private validate: ValidateService) {
     this.initFormData();
     this.ivaList.push(cfg.iva);
   }
@@ -46,7 +52,7 @@ export class FrmProductComponent implements OnInit {
     this.formData.pvp = this.pvpIva;
     this.formData.iva = this.iva > 0 ? 1 : 0;
     this.formData.category_id = this.category.id;
-    this.inventoryService.saveProduct(this.formData).subscribe(res => {
+    this.articleService.saveProduct(this.formData).subscribe(res => {
       if (res.ok) {
         this.initFormData();
         this.create.emit(res.body);
@@ -67,7 +73,7 @@ export class FrmProductComponent implements OnInit {
     if (key.keyCode !== 13) return;
     if (!this.category.id) return;
     key.preventDefault();
-    this.inventoryService.getCategroy(this.category.id).subscribe(res => {
+    this.categoryService.getCategroy(this.category.id).subscribe(res => {
       if (res.ok && res.body) {
         this.category = res.body;
         document.getElementById('product_name').focus();
@@ -93,6 +99,10 @@ export class FrmProductComponent implements OnInit {
   onInputUtility(value: string) {
     this.utility = this.validate.parseDouble(value);
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
+  }
+  onInputFinalPrice(value: string) {
+    this.utility = this.validate.getPercent(this.validate.parseDouble(value), this.pvp)
+    
   }
 
   initFormData() {

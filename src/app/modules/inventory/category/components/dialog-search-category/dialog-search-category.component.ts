@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ModalComponent} from '../../../../core/components/modal/modal.component';
+import {ModalComponent} from '../../../../../core/components/modal/modal.component';
 import { Category } from '../../models/categories.model';
-import { InventoryService } from '../../services/inventory.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-dialog-search-category',
@@ -14,11 +14,12 @@ export class DialogSearchCategoryComponent implements OnInit {
   search:string;
   public categories:Array<Category> = [];
   public loader: boolean = false;
-  constructor(private inventoryService: InventoryService) {
+  constructor(private categoryService: CategoryService) {
     this.search = ``;
   }
 
   ngOnInit(): void {
+    this.ListCategory();
   }
 
   ngAfterViewInit() {
@@ -32,7 +33,7 @@ export class DialogSearchCategoryComponent implements OnInit {
     this.categories = [];
     if (this.search.length < 2) return;
     this.loader = true;
-    this.inventoryService.getCategories(this.search).subscribe(res => {
+    this.categoryService.getCategories(this.search).subscribe(res => {
       if (res.ok) {
         this.categories = res.body;
         this.loader = false;
@@ -43,9 +44,21 @@ export class DialogSearchCategoryComponent implements OnInit {
     })
   }
 
+  ListCategory() {
+    this.categories = [];
+    this.categoryService.getCategories("").subscribe(res => {
+      if (res.ok){
+        this.categories = res.body;
+      }
+    }, error => {
+      this.loader = false;
+      console.log(error);
+    })
+  }
+
   onEnterPress(key) {
     if (key.keyCode !== 13) return;
-    const btn = document.getElementById(`addPerson0`);
+    const btn = document.getElementById(`addCategory0`);
     if (btn)
       btn.focus();
   }

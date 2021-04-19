@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {InventoryService} from '../../services/inventory.service';
-import {Product} from '../../models/products.model';
-import {ConfigService} from '../../../config/general/services/config.service';
+import {Articles} from '../../models/articles.model';
+import {ConfigService} from '../../../../config/general/services/config.service';
+import { ArticleService } from '../../services/articles.service';
 
 @Component({
   selector: 'app-select-product',
@@ -9,9 +9,9 @@ import {ConfigService} from '../../../config/general/services/config.service';
 })
 export class SelectProductComponent implements OnInit {
   code: string
-  selectProduct: Product;
+  selectProduct: Articles;
   selectProductCalc: any;
-  constructor(private productServ: InventoryService, private cfg: ConfigService) {
+  constructor(private articleService: ArticleService, private cfg: ConfigService) {
     this.code = '';
     this.selectProduct = {
       category_id: 0,
@@ -42,7 +42,7 @@ export class SelectProductComponent implements OnInit {
   searchProduct(key) {
     if (key.keyCode !== 13) return;
     if (this.code.trim().length <= 0) return;
-    this.productServ.getProduct(this.code, true).subscribe(res => {
+    this.articleService.getProduct(this.code, true).subscribe(res => {
       if (res.ok && res.body) {
         this.selectProduct = res.body;
         this.selectProduct.pvp = this.cfg.toFloat(this.selectProduct.pvp);

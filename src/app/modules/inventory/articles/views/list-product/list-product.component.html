@@ -1,0 +1,45 @@
+<div class="page-header">
+    <h5>Listado de productos</h5>
+    <app-add-product (create)="onCreateProduct($event)"></app-add-product>
+</div>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">COD.</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">PVP</th>
+                    <th scope="col">Precio de Compra</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col" class="text-center">Stock</th>
+                    <th scope="col">Oficina</th>
+                    <th class="text-center"><i class="fa fa-cog"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of products">
+                    <td>{{ p.code }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.description }}</td>
+                    <td>{{ p.pvp }}</td>
+                    <td>{{ p.price_purchase }}</td>
+                    <td>{{ p.type }}</td>
+                    <td>{{ p.category }}</td>
+                    <td [class]=" (p.stock === 0 ? 'text-danger': 'text-success') +' fw-bold text-center'">{{ p.stock }}</td>
+                    <td>{{ p.office }}</td>
+                    <td class="text-center">
+                        <button class="s-btn text-danger" (click)="deleteProduct(p)"><i class="fa fa-trash"></i></button>
+                        <a class="s-btn text-info" [routerLink]="'/persons/'+p.code.toString()+'/edit'"><i class="fa fa-pencil"></i></a>
+                    </td>
+                </tr>
+                <tr *ngIf="products.length <= 0">
+                    <td colspan="10" class="text-center text-muted">Aun no se han registrado productos</td>
+                </tr>
+            </tbody>
+        </table>
+        <app-modal-confirm></app-modal-confirm>
+    </div>
+</div>

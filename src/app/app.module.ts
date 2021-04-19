@@ -45,6 +45,9 @@ import {environment} from '../environments/environment';
 
 import { ListCategoriesComponent } from './modules/inventory/views/list-category/list-categories.component';
 import { DialogSearchCategoryComponent } from './modules/inventory/components/dialog-search-category/dialog-search-category.component';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
+import {LoadingBarModule} from '@ngx-loading-bar/core';
+import { WithLoaderComponent } from './core/components/with-loader/with-loader.component';
 
 @NgModule({
   declarations: [
@@ -75,8 +78,8 @@ import { DialogSearchCategoryComponent } from './modules/inventory/components/di
     SelectProductComponent,
     GeneralConfigComponent,
     ListCategoriesComponent,
-    DialogSearchCategoryComponent
-
+    DialogSearchCategoryComponent,
+    WithLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +91,9 @@ import { DialogSearchCategoryComponent } from './modules/inventory/components/di
     ToastNotificationsModule,
     MomentModule,
     StoreModule.forRoot({data: userReducer}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    LoadingBarHttpClientModule,
+    LoadingBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

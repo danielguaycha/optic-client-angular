@@ -1,0 +1,5 @@
+<div class="with-loader" *ngIf="loader">
+  <div class="spinner-border" role="status" ></div>
+  <span>Cargando...</span>
+</div>
+<ng-content *ngIf="!loader"></ng-content>

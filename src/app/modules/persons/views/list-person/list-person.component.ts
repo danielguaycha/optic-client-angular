@@ -8,8 +8,7 @@ import {ToastService} from '../../../../core/services/toast.service';
   templateUrl: './list-person.component.html',
 })
 export class ListPersonComponent implements OnInit {
-
-  public loader:boolean;
+  loader: boolean = false;
   public persons:Array<any> = [];
   constructor(private personService: PersonService, private confirm: ConfirmService,
               private toast: ToastService) {
@@ -26,8 +25,11 @@ export class ListPersonComponent implements OnInit {
       if (res.ok && res.body.data) {
         this.persons = res.body.data;
       }
-    }, error => {
+      //this.loader.hide();
       this.loader = false;
+    }, error => {
+      //this.loader.hide();
+      this.loader = true;
     })
   }
 

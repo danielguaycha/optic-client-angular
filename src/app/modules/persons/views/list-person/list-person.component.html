@@ -1,8 +1,9 @@
-<div class="page-header">
+<with-loader [loader]="loader">
+  <div class="page-header">
     <h5>Listado de clientes</h5>
     <app-add-client (create)="onCreateClient($event)"></app-add-client>
-</div>
-<div class="card pt-0">
+  </div>
+  <div class="card pt-0">
     <div class="table-responsive">
       <table class="table table-bordered table-hover mb-0">
         <thead>
@@ -34,4 +35,5 @@
       </table>
       <app-modal-confirm></app-modal-confirm>
     </div>
-</div>
+  </div>
+</with-loader>

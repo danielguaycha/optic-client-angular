@@ -19,6 +19,7 @@ export class DialogSearchCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ListCategory();
   }
 
   ngAfterViewInit() {
@@ -43,9 +44,21 @@ export class DialogSearchCategoryComponent implements OnInit {
     })
   }
 
+  ListCategory() {
+    this.categories = [];
+    this.categoryService.getCategories("").subscribe(res => {
+      if (res.ok){
+        this.categories = res.body;
+      }
+    }, error => {
+      this.loader = false;
+      console.log(error);
+    })
+  }
+
   onEnterPress(key) {
     if (key.keyCode !== 13) return;
-    const btn = document.getElementById(`addPerson0`);
+    const btn = document.getElementById(`addCategory0`);
     if (btn)
       btn.focus();
   }

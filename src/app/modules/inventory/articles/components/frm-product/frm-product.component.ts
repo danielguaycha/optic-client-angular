@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Articles } from '../../models/articles.model';
 import { ArticleService } from '../../services/articles.service';
@@ -24,6 +24,7 @@ export class FrmProductComponent implements OnInit {
   @Input() formData!:Articles;
   @Input() category!:Category;
   @Input() edit:boolean = false;
+  
   public loader: boolean = false;
 
   constructor(
@@ -98,6 +99,10 @@ export class FrmProductComponent implements OnInit {
   onInputUtility(value: string) {
     this.utility = this.validate.parseDouble(value);
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
+  }
+  onInputFinalPrice(value: string) {
+    this.utility = this.validate.getPercent(this.validate.parseDouble(value), this.pvp)
+    
   }
 
   initFormData() {

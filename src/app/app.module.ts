@@ -32,6 +32,7 @@ import { LoaderComponent } from './core/components/loader/loader.component';
 import { SelectPersonComponent } from './modules/persons/components/select-person/select-person.component';
 import { ListProductsComponent } from './modules/inventory/articles/views/list-product/list-product.component';
 import { DialogAddProductComponent } from './modules/inventory/articles/components/dialog-add-product/dialog-add-product.component';
+import { EditArticleComponent } from './modules/inventory/articles/views/edit-product/edit-product.component';
 import { FrmProductComponent } from './modules/inventory/articles/components/frm-product/frm-product.component';
 import { DialogAddCategoryComponent } from './modules/inventory/category/components/dialog-add-category/dialog-add-category.component';
 import { FrmCategoryComponent } from './modules/inventory/category/components/frm-category/frm-category.component';
@@ -75,7 +76,8 @@ import { DialogSearchCategoryComponent } from './modules/inventory/category/comp
     SelectProductComponent,
     GeneralConfigComponent,
     ListCategoriesComponent,
-    DialogSearchCategoryComponent
+    DialogSearchCategoryComponent,
+    EditArticleComponent
 
   ],
   imports: [

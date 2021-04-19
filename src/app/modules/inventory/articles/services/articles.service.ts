@@ -13,15 +13,21 @@ export class ArticleService {
     return this.http.post('article', data);
   }
 
+  getProduct(idOrCode, isCode: boolean = false): Observable<any> {
+    let url = `article/${idOrCode}`;
+    if (isCode) url += `?code=true`
+    return this.http.get(url);
+  }
+
   getProducts(search: string = null, limit: number = 30): Observable<any> {
     let url = `article?limit=${limit}`;
     if (search) url += `&search=${search}`; // for search product
     return this.http.get(url);
   }
 
-  getProduct(idOrCode, isCode: boolean = false): Observable<any> {
-    let url = `article/${idOrCode}`;
-    if (isCode) url += `?code=true`
+  updateProducts(search: string = null, limit: number = 30): Observable<any> {
+    let url = `article?limit=${limit}`;
+    if (search) url += `&search=${search}`; // for search product
     return this.http.get(url);
   }
 }

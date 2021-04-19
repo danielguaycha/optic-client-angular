@@ -17,7 +17,7 @@
                     <td>{{ c.name }}</td>
                     <td>{{ c.description }}</td>
                     <td>
-                        <button (click)="onSelectCategory(c)" class="s-btn text-secondary" [id]="'addCategory'+i"><i class="fa fa-plus"></i></button>
+                        <button (click)="onSelectCategory(c)" class="s-btn text-secondary" [id]="'addCategory'+i" data-dismiss-modal="modalSearchCategory"><i class="fa fa-plus"></i></button>
                     </td>
                 </tr>
                 <tr *ngIf="!search && categories.length <= 0 && !loader">

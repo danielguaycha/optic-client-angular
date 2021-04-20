@@ -46,6 +46,7 @@ import {environment} from '../environments/environment';
 
 import { ListCategoriesComponent } from './modules/inventory/category/views/list-category/list-categories.component';
 import { DialogSearchCategoryComponent } from './modules/inventory/category/components/dialog-search-category/dialog-search-category.component';
+import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { DialogSearchCategoryComponent } from './modules/inventory/category/comp
     GeneralConfigComponent,
     ListCategoriesComponent,
     DialogSearchCategoryComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    AddRolComponent
 
   ],
   imports: [

@@ -8,6 +8,7 @@ import configRoutes from './modules/config/general/config-general.routes';
 import categoryRoutes from './modules/inventory/category/category.routes';
 import articlesRoutes from './modules/inventory/articles/articles.routes';
 import inventoryAdjustRoutes from './modules/inventory/adjust/inventory.adjust.routes';
+import rolesRoutes from './modules/roles/roles.routes';
 
 const MainRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,7 +20,8 @@ const MainRoutes: Routes = [
   ...articlesRoutes,
   ...inventoryAdjustRoutes,
   //config
-  ...configRoutes
+  ...configRoutes,
+  ...rolesRoutes
 ]
 
 @NgModule({

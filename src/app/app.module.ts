@@ -48,6 +48,8 @@ import {LoadingBarModule} from '@ngx-loading-bar/core';
 import { WithLoaderComponent } from './core/components/with-loader/with-loader.component';
 import { ListCategoriesComponent } from './modules/inventory/category/views/list-category/list-categories.component';
 import { DialogSearchCategoryComponent } from './modules/inventory/category/components/dialog-search-category/dialog-search-category.component';
+import { InventoryAdjustComponent } from './modules/inventory/adjust/views/inventory-adjust/inventory-adjust.component';
+import { MethodPaymentComponent } from './modules/invoice/components/method-payment/method-payment.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,9 @@ import { DialogSearchCategoryComponent } from './modules/inventory/category/comp
     ListCategoriesComponent,
     DialogSearchCategoryComponent,
     WithLoaderComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    InventoryAdjustComponent,
+    MethodPaymentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <div class="d-flex mb-2">
   <input type="text" placeholder="CI/Ruc." class="form-control"
-         (keypress)="onPressVerify($event)"
+         (keypress)="onPressVerify($event)" autocomplete="off"
          [(ngModel)]="person.doc" name="doc">
   <app-add-client (create)="onSelect($event)"></app-add-client>
   <app-dialog-search-person (select)="onSelect($event)"></app-dialog-search-person>

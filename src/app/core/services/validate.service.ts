@@ -10,8 +10,11 @@ export class ValidateService {
 
   //number functions
 
-  round(number: any) {
-    return this.roundToPlaces(number, this.cfg.decimals);
+  round(number: any, useConfig: boolean = true) {
+    if (useConfig)
+      return this.roundTo(number, this.cfg.decimals);
+
+    return this.roundTo(number, 6);
   }
 
   toIntDefault(number: any, default_: number = 0) {
@@ -22,7 +25,7 @@ export class ValidateService {
     }
   }
 
-  roundToPlaces(number:any, places:number = 2){
+  roundTo(number:any, places:number = 6){
     if (typeof number === 'string') {
       return Number.parseFloat(number).toFixed(places);
     }
@@ -38,19 +41,19 @@ export class ValidateService {
 
   // percent calc
   addPercent(valueNeto: number, tarifa: number) {
-    return this.round(valueNeto * (1 + (tarifa/100)));
+    return (valueNeto * (1 + (tarifa/100)));
   }
 
   calcPercent(valueNeto: number, tarifa: number) {
-    return this.round(valueNeto * (tarifa/100));
+    return (valueNeto * (tarifa/100));
   }
 
   getNeto(total: number, tarifaPercent: number) {
-    return this.round(total / (1 + (tarifaPercent/100)));
+    return (total / (1 + (tarifaPercent/100)));
   }
 
   getPercent(total: number, valueNeto: number) {
-    return this.round( ((total / valueNeto) - 1) * 100);
+    return ((total / valueNeto) - 1) * 100;
   }
 
   // parse

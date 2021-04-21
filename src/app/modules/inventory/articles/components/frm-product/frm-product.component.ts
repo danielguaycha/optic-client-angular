@@ -24,7 +24,7 @@ export class FrmProductComponent implements OnInit {
   @Input() formData!:Articles;
   @Input() category!:Category;
   @Input() edit:boolean = false;
-  
+
   public loader: boolean = false;
 
   constructor(
@@ -32,7 +32,7 @@ export class FrmProductComponent implements OnInit {
     private categoryService : CategoryService,
     private toast: ToastService,
     private cfg : ConfigService,
-    private validate: ValidateService) {
+    public validate: ValidateService) {
     this.initFormData();
     this.ivaList.push(cfg.iva);
   }
@@ -48,10 +48,10 @@ export class FrmProductComponent implements OnInit {
 
   //products
   storeProduct(){
-    this.loader = true;
-    this.formData.pvp = this.pvpIva;
+    this.formData.pvp = this.iva > 0 ? this.validate.getNeto(this.pvpIva, this.cfg.iva) : this.pvpIva;
     this.formData.iva = this.iva > 0 ? 1 : 0;
     this.formData.category_id = this.category.id;
+    this.loader = true;
     this.articleService.saveProduct(this.formData).subscribe(res => {
       if (res.ok) {
         this.initFormData();
@@ -62,7 +62,7 @@ export class FrmProductComponent implements OnInit {
     }, error => {
       this.loader = false;
       this.toast.err(error);
-    })
+    });
   }
 
   //events for category
@@ -101,8 +101,7 @@ export class FrmProductComponent implements OnInit {
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
   }
   onInputFinalPrice(value: string) {
-    this.utility = this.validate.getPercent(this.validate.parseDouble(value), this.pvp)
-    
+    this.utility = this.validate.round(this.validate.getPercent(this.validate.parseDouble(value), this.pvp));
   }
 
   initFormData() {

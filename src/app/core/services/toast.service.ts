@@ -24,4 +24,20 @@ export class ToastService {
       type: 'danger',
     });
   }
+
+  info(message = 'Comprueba tus datos', title = 'Dato informativo') {
+    this.toaster.open({
+      text: message,
+      caption: `${environment.appName} :: ${title}`,
+      type: 'info',
+    });
+  }
+
+  warn(message = 'Comprueba tus datos', title = 'Dato informativo') {
+    this.toaster.open({
+      text: message,
+      caption: `${environment.appName} :: ${title}`,
+      type: 'warning',
+    });
+  }
 }

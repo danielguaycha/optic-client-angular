@@ -32,8 +32,11 @@
                             <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
                                 <li><a class="dropdown-item" routerLink="/products/add">Nuevo Producto</a></li>
                                 <li><a class="dropdown-item" routerLink="/products">Listar Productos</a></li>
-                                <li class="dropdown-divider"></li>
+                                <li class="dropdown-divider dark"></li>
+                                <li><a class="dropdown-item" routerLink="/inventory/adjust">Ajuste de Inventario</a></li>
+                                <li class="dropdown-divider dark"></li>
                                 <li><a class="dropdown-item" routerLink="/products/categories">Categorías</a></li>
+                              <li class="dropdown-divider"></li>
                             </ul>
                         </li>
                         <!--Compras-->
@@ -60,7 +63,16 @@
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">Configuración</a>
                   <ul class="dropdown-menu dropdown-menu-dark drop">
                     <li class="dropdown-submenu">
-                      <a class="dropdown-item" routerLink="/config">Config. General</a>
+                      <a class="dropdown-item" routerLink="/config">Perfil de empresa</a>
+                    </li>
+                    <li class="dropdown-submenu">
+                      <a class="dropdown-item" routerLink="/config">Configuración General</a>
+                    </li>
+                    <li class="dropdown-submenu">
+                      <a class="dropdown-item" routerLink="/config">Usuarios</a>
+                    </li>
+                    <li class="dropdown-submenu">
+                      <a class="dropdown-item" routerLink="/config">Roles y Permisos</a>
                     </li>
                   </ul>
                 </li>

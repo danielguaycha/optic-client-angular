@@ -8,12 +8,13 @@ import configRoutes from './modules/config/general/config-general.routes';
 import categoryRoutes from './modules/inventory/category/category.routes';
 import articlesRoutes from './modules/inventory/articles/articles.routes';
 import rolesRoutes from './modules/roles/roles.routes';
+import userRoutes from './modules/users/users.routes';
 
 const MainRoutes: Routes = [
   { path: '', component: LoginComponent },
   ...authRoutes, ...personRoutes,
   ...invoiceRoutes, ...categoryRoutes,
-  ...articlesRoutes, ...configRoutes, ...rolesRoutes
+  ...articlesRoutes, ...configRoutes, ...rolesRoutes, ...userRoutes
 ]
 
 @NgModule({

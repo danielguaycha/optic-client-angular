@@ -1,0 +1,52 @@
+<form class="row g-2" #enterpriseForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
+    <label class="label-title"><span>Perfil de empresa</span></label>
+
+    <div class="col-12 col-md-4">
+        <div class="text-center">
+            <img class="rounded-circle" alt="50x50" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" data-holder-rendered="true">
+        </div>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="obligado" (change)="onCheckPermiso($event.target.checked)">
+            <label class="form-check-label">Obligado a llevar contablilidad</label>
+        </div>
+        <br>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="regimen" (change)="onCheckPermiso($event.target.checked)">
+            <label class="form-check-label">Regimen Micro-Empresas</label>
+        </div>
+
+
+
+    </div>
+
+    <!-- Datos -->
+    <div class="col-12 col-md-8">
+        <label for="ruc" class="form-label">RUC: </label>
+        <input type="text" id="ruc" [(ngModel)]="formData.ruc" name="ruc" class="form-control" required>
+
+        <label for="nombre_comercial" class="form-label">Nombre Comercial: </label>
+        <input type="text" id="nombre_comercial" [(ngModel)]="formData.nombre_comercial" name="nombre_comercial" class="form-control" required>
+
+        <label for="razon_social" class="form-label">Razón Social: </label>
+        <input type="text" id="razon_social" [(ngModel)]="formData.razon_social" name="razon_social" class="form-control" required>
+
+        <label for="telefono" class="form-label">Telefono: </label>
+        <input type="text" id="telefono" [(ngModel)]="formData.telefono" name="telefono" class="form-control" required>
+
+        <label for="correo" class="form-label">Correo: </label>
+        <input type="text" id="correo" [(ngModel)]="formData.correo" name="correo" class="form-control" required>
+
+        <label for="direccion" class="form-label">Dirección: </label>
+        <input type="text" id="direccion" [(ngModel)]="formData.direccion" name="direccion" class="form-control" required>
+
+    </div>
+
+    <div class="col-12 col-md-4 text-end mt-4">
+        <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
+        <bs-button variant="primary"><i class="fa fa-save me-1"></i>Guardar</bs-button>
+        <!-- <bs-button [loader]="loader" variant="primary"><i class="fa fa-save me-1"></i>Guardar</bs-button> -->
+    </div>
+
+</form>

@@ -1,0 +1,81 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <app-select-product #selectArticle [showCalc]="false" (onSelect)="onAddArticle($event)"></app-select-product>
+      </div>
+    </div>
+    <label class="label-title">Detalle de artículos</label>
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Cod</th>
+                <th>Detalle</th>
+                <th>P. Costo</th>
+                <th>Cantidad</th>
+                <th>Total Unidades</th>
+                <th>Sucursal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let art of articles">
+              <td>{{ art.code }}</td>
+              <td>{{ art.name }}</td>
+              <td>{{ validate.round(art.price_purchase) }}</td>
+              <td><input type="number" min="1" [(ngModel)]="art.qty" (input)="onChangeQty(art)"
+                         class="form-control-plaintext form-control-sm"></td>
+              <td>{{ art.totalUnid }}</td>
+              <td>{{ art.office }}</td>
+              <td class="text-end"><button (click)="onRemoveArticle(art)"
+                class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td colspan="7" class="text-center text-muted" *ngIf="articles && articles.length <= 0">No se han agregado artículos</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row g-2">
+      <div class="col-12 col-md-2">
+        <label class="form-label">Tipo de Ajuste</label>
+        <select name="type" id="type" class="form-select" [(ngModel)]="type" (change)="onChangeType()">
+          <option value="1">Ingreso (+)</option>
+          <option value="2">Egreso (-)</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-4">
+        <label class="form-label">Por concepto de:</label>
+        <input type="text" name="description"
+               [(ngModel)]="desc"
+               class="form-control" placeholder="Ejm. Por Faltantes, Sobrantes, Inv. Inicial">
+      </div>
+
+      <div class="col-12 col-md-1">
+        <label class="form-label">SubTotal 0%:</label>
+        <input type="number" name="subtotal0" class="form-control" readonly [value]="validate.round(subTotal0)">
+      </div>
+      <div class="col-12 col-md-1">
+        <label class="form-label">SubTotal Iva:</label>
+        <input type="number" name="subtotal_iva" class="form-control" readonly [value]="validate.round(subTotalIva)">
+      </div>
+      <div class="col-12 col-md-1">
+        <label class="form-label">Iva %:</label>
+        <input type="number" name="iva_percent" class="form-control" readonly [value]="validate.round(ivaPercent)">
+      </div>
+      <div class="col-12 col-md-3">
+        <label class="form-label">Total Ajuste:</label>
+        <input type="number" name="total" class="form-control" readonly [value]="validate.round(total)">
+      </div>
+    </div>
+  </div>
+  <div class="card-body text-end">
+    <button class="btn btn-outline-danger me-2">Cancelar</button>
+    <bs-button [loader]="loader" (click)="onSubmit()"><i class="fa fa-check me-2"></i>Registrar Ajuste</bs-button>
+  </div>
+</div>

@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { UserModel } from '../models/users.model';
+import { EnterpriseModel } from '../models/enterprise.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class EnterpriseService {
 
   constructor(private http: HttpClient) { }
 
-  saveUser(userData: UserModel): Observable<any> {
-    return this.http.post('user', userData);
+  getEnterprise(): Observable<any> {
+    return null;
+    // return this.http.post('user', userData);
   }
 }

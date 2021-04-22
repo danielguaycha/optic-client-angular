@@ -2,19 +2,19 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidateService } from 'src/app/core/services/validate.service';
-import { UserModel } from '../../models/users.model';
-import { UserService } from '../../services/users.service';
+import { EnterpriseModel } from '../../models/enterprise.model';
+import { EnterpriseService } from '../../services/enterprise.service';
 
 @Component({
-    selector: 'frm-add-user',
-    templateUrl: './add-user.component.html',
+    selector: 'frm-enterprise',
+    templateUrl: './enterprise.component.html',
 })
-export class CreateUserComponent implements OnInit {
-    @Input() formData!: UserModel;
+export class EnterpriseComponent implements OnInit {
+    @Input() formData!: EnterpriseModel;
     @Input() edit: boolean = false;
 
     public loader: boolean = false;
-    constructor(private roleService: UserService, private toast: ToastService) {
+    constructor(private enterpriseService: EnterpriseService, private toast: ToastService) {
 
     }
 
@@ -23,14 +23,14 @@ export class CreateUserComponent implements OnInit {
     }
 
     onSubmit() {
-        this.savePermissions();
+        this.getEnterprise();
     }
     
-    savePermissions(){
+    getEnterprise(){
         this.loader = true;
-        this.roleService.saveUser(this.formData).subscribe(res => {
+        this.enterpriseService.getEnterprise().subscribe(res => {
           if (res.ok) {
-            this.initFormData();
+            // this.initFormData();
             this.toast.ok(res.message);
           }
           this.loader = false;
@@ -40,7 +40,7 @@ export class CreateUserComponent implements OnInit {
         })        
     }
 
-    onCheckPermiso(value, isChecked: boolean){
+    onCheckPermiso(isChecked: boolean){
         if(isChecked){
             // this.formData.permissions.push(Number(value));
         }else{
@@ -51,8 +51,12 @@ export class CreateUserComponent implements OnInit {
     initFormData() {
         this.formData = {
           id: null,
-          name: '',
-          pass: '',
+          ruc: '',
+          nombre_comercial: '',
+          razon_social: '',
+          telefono: '',
+          correo: '',
+          direccion: '',
         };
     }
 }

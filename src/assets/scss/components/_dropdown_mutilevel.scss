@@ -179,3 +179,9 @@
     color: white;
     text-shadow: 0 0 30px white;
 }
+
+.dropdown-divider {
+  &.dark {
+    background: gray;
+  }
+}

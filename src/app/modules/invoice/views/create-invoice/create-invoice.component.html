@@ -29,41 +29,95 @@
         </div>
 
       </div>
-      <app-select-product></app-select-product>
+      <app-select-product (onSelect)="onAddArticle($event)"></app-select-product>
       <label class="label-title">Detalles</label>
       <div class="col-12">
-        <table class="table table-striped table-hover table-bordered">
-          <thead>
-          <tr>
-            <th>COD</th>
-            <th>DETALLE</th>
-            <th>P. UNIT</th>
-            <th>CANTIDAD</th>
-            <th>DESC %</th>
-            <th>TOTAL</th>
-            <th>TOTAL+IVA</th>
-            <th></th>
-          </tr>
-          </thead>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+            <tr>
+              <th>COD</th>
+              <th>DETALLE</th>
+              <th>P. UNIT</th>
+              <th class="text-center">CANTIDAD</th>
+              <th class="text-center">DESC %</th>
+              <th>TOTAL</th>
+              <th>TOTAL+IVA</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let p of articles">
+              <td>{{ p.code }}</td>
+              <td>{{ p.name }}</td>
+              <td>{{ p.pvp }}</td>
+              <td><input type="number" min="0"
+                         class="form-control-plaintext form-control-sm text-center"
+                         [(ngModel)]="p.qty" (input)="reCalcItem(p)"></td>
+              <td><input type="number" min="0" max="100"
+                         class="form-control-plaintext form-control-sm text-center"
+                         [(ngModel)]="p.discount" (input)="reCalcItem(p)"></td>
+              <td>{{ validate.round(p.total) }}</td>
+              <td>{{ validate.round(p.totalIva) }}</td>
+              <td class="text-end"><button (click)="onRemoveArticle(p)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td colspan="8" *ngIf="articles.length <= 0"
+                  class="text-center text-muted">Agregue productos a la Factura</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-9 ">
+        <div class="row g-2">
+          <div class="col-12">
+            <label for="desc">Observación: </label>
+            <input type="text" id="desc" class="form-control">
+          </div>
+          <div class="col-12 btn-group align-items-start">
+            <button class="btn btn-light me-2"><i class="fa fa-plus me-1 text-success"></i>Agregar artículos</button>
+            <button class="btn btn-light me-2"><i class="fa fa-eraser me-1 text-warning"></i>Limpiar todo</button>
+            <button class="btn btn-primary" (click)="confirmPayment()"><i class="fa fa-save me-1"></i>Guardar Factura</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-12 col-md-3 text-end align-items-end">
+        <table class="table table-borderless">
           <tbody>
-          <tr *ngFor="let p of products">
-            <td>{{ p.code }}</td>
-            <td>{{ p.name }}</td>
-            <td [contentEditable]="true">{{ p.pvp }}</td>
-            <td [contentEditable]="true">0</td>
-            <td [contentEditable]="true">0</td>
-            <td>0</td>
-            <td>0</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="8" *ngIf="products.length <= 0"
-                class="text-center text-muted">Agregue productos a la Factura</td>
-          </tr>
+            <tr>
+              <td>Subtotal 0% </td>
+              <td><input type="text" class="form-control form-control-sm text-end"
+                         readonly [value]="validate.round(subtotal0)"></td>
+            </tr>
+            <tr>
+              <td>Subtotal {{cfg.iva}}% </td>
+              <td><input type="text" class="form-control form-control-sm text-end"
+                         readonly [value]="validate.round(subtotal12)"></td>
+            </tr>
+            <tr>
+              <td>Descuento</td>
+              <td><input type="text" class="form-control form-control-sm text-end"
+                         readonly [value]="validate.round(descuento)"></td>
+            </tr>
+            <tr>
+              <td>Iva {{cfg.iva}}% </td>
+              <td><input type="text" class="form-control form-control-sm text-end"
+                         readonly [value]="validate.round(iva12)"></td>
+            </tr>
+            <tr>
+              <td>Total A Pagar </td>
+              <td><input type="text" class="form-control form-control-sm text-end text-primary fw-bold"
+                         readonly [value]="validate.round(total)"></td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
+<app-method-payment></app-method-payment>
 

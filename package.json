@@ -21,6 +21,8 @@
     "@angular/router": "^11.2.10",
     "@ngrx/store": "^11.1.0",
     "@ngrx/store-devtools": "^11.1.0",
+    "@ngx-loading-bar/core": "^5.1.2",
+    "@ngx-loading-bar/http-client": "^5.1.2",
     "@popperjs/core": "^2.9.2",
     "@types/bootstrap": "^5.0.12",
     "bootstrap": "^5.0.0-beta3",

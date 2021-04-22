@@ -7,11 +7,6 @@
         <label for="description" class="form-label">Descripción:</label>
         <input type="text" id="description" [(ngModel)]="formData.description" name="description" class="form-control" required>
 
-        <div class="col-12 text-end mt-4">
-            <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
-            <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i>Registrar Rol</bs-button>
-        </div>
-
     </div>
 
     <div class="col-12 col-md-6">
@@ -37,4 +32,10 @@
             </div>
         </div>
     </div>
+
+    <div class="col-12 col-md-6 text-end mt-4">
+        <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
+        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i>Registrar Rol</bs-button>
+    </div>
+
 </form>

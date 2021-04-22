@@ -9,25 +9,23 @@ import { SecureStorageService } from '../../../../auth/services/secure-storage.s
 })
 export class GeneralConfigComponent implements OnInit {
 
-
-
   @Output() create: EventEmitter<any> = new EventEmitter();
   @Input() formData!:any;
   @Input() edit:boolean = false;
   public loader: boolean = false;
-  
+
   // public configService: any;
   constructor(private storage: SecureStorageService, private configService : ConfigService, private toast: ToastService) {
     this.formData = {
-      iva: 0,
-      decimals: 0
+      iva: configService.iva,
+      decimals: configService.decimals
     }
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {     
+  onSubmit() {
     this.loader = true;
     this.saveConfiguration();
   }

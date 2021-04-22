@@ -7,14 +7,26 @@ import invoiceRoutes from './modules/invoice/invoice.route';
 import configRoutes from './modules/config/general/config-general.routes';
 import categoryRoutes from './modules/inventory/category/category.routes';
 import articlesRoutes from './modules/inventory/articles/articles.routes';
+import inventoryAdjustRoutes from './modules/inventory/adjust/inventory.adjust.routes';
 import rolesRoutes from './modules/roles/roles.routes';
 import userRoutes from './modules/users/users.routes';
+import enterpriseRoutes from './modules/enterprise/enterprise.routes';
 
 const MainRoutes: Routes = [
   { path: '', component: LoginComponent },
-  ...authRoutes, ...personRoutes,
-  ...invoiceRoutes, ...categoryRoutes,
-  ...articlesRoutes, ...configRoutes, ...rolesRoutes, ...userRoutes
+  ...authRoutes,
+  ...personRoutes,
+  ...invoiceRoutes,
+  //inventory
+  ...categoryRoutes,
+  ...articlesRoutes,
+  ...inventoryAdjustRoutes,
+  //config
+  ...configRoutes,
+  ...rolesRoutes,
+  ...userRoutes,
+  //Enterprise
+  ...enterpriseRoutes
 ]
 
 @NgModule({

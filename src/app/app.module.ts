@@ -43,11 +43,16 @@ import {StoreModule} from '@ngrx/store';
 import { userReducer } from './modules/auth/store/user.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
-
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
+import {LoadingBarModule} from '@ngx-loading-bar/core';
+import { WithLoaderComponent } from './core/components/with-loader/with-loader.component';
 import { ListCategoriesComponent } from './modules/inventory/category/views/list-category/list-categories.component';
 import { DialogSearchCategoryComponent } from './modules/inventory/category/components/dialog-search-category/dialog-search-category.component';
+import { InventoryAdjustComponent } from './modules/inventory/adjust/views/inventory-adjust/inventory-adjust.component';
+import { MethodPaymentComponent } from './modules/invoice/components/method-payment/method-payment.component';
 import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component';
 import { CreateUserComponent } from './modules/users/views/add-user/add-user.component';
+import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterprise.component';
 
 @NgModule({
   declarations: [
@@ -79,9 +84,15 @@ import { CreateUserComponent } from './modules/users/views/add-user/add-user.com
     GeneralConfigComponent,
     ListCategoriesComponent,
     DialogSearchCategoryComponent,
+
+    WithLoaderComponent,
+    EditArticleComponent,
+    InventoryAdjustComponent,
+    MethodPaymentComponent,
     EditArticleComponent,
     AddRolComponent,
-    CreateUserComponent
+    CreateUserComponent, 
+    EnterpriseComponent
 
   ],
   imports: [
@@ -94,7 +105,9 @@ import { CreateUserComponent } from './modules/users/views/add-user/add-user.com
     ToastNotificationsModule,
     MomentModule,
     StoreModule.forRoot({data: userReducer}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    LoadingBarHttpClientModule,
+    LoadingBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

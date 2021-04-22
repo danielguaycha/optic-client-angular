@@ -14,6 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             if(err.status === 0) {
               return throwError('Ha ocurrido un error al comunicar con el servidor');
             }
+
             if (err.status === 401) {
               if (this.authServ.getToken()) {
                 this.authServ.removeToken();

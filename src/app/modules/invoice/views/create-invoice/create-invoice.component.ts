@@ -5,6 +5,8 @@ import {SelectProductComponent} from '../../../inventory/articles/components/sel
 import {ValidateService} from '../../../../core/services/validate.service';
 import {ConfigService} from '../../../config/general/services/config.service';
 import {Modal} from 'bootstrap';
+import typePayment from '../../models/type.payment';
+import banks from '../../models/banks';
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
@@ -20,16 +22,12 @@ export class CreateInvoiceComponent implements OnInit {
   descuento: number;
   iva12: number;
   total: number;
+  typePayments: Array<any> = [];
 
   constructor(private toast: ToastService, public validate: ValidateService,
               public cfg: ConfigService) {
     this.initComponents();
-  }
-
-  @HostListener('window:keyup', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-    console.log(event);
-    event.preventDefault();
+    this.typePayments = typePayment;
   }
 
   ngOnInit(): void {}

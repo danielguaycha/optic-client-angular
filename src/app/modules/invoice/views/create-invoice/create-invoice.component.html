@@ -22,6 +22,14 @@
               <option value="FACTURA" selected>Factura</option>
             </select>
           </div>
+          <div class="col-12 col-md-4">
+            <select class="form-select">
+
+              <ng-container *ngIf="typePayments && typePayments.length > 0">
+                <option *ngFor="let pay of typePayments" [value]="pay.code">{{pay.text}}</option>
+              </ng-container>
+            </select>
+          </div>
 
           <div class="col-12 col-md-4">
             <input type="text" class="form-control" placeholder="Caja/Pt. Emisión" readonly>

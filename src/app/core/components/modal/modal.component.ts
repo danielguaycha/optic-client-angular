@@ -10,6 +10,7 @@ export class ModalComponent implements OnInit {
   @Input() title:string = environment.appName;
   @Input() idModal:string;
   @Input() showFooter:boolean = true;
+  @Input() extraClass: string = '';
   @ViewChild('closebutton') closebutton;
   public appName: string
   constructor() {

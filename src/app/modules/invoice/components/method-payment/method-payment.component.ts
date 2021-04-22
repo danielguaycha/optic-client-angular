@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import banks from '../../models/banks';
+import typePayment from '../../models/type.payment';
 
 @Component({
   selector: 'app-method-payment',
@@ -6,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MethodPaymentComponent implements OnInit {
 
-  constructor() { }
+  @Input() selectedPay:string = '20';
+  @Input() totalAPagar: any = 0;
+
+  banks = banks;
+  typePayments: Array<any>;
+
+  payments = [];
+  constructor() {
+    this.typePayments = typePayment;
+  }
 
   ngOnInit(): void {
+  }
+
+  addPayMethod() {
+    this.payments.push({
+      type: this.selectedPay,
+      bank: '',
+      desc: '',
+      value: 0
+    });
   }
 
 }

@@ -51,6 +51,8 @@ import { DialogSearchCategoryComponent } from './modules/inventory/category/comp
 import { InventoryAdjustComponent } from './modules/inventory/adjust/views/inventory-adjust/inventory-adjust.component';
 import { MethodPaymentComponent } from './modules/invoice/components/method-payment/method-payment.component';
 import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component';
+import { CreateUserComponent } from './modules/users/views/add-user/add-user.component';
+import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterprise.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,10 @@ import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component
     InventoryAdjustComponent,
     MethodPaymentComponent,
     EditArticleComponent,
-    AddRolComponent
+    AddRolComponent,
+    CreateUserComponent, 
+    EnterpriseComponent
+
   ],
   imports: [
     BrowserModule,

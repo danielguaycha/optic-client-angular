@@ -7,7 +7,7 @@
     <div class="col-12 col-md-6">
         <label for="category_id" class="form-label">Categoría: *</label>
         <div class="input-group">
-            <input type="text" id="category_id" [(ngModel)]="category.id" (keypress)="onSearchCategory($event)" name="category_id" class="form-control">
+            <input type="text" id="category_id" [(ngModel)]="formData.category_id? formData.category_id : category.id" (keypress)="onSearchCategory($event)" name="category_id" class="form-control">
             <input type="text" id="category" [(ngModel)]="category.name" name="category" class="form-control" readonly>
             <app-add-category (create)="onSelectCategory($event)"></app-add-category>
             <app-dialog-search-category (select)="onSelectCategory($event)"></app-dialog-search-category>
@@ -58,13 +58,14 @@
 
             <div class="div col-3 col-md-3">
                 <label for="pvpIva" class="form-label">PVP + Iva</label>
-                <input type="number" min="0" id="pvpIva" name="pvpIva" (input)="onInputFinalPrice($event.target.value)" class="form-control" [value]="validate.round(pvpIva)" step="any">
+                <input type="number" min="0" id="pvpIva" name="pvpIva" (input)="onInputFinalPrice($event.target.value)" class="form-control" [value]="validate.round(pvpIva)" [(ngModel)]="formData.pvp" step="any">
             </div>
         </div>
     </div>
 
     <div class="col-12 text-end mt-4">
         <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal">Cancelar</button>
-        <bs-button [loader]="loader"><i class="fa fa-save me-1"></i>Registrar Producto</bs-button>
+        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i>Registrar Producto</bs-button>
+        <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-save me-1"></i>Actualizar Producto</bs-button>
     </div>
 </form>

@@ -6,6 +6,7 @@ import {ConfigService} from '../../../../config/general/services/config.service'
 import {ValidateService} from '../../../../../core/services/validate.service';
 import { Category } from '../../../category/models/categories.model';
 import { CategoryService } from '../../../category/services/category.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-frm-product',
@@ -32,18 +33,26 @@ export class FrmProductComponent implements OnInit {
     private categoryService : CategoryService,
     private toast: ToastService,
     private cfg : ConfigService,
-    public validate: ValidateService) {
+    public validate: ValidateService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.initFormData();
     this.ivaList.push(cfg.iva);
   }
 
   ngOnInit(): void {
     this.loader = false;
+    // if(this.edit){
+      // this.getCategory(this.formData.category_id);      
+    // }
+    // this.pvpIva = this.formData.pvp;
     document.getElementById('product_cod').focus();
   }
   // storing products
   onSubmit() {
+    this.loader = true;
     if (!this.edit) this.storeProduct();
+    if (this.edit) this.updateProduct();
   }
 
   //products
@@ -65,6 +74,20 @@ export class FrmProductComponent implements OnInit {
     });
   }
 
+  updateProduct() {
+    this.articleService.updateProducts(this.formData.id, this.formData).subscribe(res => {
+      console.log("res: ", res);
+      if (res.ok) {
+        this.toast.ok(res.message)
+        this.router.navigate(['products']);
+      }
+      this.loader = false;
+    }, error => {
+      this.loader = false;
+      this.toast.err(error);
+    });
+  }
+
   //events for category
   onSelectCategory(category) {
     this.category = category;
@@ -73,7 +96,12 @@ export class FrmProductComponent implements OnInit {
     if (key.keyCode !== 13) return;
     if (!this.category.id) return;
     key.preventDefault();
-    this.categoryService.getCategroy(this.category.id).subscribe(res => {
+    this.getCategory();
+  }
+
+  getCategory(id?){
+    console.log("ID CAT: ", id);
+    this.categoryService.getCategory(id ? id : this.category.id).subscribe(res => {
       if (res.ok && res.body) {
         this.category = res.body;
         document.getElementById('product_name').focus();
@@ -81,6 +109,7 @@ export class FrmProductComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+
   }
 
   // calc

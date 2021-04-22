@@ -25,9 +25,15 @@ export class ArticleService {
     return this.http.get(url);
   }
 
-  updateProducts(search: string = null, limit: number = 30): Observable<any> {
-    let url = `article?limit=${limit}`;
-    if (search) url += `&search=${search}`; // for search product
-    return this.http.get(url);
+  updateProducts(id: number, formData): Observable<any> {
+    let url = "article/" + id;
+    return this.http.put(url, formData);
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    // let url = `article?limit=${limit}`;
+    // if (search) url += `&search=${search}`; // for search product
+    // return this.http.get(url);
+    return null;
   }
 }

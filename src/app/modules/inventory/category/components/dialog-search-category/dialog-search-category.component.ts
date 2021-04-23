@@ -23,10 +23,10 @@ export class DialogSearchCategoryComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    const modal = document.getElementById('modalSearchCategory');
-    modal.addEventListener('shown.bs.modal', function() {
-      document.getElementById('search').focus();
-    });
+    // const modal = document.getElementById('modalSearchCategory');
+    // modal.addEventListener('shown.bs.modal', function() {
+    //   document.getElementById('search').focus();
+    // });
   }
 
   searchCategory() {

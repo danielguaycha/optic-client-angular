@@ -1,5 +1,7 @@
-<div class="card">
-    <div class="card-body">
-        <app-frm-product [formData]="article" [category]="category" [edit]="true"></app-frm-product>
+<with-loader [loader]="loader">
+    <div class="card">
+        <div class="card-body">
+            <app-frm-product *ngIf="!loader" [formData]="article" [edit]="true"></app-frm-product>
+        </div>
     </div>
-</div>
+</with-loader>

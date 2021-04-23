@@ -2,13 +2,13 @@
     <label class="label-title"><span>Datos del producto</span></label>
     <div class="col-12 col-md-6">
         <label for="product_cod" class="form-label">Codigo / Codigo Barra: *</label>
-        <input type="text" [(ngModel)]="formData.code" name="product_cod" class="form-control" id="product_cod" required>
+        <input type="text" [(ngModel)]="formData.code" name="product_cod" class="form-control" id="product_cod" value="formData.code" required>
     </div>
     <div class="col-12 col-md-6">
         <label for="category_id" class="form-label">Categoría: *</label>
         <div class="input-group">
             <input type="text" id="category_id" [(ngModel)]="formData.category_id? formData.category_id : category.id" (keypress)="onSearchCategory($event)" name="category_id" class="form-control">
-            <input type="text" id="category" [(ngModel)]="category.name" name="category" class="form-control" readonly>
+            <input type="text" id="category" [(ngModel)]="formData.category? formData.category : category.name" name="category" class="form-control" readonly>
             <app-add-category (create)="onSelectCategory($event)"></app-add-category>
             <app-dialog-search-category (select)="onSelectCategory($event)"></app-dialog-search-category>
         </div>
@@ -35,7 +35,7 @@
     <div class="col-12 col-md-6">
         <label for="product__iva" class="form-label">IVA: *</label>
         <select [(ngModel)]="iva" name="product__iva" id="product__iva" class="form-select" required (change)="onChangeIVA($event.target.value)">
-          <option *ngFor="let i of ivaList" [value]="i" selected>{{ i }}%</option>
+          <option *ngFor="let i of ivaList; index as x" [value]="i" >{{ i }}%</option>
         </select>
     </div>
 

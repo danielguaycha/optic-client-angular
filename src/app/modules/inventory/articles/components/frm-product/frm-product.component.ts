@@ -36,17 +36,18 @@ export class FrmProductComponent implements OnInit {
     public validate: ValidateService,
     private router: Router,
     private route: ActivatedRoute) {
+
     this.initFormData();
     this.ivaList.push(cfg.iva);
   }
 
   ngOnInit(): void {
     this.loader = false;
-    // if(this.edit){
-      // this.getCategory(this.formData.category_id);      
-    // }
-    // this.pvpIva = this.formData.pvp;
-    document.getElementById('product_cod').focus();
+    if(this.edit){
+      this.price = this.validate.parseDouble(this.formData.price_purchase);
+      this.pvp = this.formData.iva > 0 ? this.validate.addPercent(this.price, this.cfg.iva) : this.price;
+      this.utility = this.validate.round(this.validate.getPercent(this.formData.pvp, this.pvp), true);
+    }
   }
   // storing products
   onSubmit() {
@@ -75,6 +76,7 @@ export class FrmProductComponent implements OnInit {
   }
 
   updateProduct() {
+    this.loader = true;
     this.articleService.updateProducts(this.formData.id, this.formData).subscribe(res => {
       console.log("res: ", res);
       if (res.ok) {

@@ -53,7 +53,7 @@
 
             <div class="div col-3 col-md-3">
                 <label for="product_utility" class="form-label">% Utilidad</label>
-                <input type="number" min="0" id="product_utility" [value]="utility" name="product_utility" class="form-control" (input)="onInputUtility($event.target.value)">
+                <input type="number" min="0" id="product_utility" [value]="utility" name="product_utility" class="form-control" (input)="onInputUtility($event.target.value)" step="any">
             </div>
 
             <div class="div col-3 col-md-3">

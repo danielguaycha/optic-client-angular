@@ -12,30 +12,87 @@
     <div class="col-12 col-md-6">
         <label for="name" class="form-label">Permisos</label>
 
-        <div *ngFor="let tM of tagsModules; Index as i" class="accordion" id="accordionExample">
+        <!-- <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapse">
-                  Modulo {{tM[1]}}
-                </button>
+                        Modulo 1
+                    </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" *ngFor="let p of permissions">
-                    <div class="accordion-body" *ngIf="p.parent == tM[0]">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{'permiso' + p.id}}" (change)="onCheckPermiso(p.id, $event.target.checked)">
+                            <input class="form-check-input" type="checkbox" id="id">
                             <label class="form-check-label">
-                                  {{p.name}}
-                                </label>
+                                1
+                            </label>
+                        </div>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="id">
+                            <label class="form-check-label">
+                                2
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{formData.id}}" aria-expanded="true" aria-controls="collapse">
+                        Modulo 2
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="id">
+                            <label class="form-check-label">
+                                1
+                            </label>
+                        </div>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="id">
+                            <label class="form-check-label">
+                                2
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div *ngFor="let tM of tagsModules; Index as i" class="accordion" id="accordionPather">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-target]="'#collapse' + tM[1].toString()" aria-expanded="true" aria-controls="collapse">
+                        Modulo {{tM[1]}}
+                    </button>
+                </h2>
+                <div id="'collapse' + tM[1]" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPather" *ngFor="let p of permissions">
+                    <div class="accordion-body" *ngIf="p.parent == tM[0]">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="{{'permiso' + p.id}}" (change)="onCheckPermiso(p.id, $event.target.checked)">
+                            <label class="form-check-label">
+                                {{p.name}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-12 col-md-6 text-end mt-4">
         <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
-        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i>Registrar Rol</bs-button>
+        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i>Registrar Rol
+        </bs-button>
     </div>
 
 </form>

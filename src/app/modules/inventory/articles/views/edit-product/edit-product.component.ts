@@ -30,6 +30,7 @@ export class EditArticleComponent implements OnInit {
     this.articleService.getProduct(this.articleId).subscribe(res => {
       if (res.ok) {
         this.article = res.body;
+        console.log(res.body)
         this.loader = false;
       }else{
         this.loader = true;

@@ -6,7 +6,6 @@ import {ConfigService} from '../../../../config/general/services/config.service'
 import {ValidateService} from '../../../../../core/services/validate.service';
 import { Category } from '../../../category/models/categories.model';
 import { CategoryService } from '../../../category/services/category.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-frm-product',
@@ -21,6 +20,7 @@ export class FrmProductComponent implements OnInit {
   pvpIva:number = 0
   ivaList: Array<number> = [0]
 
+
   @Output() create: EventEmitter<any> = new EventEmitter();
   @Input() formData!:Articles;
   @Input() category!:Category;
@@ -33,9 +33,7 @@ export class FrmProductComponent implements OnInit {
     private categoryService : CategoryService,
     private toast: ToastService,
     private cfg : ConfigService,
-    public validate: ValidateService,
-    private router: Router,
-    private route: ActivatedRoute) {
+    public validate: ValidateService,) {
 
     this.initFormData();
     this.ivaList.push(cfg.iva);
@@ -44,14 +42,24 @@ export class FrmProductComponent implements OnInit {
   ngOnInit(): void {
     this.loader = false;
     if(this.edit){
+      //price initial
       this.price = this.validate.parseDouble(this.formData.price_purchase);
+      //price + iva
       this.pvp = this.formData.iva > 0 ? this.validate.addPercent(this.price, this.cfg.iva) : this.price;
+      //
       this.utility = this.validate.round(this.validate.getPercent(this.formData.pvp, this.pvp), true);
+      this.iva = this.formData.iva > 0 ? this.cfg.iva : 0;
     }
   }
   // storing products
   onSubmit() {
     this.loader = true;
+    if(this.iva > 0){
+      if(this.pvpIva < this.pvp){
+      this.toast.err("El precio final debe ser mayor");
+      return
+      }
+    }
     if (!this.edit) this.storeProduct();
     if (this.edit) this.updateProduct();
   }
@@ -81,7 +89,6 @@ export class FrmProductComponent implements OnInit {
       console.log("res: ", res);
       if (res.ok) {
         this.toast.ok(res.message)
-        this.router.navigate(['products']);
       }
       this.loader = false;
     }, error => {
@@ -98,12 +105,7 @@ export class FrmProductComponent implements OnInit {
     if (key.keyCode !== 13) return;
     if (!this.category.id) return;
     key.preventDefault();
-    this.getCategory();
-  }
-
-  getCategory(id?){
-    console.log("ID CAT: ", id);
-    this.categoryService.getCategory(id ? id : this.category.id).subscribe(res => {
+    this.categoryService.getCategory(this.category.id).subscribe(res => {
       if (res.ok && res.body) {
         this.category = res.body;
         document.getElementById('product_name').focus();
@@ -130,6 +132,7 @@ export class FrmProductComponent implements OnInit {
   onInputUtility(value: string) {
     this.utility = this.validate.parseDouble(value);
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
+    this.formData.pvp = this.pvpIva;
   }
   onInputFinalPrice(value: string) {
     this.utility = this.validate.round(this.validate.getPercent(this.validate.parseDouble(value), this.pvp));

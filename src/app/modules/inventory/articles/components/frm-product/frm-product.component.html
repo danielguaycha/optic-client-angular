@@ -34,8 +34,8 @@
 
     <div class="col-12 col-md-6">
         <label for="product__iva" class="form-label">IVA: *</label>
-        <select [(ngModel)]="iva" name="product__iva" id="product__iva" class="form-select" required (change)="onChangeIVA($event.target.value)">
-          <option *ngFor="let i of ivaList; index as x" [value]="i" >{{ i }}%</option>
+        <select [(ngModel)]="iva" name="product__iva" id="product__iva" class="form-select" (change)="onChangeIVA($event.target.value)">
+          <option *ngFor="let i of ivaList"  [value]="i" selected required>{{ i }}%</option>
         </select>
     </div>
 

@@ -13,6 +13,9 @@ export class EnterpriseComponent implements OnInit {
     @Input() formData!: EnterpriseModel;
     @Input() edit: boolean = false;
 
+    public defaultImage = '../../../../../assets/img/icon.png';
+    public imageProfile = 'https://picsum.photos/id/249/200/200';
+
     public loader: boolean = false;
     constructor(private enterpriseService: EnterpriseService, private toast: ToastService) {
 

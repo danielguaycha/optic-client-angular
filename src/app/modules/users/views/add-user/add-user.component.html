@@ -2,29 +2,34 @@
     <label class="label-title"><span>Crear usuario</span></label>
     <div class="col-12 col-md-6">
 
+
         <label for="name" class="form-label">Perfil de usuario: </label>
         <div class="input-group">
 
             <input type="text" id="name" [(ngModel)]="formData.name" name="name" class="form-control" required>
-            <!-- <app-add-category (create)="onSelectCategory($event)"></app-add-category>
-                <app-dialog-search-category (select)="onSelectCategory($event)"></app-dialog-search-category> -->
+            <div class="divider-vertical"></div>
             <app-add-category></app-add-category>
+            <div class="divider-vertical"></div>
             <app-dialog-search-category></app-dialog-search-category>
         </div>
 
-        <label for="description" class="form-label">Nombres y apellidos:</label>
-
-        <input type="text" id="description" [(ngModel)]="formData.name" name="description" class="form-control" required>
-        <label for="name" class="form-label">Usuario: </label>
-        <input type="text" id="name" [(ngModel)]="formData.name" name="name" class="form-control" required>
-
-        <label for="description" class="form-label">Contraseña:</label>
-        <input type="text" id="description" [(ngModel)]="formData.name" name="description" class="form-control" required>
-
+        <div class="mt-2">
+            <label for="description" class="form-label">Nombres y apellidos:</label>
+            <input type="text" id="description" [(ngModel)]="formData.name" name="description" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="name" class="form-label">Usuario: </label>
+            <input type="text" id="name" [(ngModel)]="formData.name" name="name" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="description" class="form-label">Contraseña:</label>
+            <input type="text" id="description" [(ngModel)]="formData.name" name="description" class="form-control" required>
+        </div>
     </div>
 
+    <div class="divider-vertical"></div>
     <!-- Roles -->
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-5">
         <label for="name" class="form-label">Lista de Roles</label>
 
         <div class="accordion" id="accordionExample">

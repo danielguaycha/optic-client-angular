@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   async login(form) {
     this.alert.clear();
     this.loader = true;
-    this.authService.login({email: this.user, password: this.password}).subscribe(res =>{
+    this.authService.login({username: this.user, password: this.password}).subscribe(res =>{
       if (res.body) {
         this.authService.setToken(res.body.token);
         this.router.navigate(['/persons']);

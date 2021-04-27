@@ -1,22 +1,23 @@
 <app-modal [title]="'Método de pago'" idModal="modalPayments" [showFooter]="true" extraClass="px-1 pt-0">
   <div body>
-    <div class="method_payment" id="pay">
-      <table class="table table-sm table-bordered">
-        <thead>
-        <tr>
-          <th>Forma/Pago</th>
-          <th>Banco/Tarjeta</th>
-          <th>Detalle/Voucher</th>
-          <th>Valor</th>
-          <th class="text-end"></th>
-        </tr>
-        </thead>
-        <tbody id="paymentContent">
+    <div class="row g-2">
+      <div class="col-12">
+        <table class="table table-sm table-bordered mb-0">
+          <thead>
+          <tr>
+            <th>Forma/Pago</th>
+            <th>Banco/Tarjeta</th>
+            <th>Detalle/Voucher</th>
+            <th>Valor</th>
+            <th class="text-end"></th>
+          </tr>
+          </thead>
+          <tbody id="paymentContent">
           <ng-container *ngIf="payments && payments.length > 0">
-            <tr *ngFor="let p of payments">
+            <tr *ngFor="let p of payments; index as i">
               <td style="width: 15%">
-                <select name="typePayment" class="form-select form-select-sm" [(ngModel)]="p.type">
-                  <option *ngFor="let tp of typePayments" value="{{ tp.code}}">{{ tp.text}}</option>
+                <select name="typePayment" class="form-select form-select-sm" [(ngModel)]="p.code">
+                  <option *ngFor="let tp of typePayments" value="{{ tp.id }}">{{ tp.text}}</option>
                 </select>
               </td>
               <td style="width: 25%">
@@ -29,35 +30,51 @@
                        placeholder="Detalle: 00000XXXX">
               </td>
               <td data-name="Valor" class="text-end" style="width: 11%">
-                <input type="number" min="0" value="0" [(ngModel)]="p.value"
-                       class="form-control form-control-plaintext form-control-sm" placeholder="0.000">
+                <input type="number" min="0" value="0" [(ngModel)]="p.total" (input)="calc()" onfocus="this.select()"
+                       class="form-control form-control-plaintext form-control-sm text-center fw-bolder" placeholder="0.000">
               </td>
               <td style="width: 1%">
-                <button class="btn btn-sm text-danger btnRemove"><i class="fa fa-trash"></i></button>
+                <button (click)="removePayMethod(i)" class="btn btn-sm text-danger btnRemove"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
           </ng-container>
           <tr *ngIf="payments.length <= 0">
             <td colspan="4" class="text-center text-muted">Presione en botón "+" para agregar otras formas de pago</td>
           </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+        <div class="col-12 text-end">
+          <button class="btn btn-outline-success btn-sm" (click)="addPayMethod()">
+            <i class="fa fa-plus me-1 text-warning"></i>Forma Pago</button>
+        </div>
 
-      <div class="px-1 d-flex align-items-center">
+      <div class="col-12 d-flex align-items-center">
         <div class="input-group">
           <span class="input-group-text" id="label-total">Total Pago $:</span>
-          <input type="text" class="form-control" id="total" aria-describedby="total">
+          <input type="number" class="form-control"
+                 [(ngModel)]="totalPay" (input)="calc()" onfocus="this.select()"
+                 id="totalPay"  aria-describedby="total">
         </div>
         <div class="input-group">
           <span class="input-group-text" id="label-cambio">Su Cambio $:</span>
-          <input type="text" class="form-control" id="cambio" aria-describedby="cambio" readonly>
+          <input type="text" class="form-control text-end text-danger fw-bolder"
+                 [value]="validate.round(change)"
+                 id="cambio" aria-describedby="cambio" readonly>
         </div>
 
-        <button class="btn btn-outline-success w-50" (click)="addPayMethod()"><i class="fa fa-plus" ></i> Agregar F. Pago</button>
+        <div class="input-group">
+          <span class="input-group-text" id="label-totalAPagar">Total A Pagar $:</span>
+          <input type="text" class="form-control fw-bold text-success text-end"
+                 [value]="validate.round(totalAPagar)"
+                 id="totalAPagar" aria-describedby="cambio" readonly>
+        </div>
       </div>
     </div>
   </div>
   <div btn>
-    <button class="btn btn-primary"><i class="fa fa-check me-2"></i>Guardar Factura</button>
+    <button class="btn btn-primary"
+            (click)="onSubmit()"
+            [disabled]="(total < totalAPagar)"><i class="fa fa-check me-2"></i>Guardar Factura</button>
   </div>
 </app-modal>

@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ToastService} from '../../../../core/services/toast.service';
 import {SelectProductComponent} from '../../../inventory/articles/components/select-product/select-product.component';
@@ -32,12 +32,20 @@ export class CreateInvoiceComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  submit(methodsPayments) {
+    console.log(methodsPayments);
+    console.log(this.articles);
+  }
+
   //confirm payments
   confirmPayment() {
-    const modal = new Modal(document.getElementById('modalPayments'), {
-      keyboard: true
+    const modalEl = document.getElementById('modalPayments');
+    const modal = new Modal(modalEl, {
+      keyboard: true, focus: true
     });
     modal.show();
+    modalEl.addEventListener('shown.bs.modal', function (event) {
+      document.getElementById('totalPay').focus();});
   }
 
   //events

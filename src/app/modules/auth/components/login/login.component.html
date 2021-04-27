@@ -9,7 +9,7 @@
                 <form #loginForm='ngForm' (ngSubmit)="login(loginForm)" class="card-body row g-3" ngNativeValidate>
                     <div class="col-md-12 form-icon">
                         <i class="fa fa-user"></i>
-                        <input type="email" [(ngModel)]="user" name="email" class="form-control" placeholder="Correo/Usuario" required>
+                        <input type="text" [(ngModel)]="user" name="username" class="form-control" placeholder="Correo/Usuario" required>
                     </div>
 
                     <div class="col-md-12 form-icon">

@@ -26,7 +26,7 @@
             <select class="form-select">
 
               <ng-container *ngIf="typePayments && typePayments.length > 0">
-                <option *ngFor="let pay of typePayments" [value]="pay.code">{{pay.text}}</option>
+                <option *ngFor="let pay of typePayments" [value]="pay.id">{{pay.text}}</option>
               </ng-container>
             </select>
           </div>
@@ -127,5 +127,5 @@
     </div>
   </div>
 </div>
-<app-method-payment></app-method-payment>
+<app-method-payment (onComplete)="submit($event)" [totalAPagar]="total" ></app-method-payment>
 

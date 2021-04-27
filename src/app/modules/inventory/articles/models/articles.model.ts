@@ -12,5 +12,6 @@ export interface Articles{
     category?: string,
     stock?: number,
     office_id?: number,
-    office?: string
+    office?: string,
+    category_name?:string
 }

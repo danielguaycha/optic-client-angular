@@ -1,7 +1,7 @@
-<form class="row g-2" #clientForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
+<form class="row g-2" #clientForm='ngForm' (ngSubmit)="onSubmit()">
     <label class="label-title"><span>Datos del producto</span></label>
     <div class="col-12 col-md-6">
-        <label for="product_cod" class="form-label">Codigo / Codigo Barra: *</label>
+        <label for="product_cod" class="form-label">Código / Código Barra: *</label>
         <input type="text" [(ngModel)]="formData.code" name="product_cod" class="form-control" id="product_cod" value="formData.code" required>
     </div>
     <div class="col-12 col-md-6">
@@ -35,7 +35,7 @@
     <div class="col-12 col-md-6">
         <label for="product__iva" class="form-label">IVA: *</label>
         <select [(ngModel)]="iva" name="product__iva" id="product__iva" class="form-select" (change)="onChangeIVA($event.target.value)">
-          <option *ngFor="let i of ivaList"  [value]="i" selected required>{{ i }}%</option>
+          <option *ngFor="let i of ivaList"  [value]="i" selected>{{ i }}%</option>
         </select>
     </div>
 
@@ -58,7 +58,7 @@
 
             <div class="div col-3 col-md-3">
                 <label for="pvpIva" class="form-label">PVP + Iva</label>
-                <input type="number" min="0" id="pvpIva" name="pvpIva" (input)="onInputFinalPrice($event.target.value)" class="form-control" [value]="validate.round(pvpIva)" [(ngModel)]="formData.pvp" step="any">
+                <input type="number" min="0" id="pvpIva" name="pvpIva" (input)="onInputFinalPrice($event.target.value)" class="form-control" [value]="validate.round(pvpIva)"  step="any">
             </div>
         </div>
     </div>

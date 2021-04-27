@@ -1,18 +1,21 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
+
 import {ToastService} from '../../../../core/services/toast.service';
 import {SelectProductComponent} from '../../../inventory/articles/components/select-product/select-product.component';
 import {ValidateService} from '../../../../core/services/validate.service';
 import {ConfigService} from '../../../config/general/services/config.service';
-import {Modal} from 'bootstrap';
 import typePayment from '../../models/type.payment';
-import banks from '../../models/banks';
+import {MethodPaymentComponent} from '../../components/method-payment/method-payment.component';
+import {InvoiceService} from '../../services/invoice.service';
+
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
 })
 export class CreateInvoiceComponent implements OnInit {
   @ViewChild(SelectProductComponent) SelectArticleCmp;
+  @ViewChild(MethodPaymentComponent) MethodPaymentCmp;
 
   articles: Array<any>;
   formData: any;
@@ -23,9 +26,9 @@ export class CreateInvoiceComponent implements OnInit {
   iva12: number;
   total: number;
   typePayments: Array<any> = [];
-
+  loader: boolean = false;
   constructor(private toast: ToastService, public validate: ValidateService,
-              public cfg: ConfigService) {
+              public cfg: ConfigService, private invService: InvoiceService) {
     this.initComponents();
     this.typePayments = typePayment;
   }
@@ -33,19 +36,54 @@ export class CreateInvoiceComponent implements OnInit {
   ngOnInit(): void {}
 
   submit(methodsPayments) {
-    console.log(methodsPayments);
-    console.log(this.articles);
+    if (methodsPayments.length <= 0) {
+      this.toast.err('Seleccione un método de pago');
+      return;
+    }
+    this.MethodPaymentCmp.close();
+
+    let data = {
+      date: this.formData.date,
+      client_id: this.formData.client_id,
+      subtotal0: this.subtotal0,
+      subtotalIva: this.subtotal12,
+      iva: this.iva12,
+      discount: this.descuento,
+      iva_percent: this.cfg.iva,
+      pto_emi: 1,
+      articles: [],
+      payments: methodsPayments
+    };
+    // prebuild products
+    for (let art of this.articles) {
+      data.articles.push({
+        article_id: art.id,
+        qty: art.qty,
+        pvp: art.totalIva
+      });
+    }
+    this.loader = true;
+    this.invService.store(data).subscribe(res => {
+      if (res.ok) {
+        this.toast.ok(res.message);
+        this.initComponents();
+      }
+      this.loader = false;
+    }, error => {
+      this.loader = false;
+      this.toast.err(error);
+    });
   }
 
   //confirm payments
   confirmPayment() {
-    const modalEl = document.getElementById('modalPayments');
-    const modal = new Modal(modalEl, {
-      keyboard: true, focus: true
-    });
-    modal.show();
-    modalEl.addEventListener('shown.bs.modal', function (event) {
-      document.getElementById('totalPay').focus();});
+    if (!this.validFrm()) { return; }
+    this.MethodPaymentCmp.open(this.formData.methodPay);
+  }
+
+  //events
+  onSelectPerson(person){
+    this.formData.client_id = person.id;
   }
 
   //events
@@ -115,11 +153,33 @@ export class CreateInvoiceComponent implements OnInit {
   //resets
   initComponents() {
     this.articles = [];
-    this.formData = {date: moment().format('YYYY-MM-DD')};
+    this.formData = {
+      date: moment().format('YYYY-MM-DD'),
+      methodPay: 1,
+      client_id : 1,
+    };
     this.subtotal0 = 0;
     this.subtotal12 = 0;
     this.descuento = 0;
     this.iva12 = 0;
     this.total = 0;
+  }
+
+  //validate invoice
+  validFrm(): boolean {
+    const data = this.formData;
+    if (!data.date) {
+      this.toast.err('Ingrese una fecha válida');
+      return false;
+    }
+    if (!data.client_id || data.client_id <= 0) {
+      this.toast.err('Seleccione un cliente')
+      return false;
+    }
+    if (this.articles.length <= 0) {
+      this.toast.err('Cargue al menos un articulo a la factura');
+      return false;
+    }
+    return true;
   }
 }

@@ -34,21 +34,25 @@ export class FrmProductComponent implements OnInit {
     private toast: ToastService,
     private cfg : ConfigService,
     public validate: ValidateService,) {
-
-    this.initFormData();
     this.ivaList.push(cfg.iva);
+    if (!this.edit) {
+      this.initFormData();
+    }
   }
 
   ngOnInit(): void {
     this.loader = false;
     if(this.edit){
+      this.iva = this.formData.iva > 0 ? this.cfg.iva : 0;
       //price initial
       this.price = this.validate.parseDouble(this.formData.price_purchase);
       //price + iva
       this.pvp = this.formData.iva > 0 ? this.validate.addPercent(this.price, this.cfg.iva) : this.price;
-      //
-      this.utility = this.validate.round(this.validate.getPercent(this.formData.pvp, this.pvp), true);
-      this.iva = this.formData.iva > 0 ? this.cfg.iva : 0;
+      this.pvpIva = this.formData.iva > 0 ? this.validate.addPercent(this.formData.pvp, this.cfg.iva) : this.formData.pvp;
+      this.utility = this.validate.round(this.validate.getPercent(this.pvpIva, this.pvp), true);
+      // category
+      this.category.id = this.formData.category_id;
+      this.category.name = this.formData.category_name;
     }
   }
   // storing products
@@ -118,13 +122,17 @@ export class FrmProductComponent implements OnInit {
 
   // calc
   onChangeIVA(value:string){
-    this.iva= this.validate.parseDouble(value);
+    this.iva = this.validate.parseDouble(value);
+    this.formData.iva = this.iva;
     this.calcIva();
   }
+
   calcIva() {
     this.pvp = this.validate.addPercent(this.price, this.iva);
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
   }
+
+  // events
   onInputPrice(value: string) {
     this.price = this.validate.parseDouble(value);
     this.calcIva();
@@ -146,8 +154,8 @@ export class FrmProductComponent implements OnInit {
       pvp: 0,
       price_purchase: '',
       type: 'PRODUCTO',
-      iva: 1,
-      category_id: 1,
+      iva: 0,
+      category_id: '',
     };
     this.category = {
       id: "",

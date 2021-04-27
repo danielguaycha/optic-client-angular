@@ -3,44 +3,81 @@
 
     <div class="col-12 col-md-4">
         <div class="text-center">
-            <img class="rounded-circle" alt="100x100" src="https://scontent.fmch2-1.fna.fbcdn.net/v/t1.6435-9/s851x315/46396467_2207519019282521_8612939446154690560_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=e33968&_nc_eui2=AeF5o7XFvCdLpN6D1JUbJ6hutDoi__CMoGW0OiL_8IygZSHTaAmXzLnYdqgPKwongrt6HUey-Tjt2OK2ZZdnFjw9&_nc_ohc=V3paXgLAU80AX_gaEFQ&_nc_ht=scontent.fmch2-1.fna&tp=7&oh=e0ef5b7ffc1d58a8e35ac6243ce74c45&oe=60A61325"
-                data-holder-rendered="true">
+            <img class="rounded-circle circle-img img-circle" alt="100x100" src="{{imageProfile}}" data-holder-rendered="true">
         </div>
-        <br>
-        <div class="form-check">
+
+        <label class="label-title"><span>Opciones tributarias</span></label>
+
+        <div class="form-check mt-2">
             <input class="form-check-input" type="checkbox" id="obligado" (change)="onCheckPermiso($event.target.checked)">
             <label class="form-check-label">Obligado a llevar contablilidad</label>
         </div>
-        <br>
 
-        <div class="form-check">
+        <div class="form-check mt-2">
             <input class="form-check-input" type="checkbox" id="regimen" (change)="onCheckPermiso($event.target.checked)">
             <label class="form-check-label">Regimen Micro-Empresas</label>
         </div>
+        <div class="mt-2">
 
+            <label for="" class="form-label">Autor. SRI</label>
+            <input type="text" id="" [(ngModel)]="formData" name="" class="form-control" required>
+        </div>
+        <div class="mt-2">
 
+            <label for="" class="form-label">Contrib. Especial</label>
+            <input type="text" id="" [(ngModel)]="formData" name="" class="form-control" required>
+        </div>
+        <div class="mt-2">
+
+            <label for="" class="form-label">Resol. Agnt. Retencion</label>
+            <input type="text" id="" [(ngModel)]="formData" name="" class="form-control" required>
+        </div>
 
     </div>
 
+    <div class="divider-vertical"></div>
+
     <!-- Datos -->
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-7">
         <label for="ruc" class="form-label">RUC: </label>
         <input type="text" id="ruc" [(ngModel)]="formData.ruc" name="ruc" class="form-control" required>
+        <div class="mt-2">
+            <label for="nombre_comercial" class="form-label">Nombre Comercial: </label>
+            <input type="text" id="nombre_comercial" [(ngModel)]="formData.nombre_comercial" name="nombre_comercial" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="razon_social" class="form-label">Razón Social: </label>
+            <input type="text" id="razon_social" [(ngModel)]="formData.razon_social" name="razon_social" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="direccion" class="form-label">Dirección: </label>
+            <input type="text" id="direccion" [(ngModel)]="formData.direccion" name="direccion" class="form-control" required>
+        </div>
+        <div class="col-12 mt-2">
+            <div class="row">
+                <div class="div col-6 col-md-6">
 
-        <label for="nombre_comercial" class="form-label">Nombre Comercial: </label>
-        <input type="text" id="nombre_comercial" [(ngModel)]="formData.nombre_comercial" name="nombre_comercial" class="form-control" required>
+                    <label for="telefono" class="form-label">Telefono: </label>
+                    <input type="text" id="telefono" [(ngModel)]="formData.telefono" name="telefono" class="form-control" required>
+                </div>
+                <div class="div col-6 col-md-6">
 
-        <label for="razon_social" class="form-label">Razón Social: </label>
-        <input type="text" id="razon_social" [(ngModel)]="formData.razon_social" name="razon_social" class="form-control" required>
+                    <label for="correo" class="form-label">Correo: </label>
+                    <input type="text" id="correo" [(ngModel)]="formData.correo" name="correo" class="form-control" required>
+                </div>
+            </div>
+        </div>
 
-        <label for="telefono" class="form-label">Telefono: </label>
-        <input type="text" id="telefono" [(ngModel)]="formData.telefono" name="telefono" class="form-control" required>
+        <div class="mt-2">
+            <label for="" class="form-label">Web</label>
+            <input type="url" id="" [(ngModel)]="formData" name="" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="" class="form-label">Web</label>
+            <input type="url" id="" [(ngModel)]="formData" name="" class="form-control" required>
+        </div>
 
-        <label for="correo" class="form-label">Correo: </label>
-        <input type="text" id="correo" [(ngModel)]="formData.correo" name="correo" class="form-control" required>
 
-        <label for="direccion" class="form-label">Dirección: </label>
-        <input type="text" id="direccion" [(ngModel)]="formData.direccion" name="direccion" class="form-control" required>
 
     </div>
 

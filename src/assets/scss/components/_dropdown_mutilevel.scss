@@ -6,16 +6,17 @@
         opacity: 1;
     }
 }
+
 .dropdown-item {
-  display: block;
-  padding: 0.5rem 3rem .5rem 1rem !important;
-  position: relative;
-  .icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: bottom;
-    margin-right: 1rem;
-  }
+    display: block;
+    padding: 0.5rem 3rem .5rem 1rem !important;
+    position: relative;
+    .icon {
+        width: 20px;
+        height: 20px;
+        vertical-align: bottom;
+        margin-right: 1rem;
+    }
 }
 
 .dropdown-menu.show {
@@ -181,7 +182,7 @@
 }
 
 .dropdown-divider {
-  &.dark {
-    background: gray;
-  }
+    &.dark {
+        background: gray;
+    }
 }

@@ -1,0 +1,61 @@
+<form class="row g-2" #userForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
+    <label class="label-title"><span>Crear usuario</span></label>
+    <div class="col-12 col-md-6">
+
+        <label for="name" class="form-label">Perfil de usuario: </label>
+        <div class="input-group">
+
+            <input type="text" id="name" [(ngModel)]="formData.username" name="name" class="form-control" required>
+            <div class="divider-vertical"></div>
+            <app-add-category></app-add-category>
+            <div class="divider-vertical"></div>
+            <app-dialog-search-category></app-dialog-search-category>
+        </div>
+
+        <div class="mt-2">
+            <label for="description" class="form-label">Nombres y apellidos:</label>
+            <input type="text" id="description" [(ngModel)]="formData.fullName" name="description" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="name" class="form-label">Usuario: </label>
+            <input type="text" id="name" [(ngModel)]="formData.username" name="name" class="form-control" required>
+        </div>
+        <div class="mt-2">
+            <label for="description" class="form-label">Contraseña:</label>
+            <input type="text" id="description" [(ngModel)]="formData.password" name="description" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="divider-vertical"></div>
+    <!-- Roles -->
+    <div class="col-12 col-md-5">
+        <label for="name" class="form-label">Lista de Roles</label>
+
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapse">
+                        Roles
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input" type="checkbox" (change)="onCheckPermiso(p.id, $event.target.checked)"> -->
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">
+                                Role 1
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 text-end mt-4">
+        <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
+        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i>Registrar Usuario</bs-button>
+        <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-save me-1"></i>Actualizar Usuario</bs-button>
+    </div>
+</form>

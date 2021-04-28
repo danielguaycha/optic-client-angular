@@ -53,6 +53,10 @@ import { MethodPaymentComponent } from './modules/invoice/components/method-paym
 import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component';
 import { CreateUserComponent } from './modules/users/views/add-user/add-user.component';
 import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterprise.component';
+import { ListUserComponent } from './modules/users/views/list-user/list-user.component';
+import { FormUserComponent } from './modules/users/components/form-user/form-user.component';
+import { DialogAddUser } from './modules/users/components/dialog-add-user/dialog-add-user.component';
+import { EditUserComponent } from './modules/users/views/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -60,16 +64,17 @@ import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterpr
     LoginComponent,
     AlertComponent,
     ButtonComponent,
-    ListPersonComponent,
     NavbarComponent,
     ModalComponent,
+    ModalConfirmComponent,
+    CreateInvoiceComponent,
+    //Person
+    ListPersonComponent,
     DialogAddPersonComponent,
     FrmPersonComponent,
     AddPersonComponent,
     EditPersonComponent,
-    ModalConfirmComponent,
 
-    CreateInvoiceComponent,
     DialogSearchPersonComponent,
     LoaderComponent,
     SelectPersonComponent,
@@ -92,7 +97,11 @@ import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterpr
     EditArticleComponent,
     AddRolComponent,
     CreateUserComponent, 
-    EnterpriseComponent
+    EnterpriseComponent,
+    ListUserComponent,
+    FormUserComponent,
+    DialogAddUser,
+    EditUserComponent
 
   ],
   imports: [

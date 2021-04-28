@@ -21,6 +21,9 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-target]="'#collapse' + tM[1].toString()" aria-expanded="true" aria-controls="collapse">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="title" (change)="checkAllPermissions(tM, $event.target.checked)">
+                        </div>
                         Modulo {{tM[1]}}
                     </button>
                 </h2>

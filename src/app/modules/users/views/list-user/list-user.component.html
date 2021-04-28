@@ -1,0 +1,33 @@
+<with-loader [loader]="loader">
+    <div class="page-header">
+        <h5>Listado de usuarios</h5>
+        <dialog-add-user (create)="onCreateUser($event)"></dialog-add-user>
+    </div>
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tipo</th>
+                        <th class="text-center"><i class="fa fa-cog"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let aU of arrayUsers">
+                        <td>{{ aU.username }}</td>
+                        <td>{{ aU.username }}</td>
+                        <td class="text-center">
+                            <button class="s-btn text-danger" (click)="deleteUser(aU)"><i class="fa fa-trash"></i></button>
+                            <a class="s-btn text-info" [routerLink]="'/users/'+aU.id+'/edit'"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                    <tr *ngIf="arrayUsers.length <= 0">
+                        <td colspan="10" class="text-center text-muted">Aún no se han registrado usuarios</td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-modal-confirm></app-modal-confirm>
+        </div>
+    </div>
+</with-loader>

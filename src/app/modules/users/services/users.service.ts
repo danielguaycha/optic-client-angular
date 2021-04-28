@@ -13,4 +13,18 @@ export class UserService {
   saveUser(userData: UserModel): Observable<any> {
     return this.http.post('user', userData);
   }
+
+  listUsers(): Observable<any> {
+    return this.http.get('users');
+  }
+
+  getUser(id): Observable<any> {
+    let url = 'users/';
+    return this.http.get(url + id);
+  }
+
+  deleteUser(id): Observable<any> {
+    let url = 'users/';
+    return this.http.delete(url + id);
+  }
 }

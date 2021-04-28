@@ -26,7 +26,8 @@ const MainRoutes: Routes = [
   ...rolesRoutes,
   ...userRoutes,
   //Enterprise
-  ...enterpriseRoutes
+  ...enterpriseRoutes,
+  //Users
 ]
 
 @NgModule({

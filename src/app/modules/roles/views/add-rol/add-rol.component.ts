@@ -63,6 +63,15 @@ export class AddRolComponent implements OnInit {
         });
     }
 
+    checkAllPermissions(value: [number, string], isChecked: boolean){
+        console.log(value[1]);
+        this.permissions.forEach( p => {
+            if(p.parent == value[0]){
+                this.onCheckPermiso(p.id, isChecked);
+                // console.log(p, " => ", isChecked)
+            }
+        });
+    }
     onCheckPermiso(value, isChecked: boolean){
         if(isChecked){
             this.formData.permissions.push(Number(value));

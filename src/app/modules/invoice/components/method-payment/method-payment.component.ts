@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import banks from '../../models/banks';
 import typePayment from '../../models/type.payment';
 import {ValidateService} from '../../../../core/services/validate.service';
+import {Modal} from 'bootstrap';
+import {ModalComponent} from '../../../../core/components/modal/modal.component';
 
 @Component({
   selector: 'app-method-payment',
   templateUrl: './method-payment.component.html',
 })
 export class MethodPaymentComponent implements OnInit {
+  @ViewChild(ModalComponent) ModalCmp;
   @Output() onComplete: EventEmitter<any> = new EventEmitter<any>();
-  @Input() selectedPay:number = 2;
+  @Input() selectedPay:number | string = 2;
   @Input() totalAPagar: any = 0;
 
   banks = banks;
@@ -55,6 +58,7 @@ export class MethodPaymentComponent implements OnInit {
     }
 
     this.onComplete.emit(formatPays);
+    this.close()
   }
 
   addPayMethod() {
@@ -87,11 +91,34 @@ export class MethodPaymentComponent implements OnInit {
 
   getPaymentById(id: number) {
     for(let payType of typePayment) {
-      if (payType.id === id) {
+      if (payType.id == id) {
         return payType;
       }
     }
     return null;
+  }
+
+  // opening
+  open(typePayment: string | number = 1) {
+    this.ModalCmp.open();
+    if (typePayment != 1 && typePayment != 7) {
+      this.selectedPay = `${typePayment}`;
+      this.payments = [];
+      this.addPayMethod();
+    } else {
+      document.getElementById('modalPayments').addEventListener('shown.bs.modal', function (event) {
+        document.getElementById('totalPay').focus();
+      });
+    }
+  }
+
+  close() {
+    this.ModalCmp.close();
+    this.selectedPay = 1;
+    this.payments = [];
+    this.totalPay = 0;
+    this.change = 0;
+    this.total = 0;
   }
 }
 

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {environment} from '../../../../environments/environment';
+import {Modal} from 'bootstrap';
 
 @Component({
   selector: 'app-modal',
@@ -18,12 +19,18 @@ export class ModalComponent implements OnInit {
     this.appName = environment.appName;
   }
 
-  ngOnInit(): void {
-    console.log(this.idModal);
-  }
+  ngOnInit(): void {}
 
   close() {
     this.closebutton.nativeElement.click();
+  }
+
+  open() {
+    const modalEl = document.getElementById(this.idModal);
+    const modal = new Modal(modalEl, {
+      keyboard: true, focus: true
+    });
+    modal.show();
   }
 
 }

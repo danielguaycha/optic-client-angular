@@ -57,6 +57,7 @@ import { ListUserComponent } from './modules/users/views/list-user/list-user.com
 import { FormUserComponent } from './modules/users/components/form-user/form-user.component';
 import { DialogAddUser } from './modules/users/components/dialog-add-user/dialog-add-user.component';
 import { EditUserComponent } from './modules/users/views/edit-user/edit-user.component';
+import { DialogSearchProductComponent } from './modules/inventory/articles/components/dialog-search-product/dialog-search-product.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { EditUserComponent } from './modules/users/views/edit-user/edit-user.com
     ListUserComponent,
     FormUserComponent,
     DialogAddUser,
-    EditUserComponent
+    EditUserComponent,
+    DialogSearchProductComponent
 
   ],
   imports: [

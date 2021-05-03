@@ -11,6 +11,7 @@ export class FrmPersonComponent implements OnInit {
   @Output() create: EventEmitter<any> = new EventEmitter();
   @Input() formData!:any;
   @Input() edit:boolean = false;
+  @Input() provider: boolean = false
 
   public loader: boolean = false;
   constructor(private personService : PersonService, private toast: ToastService) {
@@ -19,7 +20,7 @@ export class FrmPersonComponent implements OnInit {
       doc: '',
       name: '',
       business_name: '',
-      is_provider: 'NO',
+      is_provider: this.provider ? 'SI' : 'NO',
       birthday: '',
       email: '',
       phone: '',

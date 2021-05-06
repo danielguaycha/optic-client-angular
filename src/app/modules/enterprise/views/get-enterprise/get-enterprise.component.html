@@ -1,0 +1,7 @@
+<with-loader [loader]="loader">
+    <div class="card">
+        <div class="card-body">
+            <frm-enterprise *ngIf="!loader" [formData]="enterpriseObjet"></frm-enterprise>
+        </div>
+    </div>
+</with-loader>

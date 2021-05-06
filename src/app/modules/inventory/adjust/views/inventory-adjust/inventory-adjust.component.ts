@@ -86,6 +86,10 @@ export class InventoryAdjustComponent implements OnInit {
   }
 
   onChangeQty(a) {
+    if(a.qty < 0){
+      this.toast.warn("No puede ingresar cantidades negativas");
+      return
+    }
     a.totalUnid = this.totalUnid(a);
     this.calc();
   }

@@ -52,12 +52,13 @@ import { InventoryAdjustComponent } from './modules/inventory/adjust/views/inven
 import { MethodPaymentComponent } from './modules/invoice/components/method-payment/method-payment.component';
 import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component';
 import { CreateUserComponent } from './modules/users/views/add-user/add-user.component';
-import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterprise.component';
+import { EnterpriseComponent } from './modules/enterprise/views/edit-enterprise/enterprise.component';
 import { ListUserComponent } from './modules/users/views/list-user/list-user.component';
 import { FormUserComponent } from './modules/users/components/form-user/form-user.component';
 import { DialogAddUser } from './modules/users/components/dialog-add-user/dialog-add-user.component';
 import { EditUserComponent } from './modules/users/views/edit-user/edit-user.component';
 import { DialogSearchProductComponent } from './modules/inventory/articles/components/dialog-search-product/dialog-search-product.component';
+import { GetEnterpriseComponent } from './modules/enterprise/views/get-enterprise/get-enterprise.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { DialogSearchProductComponent } from './modules/inventory/articles/compo
     FormUserComponent,
     DialogAddUser,
     EditUserComponent,
-    DialogSearchProductComponent
+    DialogSearchProductComponent,
+    GetEnterpriseComponent,
 
   ],
   imports: [

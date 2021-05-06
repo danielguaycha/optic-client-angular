@@ -9,3 +9,14 @@
     border: none;
     margin: 0 2.5px;
 }
+
+.image-upload>input {
+    display: none;
+}
+
+.image-opa {
+     :hover {
+        opacity: 0.8;
+        cursor: crosshair;
+    }
+}

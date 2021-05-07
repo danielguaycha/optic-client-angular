@@ -31,9 +31,7 @@ export class ArticleService {
   }
 
   deleteProduct(id: number): Observable<any> {
-    // let url = `article?limit=${limit}`;
-    // if (search) url += `&search=${search}`; // for search product
-    // return this.http.get(url);
-    return null;
+    console.warn(`article/${id}`);
+    return this.http.delete(`article/${id}`);
   }
 }

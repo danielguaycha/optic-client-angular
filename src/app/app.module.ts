@@ -59,6 +59,10 @@ import { DialogAddUser } from './modules/users/components/dialog-add-user/dialog
 import { EditUserComponent } from './modules/users/views/edit-user/edit-user.component';
 import { DialogSearchProductComponent } from './modules/inventory/articles/components/dialog-search-product/dialog-search-product.component';
 import { GetEnterpriseComponent } from './modules/enterprise/views/get-enterprise/get-enterprise.component';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { ListProviderComponent } from './modules/persons/views/list-provider/list-provider.component';
+import { AddProviderComponent } from './modules/persons/views/add-provider/add-provider.component';
+import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +110,9 @@ import { GetEnterpriseComponent } from './modules/enterprise/views/get-enterpris
     EditUserComponent,
     DialogSearchProductComponent,
     GetEnterpriseComponent,
+    ListProviderComponent,
+    AddProviderComponent,
+    EditProviderComponent
 
   ],
   imports: [
@@ -125,7 +132,7 @@ import { GetEnterpriseComponent } from './modules/enterprise/views/get-enterpris
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, AlertService, AuthGuard
+    AuthService, AlertService, AuthGuard, NgxImageCompressService
   ],
   bootstrap: [AppComponent]
 })

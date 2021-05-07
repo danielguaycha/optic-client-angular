@@ -4,7 +4,7 @@
     <div class="col-12 col-md-4">
         <div class="text-center image-upload image-opa">
             <label for="file-input">
-            <img class="rounded-circle circle-img img-circle" alt="100x100" src="{{imageProfile}}" data-holder-rendered="true">
+            <img class="rounded-circle circle-img img-circle" alt="100x100" [src]="imageProfile" (error)="changeImage($event)" data-holder-rendered="true">
         </label>
             <input id="file-input" type="file" accept="image/png, image/jpeg" (change)="fileEvent($event)" />
         </div>

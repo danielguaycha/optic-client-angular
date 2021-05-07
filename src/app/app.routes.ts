@@ -13,6 +13,9 @@ import userRoutes from './modules/users/users.routes';
 import enterpriseRoutes from './modules/enterprise/enterprise.routes';
 
 const MainRoutes: Routes = [
+  // {path: '/404', name: 'NotFound', component: NotFoundComponent},
+  // {path: '/*path', redirectTo: ['NotFound']},
+  
   { path: '', component: LoginComponent },
   ...authRoutes,
   ...personRoutes,

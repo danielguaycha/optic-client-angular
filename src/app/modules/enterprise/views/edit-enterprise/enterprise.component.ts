@@ -8,7 +8,7 @@ import { EnterpriseModel } from '../../models/enterprise.model';
 import { EnterpriseService } from '../../services/enterprise.service';
 
 const defaultImage = '../../../../../assets/img/icon.png';
-
+const MAXIMO_TAMANIO_BYTES = 1000000; // 1MB = 1 millón de bytes
 @Component({
   selector: 'frm-enterprise',
   templateUrl: './enterprise.component.html',
@@ -42,11 +42,33 @@ export class EnterpriseComponent implements OnInit {
 
   fileEvent(event) {
     let file = (<HTMLInputElement>event.target).files[0];
-    this.extraerBase64(file).then((image: any) => {
-      this.imageProfile = image.base;
-      this.formData.logo = file;
-    });
+    
+    // file.name = file.name.replace(' ','');
+    if (file.size > MAXIMO_TAMANIO_BYTES) {
+      this.toast.warn("La imagen seleccionada excede el tamaño permitido. MAX: 1 MB")
+    } else {
+      this.extraerBase64(file).then((image: any) => {
+        this.imageProfile = image.base;
+        this.formData.logo = file;
+      });
+    }
   }
+
+  resizeBase64Img(base64, newWidth, newHeight) {
+    return new Promise((resolve, reject)=>{
+        var canvas = document.createElement("canvas");
+        canvas.style.width = newWidth.toString()+"px";
+        canvas.style.height = newHeight.toString()+"px";
+        let context = canvas.getContext("2d");
+        let img = document.createElement("img");
+        img.src = base64;
+        img.onload = function () {
+            context.scale(newWidth/img.width,  newHeight/img.height);
+            context.drawImage(img, 0, 0); 
+            resolve(canvas.toDataURL());               
+        }
+    });
+}
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
@@ -85,10 +107,6 @@ export class EnterpriseComponent implements OnInit {
       this.loader = false;
       this.toast.err(error);
     })
-  }
-
-  onFileChanged(value) {
-
   }
 
   onCheckMicro(isChecked: boolean) {

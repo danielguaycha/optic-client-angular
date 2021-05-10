@@ -63,6 +63,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { ListProviderComponent } from './modules/persons/views/list-provider/list-provider.component';
 import { AddProviderComponent } from './modules/persons/views/add-provider/add-provider.component';
 import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
+import { MainViewConfigComponent } from './modules/config/general/components/main-view/main-view-config.component';
+import { ElectSignComponent } from './modules/config/general/views/elect-bill/elect-bill.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,9 @@ import { EditProviderComponent } from './modules/persons/views/edit-provider/edi
     GetEnterpriseComponent,
     ListProviderComponent,
     AddProviderComponent,
-    EditProviderComponent
+    EditProviderComponent,
+    MainViewConfigComponent,
+    ElectSignComponent
 
   ],
   imports: [

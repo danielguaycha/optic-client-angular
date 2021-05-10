@@ -16,7 +16,6 @@ export class EnterpriseService {
   }
 
   updateEnterprise(formData: EnterpriseModel): Observable<any> {
-    
     const form = new FormData();
     form.append('ruc', formData.ruc);
     form.append('name', formData.name);
@@ -30,8 +29,9 @@ export class EnterpriseService {
     form.append('micro_enterprise', formData.micro_enterprise);
     form.append('last_connection', formData.last_connection);
     if(typeof(formData.logo) != "string"){
-      console.log("AAAAAA", formData.logo);
-      form.append('logo', formData.logo, formData.logo.name);
+      let nameFaile = formData.logo.name.replace(" ","");
+      nameFaile = nameFaile.replace("_","");
+      form.append('logo', formData.logo, nameFaile);
     }
 
     return this.http.post(`enterprises/${formData.id}`, form);

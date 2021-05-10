@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ConfigService } from '../../services/config.service';
 import { SecureStorageService } from '../../../../auth/services/secure-storage.service';
-import { listUrl } from '../../components/main-view/main-view-config.component';
 import { ConfigModel } from '../../models/config-general.model';
 
 @Component({
@@ -15,7 +14,6 @@ export class GeneralConfigComponent implements OnInit {
   @Input() formData!:ConfigModel;
   @Input() edit:boolean = false;
   public loader: boolean = false;
-  public list = listUrl;
   // public configService: any;
   constructor(private storage: SecureStorageService, private configService : ConfigService, private toast: ToastService) {
     this.formData = {

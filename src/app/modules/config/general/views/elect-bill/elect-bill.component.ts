@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ConfigService } from '../../services/config.service';
 import { SecureStorageService } from '../../../../auth/services/secure-storage.service';
-import { listUrl } from '../../components/main-view/main-view-config.component';
 import { ConfigModel } from '../../models/config-general.model';
 
 const MAXIMO_TAMANIO_BYTES = 5000000; // 1MB = 1 millón de bytes
@@ -17,7 +16,6 @@ export class ElectSignComponent implements OnInit {
   @Input() formData!:ConfigModel;
   @Input() edit:boolean = false;
   public loader: boolean = false;
-  public list = listUrl;
   public type:string = "password";
   // public configService: any;
   constructor(private storage: SecureStorageService, private configService : ConfigService, private toast: ToastService) {

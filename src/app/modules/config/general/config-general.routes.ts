@@ -5,8 +5,7 @@ import { GeneralConfigComponent } from './views/general-config/general-config.co
 import { ElectSignComponent } from './views/elect-bill/elect-bill.component';
 
 const configRoutes : Routes = [
-  {path: 'config', component: GeneralConfigComponent, canActivate: [AuthGuard]},
-  {path: 'config/sign', component: ElectSignComponent, canActivate: [AuthGuard]}
+  {path: 'config', component: MainViewConfigComponent, canActivate: [AuthGuard]},
 ];
 
 export default configRoutes;

@@ -1,17 +1,21 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Articles} from '../../models/articles.model';
 import {ConfigService} from '../../../../config/general/services/config.service';
 import { ArticleService } from '../../services/articles.service';
 import {ValidateService} from '../../../../../core/services/validate.service';
 import {ToastService} from '../../../../../core/services/toast.service';
+import {DialogSearchProductComponent} from '../dialog-search-product/dialog-search-product.component';
 
 @Component({
   selector: 'app-select-product',
   templateUrl: './select-product.component.html',
 })
 export class SelectProductComponent implements OnInit {
+  @ViewChild(DialogSearchProductComponent) searchProductCmp;
+
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   @Input() showCalc: boolean = true;
+
   code: string
   selectProduct: Articles;
   selectProductCalc: any;
@@ -24,8 +28,7 @@ export class SelectProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  emitArticle(key) {
-    if (key.keyCode == 13) {
+  emitArticle() {
       if (this.selectProduct.id <= 0) {
         this.toast.info('Seleccione un producto primero');
         return;
@@ -42,7 +45,18 @@ export class SelectProductComponent implements OnInit {
         total: this.selectProductCalc.total,
         totalIva: this.selectProductCalc.totalIva,
       });
-    }
+  }
+
+  onEnterPress(key: any) {
+    if (key.keyCode == 13)
+      this.emitArticle();
+  }
+
+  onSelectProduct(product: any) {
+    this.selectProduct = product;
+    this.searchProductCmp.hide();
+    const qty = document.getElementById('qty');
+    qty.focus();
   }
 
   searchProduct(key) {
@@ -55,7 +69,7 @@ export class SelectProductComponent implements OnInit {
         const qty = document.getElementById('qty');
         qty.focus();
       } else {
-        //TODO: Abrir modal para buscar el producto
+        this.searchProductCmp.show();
       }
     }, error => {});
   }
@@ -74,13 +88,20 @@ export class SelectProductComponent implements OnInit {
     if (!this.showCalc) return; // en caso de solo querer seleccionar el producto
 
     const p = this.selectProduct;
+    if (!p.id) return;
+
     const iva = this.cfg.iva;
-    const qty = this.selectProductCalc.qty;
+    let qty = this.selectProductCalc.qty;
     let pvp = p.pvp; // precio neto, sin impuestos
 
     let total = 0;
     let totalIva = 0;
     let desc = 0;
+
+    if (qty > this.selectProduct.stock) {
+      this.toast.warn(`El cantidad ingresada (${qty}) supera el stock (${this.selectProduct.stock})`);
+      this.selectProductCalc.qty = this.selectProduct.stock;
+    }
 
     desc = this.validate.calcPercent(pvp, this.selectProductCalc.discount);
     total = (pvp * qty);

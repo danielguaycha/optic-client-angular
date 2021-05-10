@@ -10,34 +10,27 @@ export class ToastService {
   constructor(private toaster: Toaster) { }
 
   ok(message = 'Ok, proceso completado con éxito') {
-    this.toaster.open({
-      text: message,
-      caption: `${environment.appName} :: Proceso exitoso`,
-      type: 'success',
-    });
+    this.alert(message, 'Proceso exitoso', 'success');
   }
 
   err(message = 'Error al procesar la petición', title = 'Error al procesar') {
-    this.toaster.open({
-      text: message,
-      caption: `${environment.appName} :: ${title}`,
-      type: 'danger',
-    });
+    this.alert(message, title, 'danger')
   }
 
   info(message = 'Comprueba tus datos', title = 'Dato informativo') {
-    this.toaster.open({
-      text: message,
-      caption: `${environment.appName} :: ${title}`,
-      type: 'info',
-    });
+    this.alert(message, title, 'info')
   }
 
   warn(message = 'Comprueba tus datos', title = 'Dato informativo') {
+   this.alert(message, title, 'warning');
+  }
+
+  alert(message:string, title:string,  type:any = 'success') {
     this.toaster.open({
       text: message,
       caption: `${environment.appName} :: ${title}`,
-      type: 'warning',
+      type: type,
+      preventDuplicates: true
     });
   }
 }

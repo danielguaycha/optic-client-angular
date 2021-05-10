@@ -61,7 +61,7 @@
               <td>{{ p.pvp }}</td>
               <td><input type="number" min="0"
                          class="form-control-plaintext form-control-sm text-center"
-                         [(ngModel)]="p.qty" (input)="reCalcItem(p)"></td>
+                         [(ngModel)]="p.qty" [max]="p.stock" (input)="reCalcItem(p)"></td>
               <td><input type="number" min="0" max="100"
                          class="form-control-plaintext form-control-sm text-center"
                          [(ngModel)]="p.discount" (input)="reCalcItem(p)"></td>

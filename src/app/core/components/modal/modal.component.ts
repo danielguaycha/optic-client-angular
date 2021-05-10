@@ -14,6 +14,7 @@ export class ModalComponent implements OnInit {
   @Input() extraClass: string = '';
   @ViewChild('closebutton') closebutton;
   public appName: string
+  private modal;
   constructor() {
     this.idModal = 'modal';
     this.appName = environment.appName;
@@ -21,16 +22,17 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngAfterViewInit() {
+    const el = document.getElementById(this.idModal);
+    this.modal = new Modal(el);
+  }
+
   close() {
-    this.closebutton.nativeElement.click();
+    this.modal.hide();
   }
 
   open() {
-    const modalEl = document.getElementById(this.idModal);
-    const modal = new Modal(modalEl, {
-      keyboard: true, focus: true
-    });
-    modal.show();
+    this.modal.show();
   }
 
 }

@@ -56,10 +56,12 @@ export class CreateInvoiceComponent implements OnInit {
     };
     // prebuild products
     for (let art of this.articles) {
+      console.log(art);
       data.articles.push({
         article_id: art.id,
         qty: art.qty,
-        pvp: art.totalIva
+        pvp: art.pvp,
+        iva: art.iva
       });
     }
     this.loader = true;
@@ -147,6 +149,10 @@ export class CreateInvoiceComponent implements OnInit {
     total = total - desc;
     article.totalIva = totalIva+total;
     article.total = total;
+    if (article.qty > article.stock) {
+      this.toast.warn(`La cantidad ingresada (${article.qty}) en mayor al stock (${article.stock})`);
+      article.qty = article.stock;
+    }
     this.calc();
   }
 

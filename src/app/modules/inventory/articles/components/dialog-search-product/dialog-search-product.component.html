@@ -1,1 +1,45 @@
-<p>dialog-search-product works!</p>
+<button class="btn text-primary" type="button" (click)="show()"><i class="fa fa-search"></i></button>
+
+<app-modal idModal="modalSearchProducts" [showFooter]="false" title="Buscar Productos/Servicios">
+  <div body>
+    <input type="search"
+           [(ngModel)]="search"
+           (keypress)="onEnterPress($event)"
+           name="search" id="searchProduct"
+           autofocus class="form-control mb-1" placeholder="Buscar por: código, nombre" >
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>Cod</th>
+        <th>Nombres y Apellidos</th>
+        <th>Desc.</th>
+        <th>Categoría</th>
+        <th class="text-center">Stock</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of articles; index as i">
+        <td>{{ p.code }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.desc }}</td>
+        <td>{{ p.category }}</td>
+        <td [class]="'text-center fw-bold '+(p.stock > 0 ? 'text-success' : 'text-danger') ">{{ p.stock }}</td>
+        <td class="text-end">
+          <button (click)="onSelectArticle(p)"
+                  class="s-btn text-secondary" [id]="'addClient'+i"><i class="fa fa-plus"></i></button>
+        </td>
+      </tr>
+      <tr *ngIf="!search && articles.length <= 0 && !loader">
+        <td colspan="6" class="text-center text-muted">Ingrese un dato para comenzar la búsqueda</td>
+      </tr>
+      <tr *ngIf="search && articles.length <= 0 && !loader">
+        <td colspan="6" class="text-center text-muted">No se encontró resultados para la búsqueda</td>
+      </tr>
+      <tr *ngIf="loader">
+        <td colspan="6"><loader [loader]="loader" [dense]="true" variante="secondary"></loader></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</app-modal>

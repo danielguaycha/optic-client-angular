@@ -12,7 +12,7 @@ export class PersonService {
   getPersons(search:string = '', provider: boolean = false): Observable<any> {
     let url = `person?`;
     if (provider) {
-      url+=`provider=true`;
+      url+=`providers=true`;
     }
     if (search.trim().length > 0) {
       url+=`search=${search}`
@@ -24,8 +24,12 @@ export class PersonService {
     return this.http.post('person', data);
   }
 
-  getPerson(id) : Observable<any> {
-    return this.http.get(`person/${id}`);
+  getPerson(id: string, provider: boolean = false) : Observable<any> {
+    let url = `person/${id}?`;
+    if (provider) {
+      url+=`providers=true`;
+    }
+    return this.http.get(url);
   }
 
   updatePerson(id, data) : Observable<any> {

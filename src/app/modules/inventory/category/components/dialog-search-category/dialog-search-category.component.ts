@@ -19,7 +19,7 @@ export class DialogSearchCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.ListCategory();
   }
 
   ngAfterViewInit() {

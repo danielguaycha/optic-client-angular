@@ -1,0 +1,35 @@
+<app-general-main-view [validateUrl]=list.elect_sign></app-general-main-view>
+<form class="card" #formGeneralConfig (ngSubmit)="onSubmit()" ngNativeValidate>
+    <div class="card-body">
+        <!-- Firma electronica -->
+        <label class="label-title d-block">Factura electrónica</label>
+
+        <div class="col-12 col-md-6">
+
+            <div class="row">
+                <div class="mt-2">
+                    <label for="sign" class="form-label">Firma</label>
+                    <input type="file" accept=".p12" name="sign" id="sign" class="form-control" [ngModel]="formData.cdfi_signature" (change)="onSelectFile($event)" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mt-2">
+                    <label for="password" class="form-label">Clave</label>
+                    <input [type]="type" name="password" id="password" [ngModel]="formData.cdfi_password" class="form-control" required>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" (change)="onChangeCheck($event.target.checked)">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Mostrar contraseña
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer text-end">
+        <bs-button [loader]="loader" type="submit"><i class="fa fa-save"> </i> Guardar Config.</bs-button>
+    </div>
+</form>

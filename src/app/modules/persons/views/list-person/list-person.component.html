@@ -1,39 +1,46 @@
 <with-loader [loader]="loader">
-  <div class="page-header">
-    <h5>Listado de clientes</h5>
-    <app-add-client (create)="onCreateClient($event)"></app-add-client>
-  </div>
-  <div class="card pt-0">
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover mb-0">
-        <thead>
-        <tr>
-          <th scope="col" class="text-center">ID</th>
-          <th scope="col">Nombres y Apellidos</th>
-          <th scope="col">RUC/CI</th>
-          <th scope="col">Celular</th>
-          <th scope="col">Email</th>
-          <th class="text-center"><i class="fa fa-cog"></i></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let p of persons">
-          <td>{{ p.id }}</td>
-          <td>{{ p.name }}</td>
-          <td>{{ p.doc }}</td>
-          <td>{{ p.phone }}</td>
-          <td>{{ p.email }}</td>
-          <td class="text-center">
-            <button class="s-btn text-danger" (click)="deletePerson(p)"><i class="fa fa-trash"></i></button>
-            <a class="s-btn text-info" [routerLink]="'/persons/'+p.doc+'/edit'"><i class="fa fa-pencil"></i></a>
-          </td>
-        </tr>
-        <tr *ngIf="persons.length <= 0">
-          <td colspan="6" class="text-center text-muted">Aun no se han registrado clientes</td>
-        </tr>
-        </tbody>
-      </table>
-      <app-modal-confirm></app-modal-confirm>
+    <div class="page-header" *ngIf="provider">
+        <h5>Listado de provedores</h5>
+        <app-add-client [provider]="provider" (create)="onCreateClient($event)"></app-add-client>
     </div>
-  </div>
+    <div class="page-header" *ngIf="!provider">
+        <h5>Listado de clientes</h5>
+        <app-add-client (create)="onCreateClient($event)"></app-add-client>
+    </div>
+    <div class="card pt-0">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">ID</th>
+                        <th scope="col">Nombres y Apellidos</th>
+                        <th scope="col">RUC/CI</th>
+                        <th scope="col" *ngIf="provider">Razón Social</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Email</th>
+                        <th class="text-center"><i class="fa fa-cog"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of persons">
+                        <td>{{ p.id }}</td>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.doc }}</td>
+                        <td *ngIf="provider">{{ p.business_name }}</td>
+                        <td>{{ p.phone }}</td>
+                        <td>{{ p.email }}</td>
+                        <td class="text-center">
+                            <button class="s-btn text-danger" (click)="deletePerson(p)"><i class="fa fa-trash"></i></button>
+                            <a *ngIf="provider" class="s-btn text-info" [routerLink]="'/providers/'+p.doc+'/edit'"><i class="fa fa-pencil"></i></a>
+                            <a *ngIf="!provider" class="s-btn text-info" [routerLink]="'/persons/'+p.doc+'/edit'"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                    <tr *ngIf="persons.length <= 0">
+                        <td colspan="6" class="text-center text-muted">Aun no se han registrado clientes</td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-modal-confirm></app-modal-confirm>
+        </div>
+    </div>
 </with-loader>

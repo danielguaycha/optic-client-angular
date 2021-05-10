@@ -6,5 +6,6 @@ export interface PermissionModel{
     parent?:     any,
     deleted_at?: any,
     created_at?: any,
-    updated_at?: any
+    updated_at?: any,
+    addToRol?: boolean,
 }

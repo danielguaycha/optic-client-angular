@@ -39,7 +39,7 @@ export class FrmProductComponent implements OnInit {
       this.initFormData();
     }
   }
-
+  
   ngOnInit(): void {
     this.loader = false;
     if(this.edit){
@@ -60,47 +60,51 @@ export class FrmProductComponent implements OnInit {
     this.loader = true;
     if(this.iva > 0){
       if(this.pvpIva < this.pvp){
-      this.toast.err("El precio final debe ser mayor");
-      return
-      }
+        this.toast.err("El precio final no puede ser menor al Costo + Iva");
+      this.loader = false;
+      return;
     }
-    if (!this.edit) this.storeProduct();
-    if (this.edit) this.updateProduct();
   }
+  if (!this.edit) this.storeProduct();
+  if (this.edit) this.updateProduct();
+}
 
-  //products
-  storeProduct(){
-    this.formData.pvp = this.iva > 0 ? this.validate.getNeto(this.pvpIva, this.cfg.iva) : this.pvpIva;
-    this.formData.iva = this.iva > 0 ? 1 : 0;
-    this.formData.category_id = this.category.id;
-    this.loader = true;
-    this.articleService.saveProduct(this.formData).subscribe(res => {
-      if (res.ok) {
-        this.initFormData();
-        this.create.emit(res.body);
-        this.toast.ok(res.message);
-      }
+//products
+storeProduct(){
+  this.formData.pvp = this.iva > 0 ? this.pvpIva : this.validate.getNeto(this.pvpIva, this.cfg.iva);
+  this.formData.iva = this.iva > 0 ? 1 : 0;
+  this.formData.category_id = this.category.id;
+  this.loader = true;
+  this.articleService.saveProduct(this.formData).subscribe(res => {
+    if (res.ok) {
+      this.initFormData();
+      this.create.emit(res.body);
+      this.toast.ok(res.message);
+    }
+    this.loader = false;
+  }, error => {
+    this.loader = false;
+    this.toast.err(error);
+  });
+}
+
+updateProduct() {
+  this.formData.pvp = this.iva > 0 ? this.pvpIva : this.validate.getNeto(this.pvpIva, this.cfg.iva);
+  this.formData.iva = this.iva > 0 ? 1 : 0;
+  this.formData.category_id = this.category.id;
+  this.loader = true;
+  this.articleService.updateProducts(this.formData.id, this.formData).subscribe(res => {
+    console.log("res: ", res);
+    if (res.ok) {
+      this.toast.ok(res.message)
+    }
       this.loader = false;
     }, error => {
       this.loader = false;
       this.toast.err(error);
     });
   }
-
-  updateProduct() {
-    this.loader = true;
-    this.articleService.updateProducts(this.formData.id, this.formData).subscribe(res => {
-      console.log("res: ", res);
-      if (res.ok) {
-        this.toast.ok(res.message)
-      }
-      this.loader = false;
-    }, error => {
-      this.loader = false;
-      this.toast.err(error);
-    });
-  }
-
+  
   //events for category
   onSelectCategory(category) {
     this.category = category;
@@ -117,22 +121,22 @@ export class FrmProductComponent implements OnInit {
     }, error => {
       console.log(error);
     })
-
+    
   }
-
+  
   // calc
   onChangeIVA(value:string){
     this.iva = this.validate.parseDouble(value);
     this.formData.iva = this.iva;
     this.calcIva();
   }
-
+  
   calcIva() {
     this.pvp = this.validate.addPercent(this.price, this.iva);
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
   }
 
-  // events
+  // events  
   onInputPrice(value: string) {
     this.price = this.validate.parseDouble(value);
     this.calcIva();
@@ -142,8 +146,12 @@ export class FrmProductComponent implements OnInit {
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
     this.formData.pvp = this.pvpIva;
   }
+
   onInputFinalPrice(value: string) {
+    console.log("PVP: ", value);
     this.utility = this.validate.round(this.validate.getPercent(this.validate.parseDouble(value), this.pvp));
+    this.pvpIva = this.validate.parseDouble(value);
+    console.log("PVP: ", this.pvpIva);
   }
 
   initFormData() {

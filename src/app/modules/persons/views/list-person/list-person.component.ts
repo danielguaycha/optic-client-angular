@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {PersonService} from '../../services/person.service';
 import {ConfirmService} from '../../../../core/services/confirm.service';
 import {ToastService} from '../../../../core/services/toast.service';
+import { PersonModel } from '../../models/person.model';
 
 @Component({
   selector: 'app-list-person',
   templateUrl: './list-person.component.html',
 })
 export class ListPersonComponent implements OnInit {
+  
+  @Input() provider: boolean = false
+  @Input() persons:Array<PersonModel> = [];
+
   loader: boolean = false;
-  public persons:Array<any> = [];
   constructor(private personService: PersonService, private confirm: ConfirmService,
               private toast: ToastService) {
 
   }
 
   ngOnInit(): void {
-    this.getClients();
+    if(!this.provider){
+      this.getClients();
+    }
   }
 
   getClients() {
@@ -42,6 +48,10 @@ export class ListPersonComponent implements OnInit {
       this.personService.deletePerson(person.id).subscribe(res => {
         console.log(res);
         if (res.ok) {
+          const index = this.persons.indexOf(person, 0);
+          if (index > -1) {
+            this.persons.splice(index, 1);
+          }
           this.toast.ok(res.message);
         }
       }, err => {

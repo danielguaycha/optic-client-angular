@@ -1,0 +1,15 @@
+export interface PersonModel {
+    id?: number,
+    name: string,
+    business_name: string,
+    doc_type: string,
+    doc: string,
+    address: string,
+    is_provider: string,
+    birthday: string,
+    email: string,
+    phone: string,
+    city: string,
+    occupation: string,
+    facebook: string,
+}

@@ -52,12 +52,19 @@ import { InventoryAdjustComponent } from './modules/inventory/adjust/views/inven
 import { MethodPaymentComponent } from './modules/invoice/components/method-payment/method-payment.component';
 import { AddRolComponent } from './modules/roles/views/add-rol/add-rol.component';
 import { CreateUserComponent } from './modules/users/views/add-user/add-user.component';
-import { EnterpriseComponent } from './modules/enterprise/views/add-user/enterprise.component';
+import { EnterpriseComponent } from './modules/enterprise/views/edit-enterprise/enterprise.component';
 import { ListUserComponent } from './modules/users/views/list-user/list-user.component';
 import { FormUserComponent } from './modules/users/components/form-user/form-user.component';
 import { DialogAddUser } from './modules/users/components/dialog-add-user/dialog-add-user.component';
 import { EditUserComponent } from './modules/users/views/edit-user/edit-user.component';
 import { DialogSearchProductComponent } from './modules/inventory/articles/components/dialog-search-product/dialog-search-product.component';
+import { GetEnterpriseComponent } from './modules/enterprise/views/get-enterprise/get-enterprise.component';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { ListProviderComponent } from './modules/persons/views/list-provider/list-provider.component';
+import { AddProviderComponent } from './modules/persons/views/add-provider/add-provider.component';
+import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
+import { MainViewConfigComponent } from './modules/config/general/components/main-view/main-view-config.component';
+import { ElectSignComponent } from './modules/config/general/views/elect-bill/elect-bill.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +110,13 @@ import { DialogSearchProductComponent } from './modules/inventory/articles/compo
     FormUserComponent,
     DialogAddUser,
     EditUserComponent,
-    DialogSearchProductComponent
+    DialogSearchProductComponent,
+    GetEnterpriseComponent,
+    ListProviderComponent,
+    AddProviderComponent,
+    EditProviderComponent,
+    MainViewConfigComponent,
+    ElectSignComponent
 
   ],
   imports: [
@@ -123,7 +136,7 @@ import { DialogSearchProductComponent } from './modules/inventory/articles/compo
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    AuthService, AlertService, AuthGuard
+    AuthService, AlertService, AuthGuard, NgxImageCompressService
   ],
   bootstrap: [AppComponent]
 })

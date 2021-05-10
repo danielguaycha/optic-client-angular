@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {SecureStorageService} from '../../../auth/services/secure-storage.service';
+import { SecureStorageService } from '../../../auth/services/secure-storage.service';
+import { ConfigModel } from '../models/config-general.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +33,25 @@ export class ConfigService {
   }
 
   getNeto(total: number, tarifaPercent: number) {
-    return this.toFloat((total / (1 + (tarifaPercent/100))));
+    return this.toFloat((total / (1 + (tarifaPercent / 100))));
   }
 
   addPercent(neto: number, tarifaPercent) {
-    return this.toFloat(neto * (1 + (tarifaPercent/100)));
+    return this.toFloat(neto * (1 + (tarifaPercent / 100)));
   }
 
-  saveConfg(data: any) : Observable<any> {
+  saveConfg(data: ConfigModel): Observable<any> {
+    let nameFaile = data.cdfi_signature.name.replace(" ","");
+    let formData = new FormData();
+    formData.append('iva', data.iva.toString());
+    formData.append('decimals', data.decimals.toString());
+    formData.append('cfdi_env', data.cfdi_env);
+    formData.append('cdfi_wait_time', data.cdfi_wait_time);
+    formData.append('cdfi_password', data.cdfi_password);
+    formData.append('cdfi_signature', data.cdfi_signature, nameFaile);
+    formData.append('cdfi_bussiness_key', data.cdfi_bussiness_key);
+    formData.append('cdfi_cert_entity', data.cdfi_cert_entity);
+    formData.append('cdfi_expiration', data.cdfi_expiration);
     return this.http.put('enterprise/config', data);
   }
-  
 }

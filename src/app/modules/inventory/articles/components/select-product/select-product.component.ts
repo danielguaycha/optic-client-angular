@@ -75,6 +75,16 @@ export class SelectProductComponent implements OnInit {
   }
 
   calc() {
+
+    if(this.selectProductCalc.qty < 0 ){
+      this.toast.warn(`No puede ingresar cantidades negativas`,"AVISO");
+      return; 
+    }
+    if( (this.selectProductCalc.qty > this.selectProduct.stock) && this.selectProduct.name.length > 0){
+      this.toast.warn(`La cantidad ingresada en stock es superior a la existencia en bodega. Cantiad maxima: ${this.selectProduct.stock}`,"AVISO");
+      return; 
+    }
+
     if (!this.showCalc) return; // en caso de solo querer seleccionar el producto
 
     const p = this.selectProduct;

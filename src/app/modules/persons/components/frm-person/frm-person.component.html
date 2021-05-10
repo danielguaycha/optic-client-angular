@@ -1,5 +1,5 @@
 <form class="row g-2" #clientForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
-    <label class="label-title"><span>Datos de básicos</span></label>
+    <label class="label-title"><span>Datos básicos</span></label>
     <div class="col-12 col-md-6">
         <label for="ruc" class="form-label">CI/Ruc: * </label>
         <input type="text" autofocus [(ngModel)]="formData.doc" name="doc" class="form-control" id="ruc" required>
@@ -18,7 +18,7 @@
         <label for="name" class="form-label">Nombre: *</label>
         <input type="text" id="name" [(ngModel)]="formData.name" name="name" class="form-control" required>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-6" *ngIf="provider">
         <label for="business_name" class="form-label">Nombre Comercial: *</label>
         <input type="text" id="business_name" [(ngModel)]="formData.business_name" name="business_name" class="form-control" required>
     </div>
@@ -38,11 +38,11 @@
         <div class="row g-2">
             <div class="div col-6 col-md-4">
                 <label for="phone" class="form-label">Celular/Teléfono</label>
-                <input type="tel" id="phone" [(ngModel)]="formData.phone" name="phone" class="form-control">
+                <input type="number" id="phone" [(ngModel)]="formData.phone" name="phone" class="form-control">
             </div>
             <div class="div col-6 col-md-4">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" [(ngModel)]="formData.email" name="email" class="form-control">
+                <input type="email" id="email" [(ngModel)]="formData.email" name="email" class="form-control" required>
             </div>
 
             <div class="div col-6 col-md-4">
@@ -52,7 +52,12 @@
         </div>
     </div>
 
-    <div class="col-12 text-end mt-4">
+    <div class="col-12 text-end mt-4" *ngIf="provider">
+        <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
+        <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i> Guardar Proveedor</bs-button>
+        <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-refresh me-1"></i> Actualizar Proveedor</bs-button>
+    </div>
+    <div class="col-12 text-end mt-4" *ngIf="!provider">
         <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
         <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i> Guardar Cliente</bs-button>
         <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-refresh me-1"></i> Actualizar Cliente</bs-button>

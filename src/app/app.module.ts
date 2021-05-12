@@ -38,7 +38,6 @@ import { DialogAddCategoryComponent } from './modules/inventory/category/compone
 import { FrmCategoryComponent } from './modules/inventory/category/components/frm-category/frm-category.component';
 import { AddProductComponent } from './modules/inventory/articles/views/add-product/add-product.component';
 import { SelectProductComponent } from './modules/inventory/articles/components/select-product/select-product.component';
-import { GeneralConfigComponent } from './modules/config/general/views/general-config/general-config.component';
 import {StoreModule} from '@ngrx/store';
 import { userReducer } from './modules/auth/store/user.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
@@ -63,8 +62,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { ListProviderComponent } from './modules/persons/views/list-provider/list-provider.component';
 import { AddProviderComponent } from './modules/persons/views/add-provider/add-provider.component';
 import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
-import { MainViewConfigComponent } from './modules/config/general/components/main-view/main-view-config.component';
-import { ElectSignComponent } from './modules/config/general/views/elect-bill/elect-bill.component';
+import { ConfigEnterpriseComponent } from './modules/config/general/views/general-config/config.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +92,6 @@ import { ElectSignComponent } from './modules/config/general/views/elect-bill/el
     FrmCategoryComponent,
     AddProductComponent,
     SelectProductComponent,
-    GeneralConfigComponent,
     ListCategoriesComponent,
     DialogSearchCategoryComponent,
 
@@ -115,8 +112,7 @@ import { ElectSignComponent } from './modules/config/general/views/elect-bill/el
     ListProviderComponent,
     AddProviderComponent,
     EditProviderComponent,
-    MainViewConfigComponent,
-    ElectSignComponent
+    ConfigEnterpriseComponent,
 
   ],
   imports: [

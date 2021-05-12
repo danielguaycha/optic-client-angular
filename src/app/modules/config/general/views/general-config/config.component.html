@@ -1,0 +1,127 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#iva">IVA</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#factElect">Fact. Electrónica</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <!-- IVA -->
+    <div class="tab-pane active" id="iva">
+        <div class="row g-0 rounded">
+            <form class="card" #formGeneralConfig (ngSubmit)="onSubmit(true)" ngNativeValidate>
+                <div class="card-body">
+                    <label class="label-title d-block">Configuración General</label>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <label for="iva" class="form-label">Iva %</label>
+                            <input type="number" name="iva" id="iva" min="0" max="50" value="12" class="form-control" [(ngModel)]="formData.iva" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="decimals" class="form-label"># Decimales</label>
+                            <select name="decimals" id="decimals" class="form-select" [(ngModel)]="formData.decimals" required>
+                                <option value="2">2 (0,00)</option>
+                                <option value="3">3 (0,000)</option>
+                                <option value="4">4 (0,0000)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <bs-button [loader]="loader" type="submit"><i class="fa fa-save"> </i> Guardar Config.</bs-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firma electronica -->
+    <div class="tab-pane" id="factElect">
+        <div class="row g-0 rounded">
+            <form class="card" #formGeneralConfig (ngSubmit)="onSubmit(false)" ngNativeValidate>
+                <div class="card-body">
+                    <label class="label-title d-block">Entorno</label>
+                    <div class="row g-2">
+                        <div class="div col-6 col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked (change)="onCheckTest($event.target.checked)">
+                                <label class="form-check-label" for="exampleRadios1">
+                                  PRUEBAS
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                <label class="form-check-label" for="exampleRadios2">
+                                  PRODUCCIÓN
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="label-title d-block">Datos de factura electrónica</label>
+                    <div class="row g-2">
+                        <div class="div col-6 col-md-6">
+                            <label for="sign" class="form-label">Firma electrónica en formato p12</label>
+                            <input type="file" accept=".p12" name="sign" id="sign" class="form-control" [ngModel]="formData.cfdi_sign" (change)="onSelectFile($event)" required>
+                        </div>
+                        <div class="div col-6 col-md-6">
+                            <label for="cfdi_sign_expire" class="form-label">Fecha de expiración de la firma:</label>
+                            <input type="date" name="cfdi_sign_expire" id="cfdi_sign_expire" class="form-control" value="formData.cfdi_sign_expire" [ngModel]="formData.cfdi_sign_expire" required>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="div col-6 col-md-6">
+                            <!-- <div class="col-12 col-md-6">
+                                <label for="product_name" class="form-label">Nombre: *</label>
+                                <input type="text" id="product_name" [(ngModel)]="formData.name" name="product_name" class="form-control" required>
+                            </div> -->
+                            <label for="cfdi_business_key" class="form-label">Clave empresarial</label>
+                            <input [type]="type" name="cfdi_business_key" id="cfdi_business_key" maxlength="8" minlength="8" value="formData.cfdi_business_key" [ngModel]="formData.cfdi_business_key" class="form-control" required>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" (change)="onChangeCheck($event.target.checked)">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Mostrar contraseña
+                                </label>
+                            </div>
+                        </div>
+                        <div class="div col-6 col-md-6">
+                            <label for="cfdi_sign_pw" class="form-label">Clave de firma electrónica</label>
+                            <input [type]="type" name="cfdi_sign_pw" id="cfdi_sign_pw" [ngModel]="formData.cfdi_sign_pw" value="formData.cfdi_sign_pw" class="form-control" required>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" (change)="onChangeCheck($event.target.checked)">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Mostrar contraseña
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="div col-6 col-md-6">
+                            <label for="cfdi_sign_entity" class="form-label">Entidad certificante</label>
+                            <select [(ngModel)]="formData.cfdi_sign_entity" name="cfdi_sign_entity" id="cfdi_sign_entity" class="form-select" required>
+                                <option value="BANCO CENTRAL DEL ECUADOR" selected>BANCO CENTRAL DEL ECUADOR</option>
+                            <option value="CONSEJO DE LA JUDICATURA">CONSEJO DE LA JUDICATURA</option>
+                            <option value="SECURITY DATA">SECURITY DATA</option>
+                          </select>
+                        </div>
+
+                        <div class="div col-6 col-md-6">
+                            <label for="cdfi_wait" class="form-label">Segundos (Tiempo de espera SRI):</label>
+                            <input type="number" name="cdfi_wait" id="cdfi_wait" class="form-control" [ngModel]="formData.cdfi_wait" value="formData.cdfi_wait" min="3" required>
+                        </div>
+                    </div>
+                    <div class="row g-2 mt-2">
+                        <div class="div col-6 col-md-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="onCheckSendMail($event.target.checked)">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Envio de correos automaticos despues de la autorización</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <bs-button [loader]="loader" type="submit"><i class="fa fa-save"> </i> Guardar Config.</bs-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -28,6 +28,10 @@ export class EnterpriseService {
     form.append('accounting', formData.accounting);
     form.append('micro_enterprise', formData.micro_enterprise);
     form.append('last_connection', formData.last_connection);
+    form.append('codEst', formData.codEst);
+    form.append('addressEst', formData.addressEst);
+    form.append('ptoEmi', formData.ptoEmi);
+
     if(typeof(formData.logo) != "string"){
       let nameFaile = formData.logo.name.replace(" ","");
       nameFaile = nameFaile.replace("_","");
@@ -37,7 +41,8 @@ export class EnterpriseService {
     return this.http.post(`enterprises/${formData.id}`, form);
   }
 
-  getLogo(logo: string) {
-    return `${environment.url}/img/logo/${logo}`
+  getLogo(logo: string): Observable<any>{
+    return this.http.get(`/image?path=logos/${logo}`);
+    // return `${environment.url}/img/logo/${logo}`
   }
 }

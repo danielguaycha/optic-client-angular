@@ -12,4 +12,7 @@ export interface EnterpriseModel{
     accounting:  string,
     micro_enterprise: string,    
     last_connection: string,
+    ptoEmi: string,
+    codEst: string,
+    addressEst: string
 }

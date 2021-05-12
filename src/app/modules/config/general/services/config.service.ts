@@ -41,17 +41,22 @@ export class ConfigService {
   }
 
   saveConfg(data: ConfigModel): Observable<any> {
-    let nameFaile = data.cdfi_signature.name.replace(" ","");
+    console.log(data);
     let formData = new FormData();
     formData.append('iva', data.iva.toString());
     formData.append('decimals', data.decimals.toString());
-    formData.append('cfdi_env', data.cfdi_env);
-    formData.append('cdfi_wait_time', data.cdfi_wait_time);
-    formData.append('cdfi_password', data.cdfi_password);
-    formData.append('cdfi_signature', data.cdfi_signature, nameFaile);
-    formData.append('cdfi_bussiness_key', data.cdfi_bussiness_key);
-    formData.append('cdfi_cert_entity', data.cdfi_cert_entity);
-    formData.append('cdfi_expiration', data.cdfi_expiration);
-    return this.http.put('enterprise/config', data);
+    // formData.append('cfdi_sign', data.cfdi_sign);
+    formData.append('cfdi_sign_expire', data.cfdi_sign_expire);
+    formData.append('cfdi_business_key', data.cfdi_business_key);
+    formData.append('cfdi_env', data.cfdi_env.toString());
+    formData.append('cfdi_send_mail', data.cfdi_send_mail.toString());
+    formData.append('cdfi_wait', data.cdfi_wait.toString());
+    formData.append('cfdi_sign_entity', data.cfdi_sign_entity);
+
+    if(data.cfdi_sign != null){
+      let nameFaile = data.cfdi_sign.name.replace(" ","");
+      formData.append('cfdi_sign', data.cfdi_sign, nameFaile);
+    }
+    return this.http.post('enterprise/config', data);
   }
 }

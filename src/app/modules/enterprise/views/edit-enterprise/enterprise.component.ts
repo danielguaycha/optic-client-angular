@@ -18,7 +18,9 @@ export class EnterpriseComponent implements OnInit {
 
   public micro_enterprise: boolean = true;
   public accounting: boolean = false;
-
+  public cod_serie:string = "";
+  public cod_est:string = "";
+  public pto_est:string = "";
   public imageProfile = '';
 
   public loader: boolean = false;
@@ -30,7 +32,7 @@ export class EnterpriseComponent implements OnInit {
     this.loader = false;
     this.micro_enterprise = this.formData.micro_enterprise == "SI" ? true : false;
     this.accounting = this.formData.accounting == "SI" ? true : false;
-    this.imageProfile = this.enterpriseService.getLogo(this.formData.logo.toString());
+    // this.imageProfile = this.enterpriseService.getLogo(this.formData.logo.toString());
   }
   changeImage(value) {
     this.imageProfile = defaultImage;
@@ -124,6 +126,15 @@ export class EnterpriseComponent implements OnInit {
       this.formData.accounting = "NO"
     }
   }
+  
+  onInputCode(value: string) {
+    this.cod_est = value;
+    this.cod_serie = `${this.cod_est}-${this.pto_est}`;
+  }
+  onInputPto(value: string) {
+    this.pto_est = value;
+    this.cod_serie = `${this.cod_est}-${this.pto_est}`;
+  }
 
   initFormData() {
     this.formData = {
@@ -140,6 +151,9 @@ export class EnterpriseComponent implements OnInit {
       accounting: '',
       micro_enterprise: '',
       last_connection: '',
+      ptoEmi: '',
+      codEst: '',
+      addressEst: ''
     };
   }
 }

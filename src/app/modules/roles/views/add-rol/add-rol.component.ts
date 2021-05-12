@@ -51,7 +51,6 @@ export class AddRolComponent implements OnInit {
         this.roleService.getPermissions().subscribe(res => {
             if (res.ok) {
                 this.permissions = res.body;
-                console.log(this.permissions);
                 this.permissions.forEach(element => {
                     if(element.parent == 0 || element.parent == null){
                         this.tagsModules.push([element.id, element.name])
@@ -59,17 +58,14 @@ export class AddRolComponent implements OnInit {
                 });
             }
         }, error => {
-            console.log(error);
+            // console.log(error);
         });
     }
 
     checkAllPermissions(value: [number, string], isChecked: boolean){
-        console.log(value[1]);
         this.permissions.forEach( p => {
             if(p.parent == value[0]){
                 p.addToRol = isChecked;
-                //this.onCheckPermiso(p.id, isChecked);
-                // console.log(p, " => ", isChecked)
             }
         });
     }
@@ -81,7 +77,6 @@ export class AddRolComponent implements OnInit {
             var i = this.formData.permissions.indexOf( Number(value) );
             this.formData.permissions.splice( i, 1 );
         }
-        console.log(this.formData.permissions);
     }
     initFormData() {
         this.formData = {

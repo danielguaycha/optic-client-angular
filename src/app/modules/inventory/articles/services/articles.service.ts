@@ -31,7 +31,6 @@ export class ArticleService {
   }
 
   deleteProduct(id: number): Observable<any> {
-    console.warn(`article/${id}`);
     return this.http.delete(`article/${id}`);
   }
 }

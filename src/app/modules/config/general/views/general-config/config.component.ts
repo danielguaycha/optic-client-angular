@@ -5,6 +5,11 @@ import { SecureStorageService } from '../../../../auth/services/secure-storage.s
 import { ConfigModel } from '../../models/config-general.model';
 
 const MAXIMO_TAMANIO_BYTES = 5000000; // 1MB = 1 millón de bytes
+const ENV_PRUEBAS = 1;
+const ENV_PRODUCCION = 2;
+const SEND_MAIL = 1;
+const NOT_SEND_MAIL = 0;
+
 @Component({
   selector: 'app-general-config',
   templateUrl: './config.component.html'
@@ -61,10 +66,10 @@ export class ConfigEnterpriseComponent implements OnInit {
   }
 
   onCheckTest(isChecked: boolean){
-    isChecked ? this.formData.cfdi_env = 1 : this.formData.cfdi_env = 2;
+    isChecked ? this.formData.cfdi_env = ENV_PRUEBAS : this.formData.cfdi_env = ENV_PRODUCCION;
   }
   onCheckSendMail(isChecked: boolean){
-    isChecked ? this.formData.cfdi_send_mail = 1 : this.formData.cfdi_send_mail= 0;
+    isChecked ? this.formData.cfdi_send_mail = SEND_MAIL : this.formData.cfdi_send_mail= NOT_SEND_MAIL;
   }
 
   initFormData() {
@@ -72,8 +77,8 @@ export class ConfigEnterpriseComponent implements OnInit {
     this.formData.cfdi_sign_pw = "";
     this.formData.cfdi_business_key = "";
     this.formData.cdfi_wait = 3;
-    this.formData.cfdi_env = 1;
-    this.formData.cfdi_send_mail = 0;
+    this.formData.cfdi_env = ENV_PRUEBAS;
+    this.formData.cfdi_send_mail = NOT_SEND_MAIL;
   }
 
 }

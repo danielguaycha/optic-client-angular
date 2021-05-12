@@ -4,7 +4,7 @@
     <div class="col-12 col-md-4">
         <div class="text-center image-upload image-opa">
             <label for="file-input">
-            <img class="rounded-circle circle-img img-circle" alt="100x100" [src]="imageProfile" (error)="changeImage($event)" data-holder-rendered="true">
+            <img class="rounded-circle circle-img img-circle" alt="100x100" [src]="this.imageProfile" (error)="changeImage($event)" data-holder-rendered="true">
         </label>
             <input id="file-input" type="file" accept="image/png, image/jpeg" (change)="fileEvent($event)" />
         </div>
@@ -67,18 +67,20 @@
             <label for="addressEst" class="form-label">Dirección: </label>
             <input type="addressEst" id="addressEst" [(ngModel)]="formData.addressEst" name="addressEst" class="form-control" required>
         </div>
-        <div class="row g-2">
-            <div class="div col-6 col-md-4">
-                <label for="codEst" class="form-label">COD: </label>
-                <input type="number" id="codEst" [(ngModel)]="formData.codEst" name="codEst" class="form-control" (input)="onInputCode($event.target.value)" (change)="onInputCode($event.target.value)" required>
-            </div>
-            <div class="div col-6 col-md-4">
-                <label for="ptoEmi" class="form-label">Pto. Emisión: </label>
-                <input type="number" id="ptoEmi" [(ngModel)]="formData.ptoEmi" name="ptoEmi" class="form-control" (input)="onInputPto($event.target.value)" (change)="onInputPto($event.target.value)" required>
-            </div>
-            <div class="div col-6 col-md-4">
-                <label class="form-label">Nº Serie:</label>
-                <input class="form-control" [value]="cod_serie" disabled>
+        <div class="mt-2">
+            <div class="row g-2">
+                <div class="div col-6 col-md-4">
+                    <label for="codEst" class="form-label">COD: </label>
+                    <input type="text" id="codEst" (keypress)="numberOnly($event)" [(ngModel)]="formData.codEst" name="codEst" maxlength="3" minlength="1" class="form-control" (input)="onInputCode($event.target.value)" (change)="onInputCode($event.target.value)" required>
+                </div>
+                <div class="div col-6 col-md-4">
+                    <label for="ptoEmi" class="form-label">Pto. Emisión: </label>
+                    <input type="text" id="ptoEmi" (keypress)="numberOnly($event)" [(ngModel)]="formData.ptoEmi" name="ptoEmi" maxlength="3" minlength="1" class="form-control" (input)="onInputPto($event.target.value)" (change)="onInputPto($event.target.value)" required>
+                </div>
+                <div class="div col-6 col-md-4">
+                    <label class="form-label">Nº Serie:</label>
+                    <input class="form-control" [value]="cod_serie" disabled>
+                </div>
             </div>
         </div>
 

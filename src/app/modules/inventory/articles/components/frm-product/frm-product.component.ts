@@ -94,7 +94,6 @@ updateProduct() {
   this.formData.category_id = this.category.id;
   this.loader = true;
   this.articleService.updateProducts(this.formData.id, this.formData).subscribe(res => {
-    console.log("res: ", res);
     if (res.ok) {
       this.toast.ok(res.message)
     }
@@ -119,7 +118,7 @@ updateProduct() {
         document.getElementById('product_name').focus();
       }
     }, error => {
-      console.log(error);
+      // console.log(error);
     })
     
   }
@@ -148,10 +147,8 @@ updateProduct() {
   }
 
   onInputFinalPrice(value: string) {
-    console.log("PVP: ", value);
     this.utility = this.validate.round(this.validate.getPercent(this.validate.parseDouble(value), this.pvp));
     this.pvpIva = this.validate.parseDouble(value);
-    console.log("PVP: ", this.pvpIva);
   }
 
   initFormData() {

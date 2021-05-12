@@ -56,7 +56,6 @@ export class CreateInvoiceComponent implements OnInit {
     };
     // prebuild products
     for (let art of this.articles) {
-      console.log(art);
       data.articles.push({
         article_id: art.id,
         qty: art.qty,

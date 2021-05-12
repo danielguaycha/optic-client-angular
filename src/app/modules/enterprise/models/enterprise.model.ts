@@ -4,7 +4,7 @@ export interface EnterpriseModel{
     name: string,
     business_name: string,
     address: string,
-    logo: File,
+    logo: File | string,
     email: string,
     authorization: string,
     special_contrib: string,     

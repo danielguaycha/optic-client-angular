@@ -44,7 +44,6 @@ import {ValidateService} from '../../../../../core/services/validate.service';
       this.confirm.confirm(`¿Está seguro que desea eliminar ${product.name.toUpperCase()}?`, () => {
         // this.toast.err("Borrado con exito!! Pero falta agregar este metodo en el api");
         this.articleService.deleteProduct(product.id).subscribe(res => {
-          console.log(res);
           if (res.ok) {
             this.toast.ok(res.message);
           }

@@ -33,7 +33,7 @@ export class AppComponent {
         this.storage.set('config', JSON.stringify(res.body.config));
       }
     }, error => {
-      console.log(error);
+      // console.log(error);
     })
   }
 }

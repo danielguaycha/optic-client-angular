@@ -4,11 +4,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ValidateService } from 'src/app/core/services/validate.service';
+import { environment } from 'src/environments/environment';
 import { EnterpriseModel } from '../../models/enterprise.model';
 import { EnterpriseService } from '../../services/enterprise.service';
 
 const defaultImage = '../../../../../assets/img/icon.png';
-const MAXIMO_TAMANIO_BYTES = 1000000; // 1MB = 1 millón de bytes
+const MAXIMO_TAMANIO_BYTES = 10000000; // 1MB = 1 millón de bytes
 @Component({
   selector: 'frm-enterprise',
   templateUrl: './enterprise.component.html',
@@ -19,8 +20,8 @@ export class EnterpriseComponent implements OnInit {
   public micro_enterprise: boolean = true;
   public accounting: boolean = false;
   public cod_serie:string = "";
-  public cod_est:string = "";
-  public pto_est:string = "";
+  public cod_est:string = "0";
+  public pto_est:string = "0";
   public imageProfile = '';
 
   public loader: boolean = false;
@@ -32,22 +33,31 @@ export class EnterpriseComponent implements OnInit {
     this.loader = false;
     this.micro_enterprise = this.formData.micro_enterprise == "SI" ? true : false;
     this.accounting = this.formData.accounting == "SI" ? true : false;
-    // this.imageProfile = this.enterpriseService.getLogo(this.formData.logo.toString());
+    this.imageProfile = `${environment.apiUrl}/image?path=/${this.formData.logo}`
+    this.formData.authorization == "null" ? this.formData.authorization = "" : null ;
+    this.formData.special_contrib == "null" ? this.formData.special_contrib = "" : null ;
+    this.formData.retention_agent == "null" ? this.formData.retention_agent = "" : null ;
+    this.isNumber(this.formData.codEst) ? this.cod_est = this.formData.codEst : this.cod_est = "0";
+    this.isNumber(this.formData.ptoEmi) ? this.pto_est = this.formData.ptoEmi : this.pto_est = "0";
+    this.addSerie();
   }
+
   changeImage(value) {
     this.imageProfile = defaultImage;
   }
 
   onSubmit() {
+    if(Number.parseInt(this.cod_est) <= 0 || Number.parseInt(this.pto_est) <= 0){
+      this.toast.warn("El codigo de establecimiento y punto de emision debe ser solo numeros enteros positivos");
+      return
+    }
     this.updateEnterprise();
   }
 
   fileEvent(event) {
     let file = (<HTMLInputElement>event.target).files[0];
-    
-    // file.name = file.name.replace(' ','');
     if (file.size > MAXIMO_TAMANIO_BYTES) {
-      this.toast.warn("La imagen seleccionada excede el tamaño permitido. MAX: 1 MB")
+      this.toast.warn(`La imagen seleccionada excede el tamaño permitido. MAX: ${MAXIMO_TAMANIO_BYTES/1000000} MB`)
     } else {
       this.extraerBase64(file).then((image: any) => {
         this.imageProfile = image.base;
@@ -56,26 +66,8 @@ export class EnterpriseComponent implements OnInit {
     }
   }
 
-  resizeBase64Img(base64, newWidth, newHeight) {
-    return new Promise((resolve, reject)=>{
-        var canvas = document.createElement("canvas");
-        canvas.style.width = newWidth.toString()+"px";
-        canvas.style.height = newHeight.toString()+"px";
-        let context = canvas.getContext("2d");
-        let img = document.createElement("img");
-        img.src = base64;
-        img.onload = function () {
-            context.scale(newWidth/img.width,  newHeight/img.height);
-            context.drawImage(img, 0, 0); 
-            resolve(canvas.toDataURL());               
-        }
-    });
-}
-
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
-      const unsafeImg = window.URL.createObjectURL($event);
-      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
       const reader = new FileReader();
       reader.readAsDataURL($event);
       reader.onload = () => {
@@ -97,10 +89,8 @@ export class EnterpriseComponent implements OnInit {
   updateEnterprise() {
     this.loader = true;
     this.enterpriseService.updateEnterprise(this.formData).subscribe(res => {
-      console.log(res);
       if (res.ok) {
         this.formData = res.body;
-        console.log(res.body);
         this.loader = false;
         this.toast.ok(res.message);
       }
@@ -127,13 +117,34 @@ export class EnterpriseComponent implements OnInit {
     }
   }
   
-  onInputCode(value: string) {
-    this.cod_est = value;
-    this.cod_serie = `${this.cod_est}-${this.pto_est}`;
+  onInputCode(value) {
+    this.isNumber(value)? this.cod_est = value : this.cod_est = "0";
+    this.addSerie();
   }
-  onInputPto(value: string) {
-    this.pto_est = value;
-    this.cod_serie = `${this.cod_est}-${this.pto_est}`;
+  onInputPto(value) {
+    this.isNumber(value)? this.pto_est = value : this.pto_est = "0";
+    this.addSerie();
+  }
+
+  addSerie(){
+    this.cod_serie = this.addZero(Number.parseInt(this.cod_est), 3)+"-"+this.addZero(Number.parseInt(this.pto_est), 3);
+  }
+
+  isNumber(value):boolean{
+    return !isNaN(parseFloat(value)) && isFinite(value);
+  }
+
+  numberOnly(event):boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
+  addZero(number: number, limit: number):string {
+    let lenght = number.toString().length;
+    return `${"0".repeat(limit-lenght)}${number}`
   }
 
   initFormData() {

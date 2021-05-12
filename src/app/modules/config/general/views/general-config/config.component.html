@@ -50,7 +50,7 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" (change)="onCheckTest(!$event.target.checked)">
                                 <label class="form-check-label" for="exampleRadios2">
                                   PRODUCCIÓN
                                 </label>
@@ -61,11 +61,11 @@
                     <div class="row g-2">
                         <div class="div col-6 col-md-6">
                             <label for="sign" class="form-label">Firma electrónica en formato p12</label>
-                            <input type="file" accept=".p12" name="sign" id="sign" class="form-control" [ngModel]="formData.cfdi_sign" (change)="onSelectFile($event)" required>
+                            <input type="file" accept=".p12" name="sign" id="sign" class="form-control" (change)="onSelectFile($event)" required>
                         </div>
                         <div class="div col-6 col-md-6">
                             <label for="cfdi_sign_expire" class="form-label">Fecha de expiración de la firma:</label>
-                            <input type="date" name="cfdi_sign_expire" id="cfdi_sign_expire" class="form-control" value="formData.cfdi_sign_expire" [ngModel]="formData.cfdi_sign_expire" required>
+                            <input type="date" name="cfdi_sign_expire" id="cfdi_sign_expire" class="form-control" [value]="formData.cfdi_sign_expire" [(ngModel)]="formData.cfdi_sign_expire" required>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -75,7 +75,7 @@
                                 <input type="text" id="product_name" [(ngModel)]="formData.name" name="product_name" class="form-control" required>
                             </div> -->
                             <label for="cfdi_business_key" class="form-label">Clave empresarial</label>
-                            <input [type]="type" name="cfdi_business_key" id="cfdi_business_key" maxlength="8" minlength="8" value="formData.cfdi_business_key" [ngModel]="formData.cfdi_business_key" class="form-control" required>
+                            <input [type]="type" name="cfdi_business_key" id="cfdi_business_key" maxlength="8" minlength="8" value="formData.cfdi_business_key" [(ngModel)]="formData.cfdi_business_key" class="form-control" required>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="flexCheckDefault" (change)="onChangeCheck($event.target.checked)">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -85,9 +85,9 @@
                         </div>
                         <div class="div col-6 col-md-6">
                             <label for="cfdi_sign_pw" class="form-label">Clave de firma electrónica</label>
-                            <input [type]="type" name="cfdi_sign_pw" id="cfdi_sign_pw" [ngModel]="formData.cfdi_sign_pw" value="formData.cfdi_sign_pw" class="form-control" required>
+                            <input [type]="type" name="cfdi_sign_pw" id="cfdi_sign_pw" [(ngModel)]="formData.cfdi_sign_pw" value="formData.cfdi_sign_pw" class="form-control" required>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" (change)="onChangeCheck($event.target.checked)">
+                                <input class="form-check-input" type="checkbox" (change)="onChangeCheck($event.target.checked)">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Mostrar contraseña
                                 </label>
@@ -106,7 +106,7 @@
 
                         <div class="div col-6 col-md-6">
                             <label for="cdfi_wait" class="form-label">Segundos (Tiempo de espera SRI):</label>
-                            <input type="number" name="cdfi_wait" id="cdfi_wait" class="form-control" [ngModel]="formData.cdfi_wait" value="formData.cdfi_wait" min="3" required>
+                            <input type="number" name="cdfi_wait" id="cdfi_wait" class="form-control" [(ngModel)]="formData.cdfi_wait" value="formData.cdfi_wait" min="3" required>
                         </div>
                     </div>
                     <div class="row g-2 mt-2">

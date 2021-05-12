@@ -26,7 +26,7 @@ export class EditPersonComponent implements OnInit {
         this.person = res.body;
       }
     }, error => {
-      console.log(error);
+      // console.log(error);
     })
   }
 

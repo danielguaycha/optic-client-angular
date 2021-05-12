@@ -42,7 +42,7 @@ export class EnterpriseService {
   }
 
   getLogo(logo: string): Observable<any>{
-    return this.http.get(`/image?path=logos/${logo}`);
+    return this.http.get(`image?path=/${logo}`);
     // return `${environment.url}/img/logo/${logo}`
   }
 }

@@ -41,11 +41,9 @@ export class ConfigService {
   }
 
   saveConfg(data: ConfigModel): Observable<any> {
-    console.log(data);
     let formData = new FormData();
     formData.append('iva', data.iva.toString());
     formData.append('decimals', data.decimals.toString());
-    // formData.append('cfdi_sign', data.cfdi_sign);
     formData.append('cfdi_sign_expire', data.cfdi_sign_expire);
     formData.append('cfdi_business_key', data.cfdi_business_key);
     formData.append('cfdi_env', data.cfdi_env.toString());
@@ -57,6 +55,6 @@ export class ConfigService {
       let nameFaile = data.cfdi_sign.name.replace(" ","");
       formData.append('cfdi_sign', data.cfdi_sign, nameFaile);
     }
-    return this.http.post('enterprise/config', data);
+    return this.http.post('enterprise/config', formData);
   }
 }

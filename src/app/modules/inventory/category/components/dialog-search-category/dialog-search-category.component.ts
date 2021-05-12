@@ -40,7 +40,7 @@ export class DialogSearchCategoryComponent implements OnInit {
       }
     }, error => {
       this.loader = false;
-      console.log(error);
+      // console.log(error);
     })
   }
 
@@ -52,7 +52,7 @@ export class DialogSearchCategoryComponent implements OnInit {
       }
     }, error => {
       this.loader = false;
-      console.log(error);
+      // console.log(error);
     })
   }
 

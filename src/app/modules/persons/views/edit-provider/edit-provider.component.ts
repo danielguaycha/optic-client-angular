@@ -41,9 +41,8 @@ export class EditProviderComponent implements OnInit {
       }else{
         //enviar pagina no encontrada
       }
-      console.log(res);
     }, error => {      
-      console.log(error);
+      // console.log(error);
     })
   }
 

@@ -38,7 +38,7 @@ export class DialogSearchPersonComponent implements OnInit {
       }
     }, error => {
       this.loader = false;
-      console.log(error);
+      // console.log(error);
     })
   }
 

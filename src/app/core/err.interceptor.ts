@@ -25,7 +25,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           if (err.error && err.error.errors) {
             const errObj = err.error.errors;
-            console.log(errObj);
             const text = errObj.join(",");
             return throwError(text);
           }

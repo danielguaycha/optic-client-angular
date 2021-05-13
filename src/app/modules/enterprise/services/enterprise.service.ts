@@ -16,6 +16,9 @@ export class EnterpriseService {
   }
 
   updateEnterprise(formData: EnterpriseModel): Observable<any> {
+formData.authorization == null ? formData.authorization = "" : null; 
+formData.special_contrib == null ? formData.special_contrib = "" : null; 
+formData.retention_agent == null ? formData.retention_agent = "" : null; 
     const form = new FormData();
     form.append('ruc', formData.ruc);
     form.append('name', formData.name);
@@ -37,7 +40,7 @@ export class EnterpriseService {
       nameFaile = nameFaile.replace("_","");
       form.append('logo', formData.logo, nameFaile);
     }
-
+    console.log(formData);
     return this.http.post(`enterprises/${formData.id}`, form);
   }
 

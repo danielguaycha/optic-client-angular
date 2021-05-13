@@ -150,21 +150,21 @@ export class EnterpriseComponent implements OnInit {
   initFormData() {
     this.formData = {
       id: null,
-      ruc: '',
-      name: '',
-      business_name: '',
-      address: '',
+      ruc: "",
+      name: "",
+      business_name: "",
+      address: "",
       logo: null,
-      email: '',
-      authorization: '',
-      special_contrib: '',
-      retention_agent: '',
-      accounting: '',
-      micro_enterprise: '',
-      last_connection: '',
-      ptoEmi: '',
-      codEst: '',
-      addressEst: ''
+      email: "",
+      authorization: "",
+      special_contrib: "",
+      retention_agent: "",
+      accounting: "",
+      micro_enterprise: "",
+      last_connection: "",
+      ptoEmi: "",
+      codEst: "",
+      addressEst: ""
     };
   }
 }

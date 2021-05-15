@@ -3,7 +3,7 @@ import {AuthService} from './modules/auth/services/auth.service';
 import {Store} from '@ngrx/store';
 import {addConfig, addUser} from './modules/auth/store/user.actions';
 import {SecureStorageService} from './modules/auth/services/secure-storage.service';
-
+import script from "./core/sciprts";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,6 +19,10 @@ export class AppComponent {
 
   ngOnInit() {
     this.getUser();
+  }
+
+  ngAfterViewInit() {
+    script();
   }
 
   ngDoCheck() {

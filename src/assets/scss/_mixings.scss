@@ -62,9 +62,3 @@
 @mixin degradado($color1, $color2) {
   background: linear-gradient(to right, $color1 0%, $color2 100%);
 }
-
-
-@mixin plan_color($number){
-  background: map-get($plans, $number);
-  border-bottom: 1px solid darken(map-get($plans, $number), 2);
-}

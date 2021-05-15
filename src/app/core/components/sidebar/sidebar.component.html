@@ -1,0 +1,62 @@
+<aside class="dark">
+  <div class="aside-head">
+    <a href="/" class="logo">
+      <img src="assets/img/logo.svg" alt="Logo">
+    </a>
+  </div>
+  <div class="aside-body">
+    <ul class="aside-menu first">
+      <li class="item-menu">
+        <a href="/" title="Compras" data-name="Compras" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-bag-plus"></i>
+        </a>
+      </li>
+      <li class="item-menu">
+        <a routerLink="/invoice" title="Ventas" data-name="Ventas" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-cart2"></i>
+        </a>
+      </li>
+      <li class="divider"></li>
+      <li class="item-menu xs-hide">
+        <a routerLink="/products" title="Productos" data-name="Productos" class="green" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-archive"></i>
+        </a>
+      </li>
+      <li class="item-menu sm-hide">
+        <a routerLink="/persons" title="Clientes" data-name="Clientes" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-people"></i>
+        </a>
+      </li>
+      <li class="item-menu sm-hide">
+        <a routerLink="/providers" title="Proveedores" data-name="Proveedores" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-person-badge"></i>
+        </a>
+      </li>
+      <li class="divider"></li>
+      <li class="item-menu aside-sub-item">
+        <button title="Documentos Electónicos" class="sub-item-btn" data-name="Doc. Elect"
+                data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-file-earmark-lock"></i></button>
+        <ul class="sub-item grid">
+          <li><a href="#"><i class="bi bi-receipt"></i><span>Facturas</span></a></li>
+          <li><a href="#"><i class="bi bi-receipt"></i><span>Guias de Remision</span></a></li>
+          <li><a href="#"><i class="bi bi-receipt"></i><span>Notas de Credito</span></a></li>
+          <li><a href="#"><i class="bi bi-receipt"></i><span>Notas de Debito</span></a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="aside-menu second">
+      <li class="item-menu">
+        <a href="/" title="Notificaciones" data-name="Alertas" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-bell"></i>
+        </a>
+      </li>
+      <li class="item-menu xs-hide">
+        <a routerLink="/config" title="Config" data-name="Config" data-bs-toggle="tooltip" data-bs-placement="right">
+          <i class="bi bi-gear"></i>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</aside>

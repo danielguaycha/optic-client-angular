@@ -1,13 +1,23 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+
 @import "variables";
 @import "mixings";
-@import "components/dropdown_mutilevel";
+@import "utils/helpers";
 @import "~bootstrap/scss/bootstrap";
-//Imports
+
+// components
 @import "./components/btn";
 @import "./components/login";
 @import "./components/form";
 @import "./components/alert";
 @import "components/table";
+@import "components/table";
 @import "components/main";
 @import "components/with_loader";
 
+//Core
+@import "./core/navbar";
+@import "./core/sidebar";
+@import "./core/section";
+@import "./core/forms";

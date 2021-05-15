@@ -63,6 +63,7 @@ import { ListProviderComponent } from './modules/persons/views/list-provider/lis
 import { AddProviderComponent } from './modules/persons/views/add-provider/add-provider.component';
 import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
 import { ConfigEnterpriseComponent } from './modules/config/general/views/general-config/config.component';
+import { SidebarComponent } from './core/components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { ConfigEnterpriseComponent } from './modules/config/general/views/genera
     AddProviderComponent,
     EditProviderComponent,
     ConfigEnterpriseComponent,
+    SidebarComponent,
 
   ],
   imports: [

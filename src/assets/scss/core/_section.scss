@@ -1,0 +1,18 @@
+main {
+    background: $body-bg;
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    section.body {
+        padding: 5px 0;
+    }
+    @include tablet {
+        left: $asideWidth;
+        width: calc(100% - #{$asideWidth});
+        section.body {
+            padding: 10px 0;
+        }
+    }
+}
+
+

@@ -28,15 +28,16 @@
                             "src/assets/*"
                         ],
                         "styles": [
-                            "src/assets/scss/app.scss",
-                            "./node_modules/font-awesome/css/font-awesome.css"
+                            "src/assets/scss/app.scss"
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
                                 "./node_modules/bootstrap/scss"
                             ]
                         },
-                        "scripts": [],
+                        "scripts": [
+
+                        ],
                         "allowedCommonJsDependencies": [
                           "moment/locale/es"
                         ]

@@ -1,82 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">SysVentas</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <!--Registro y control-->
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">Registro y Control</a>
-                    <ul class="dropdown-menu dropdown-menu-dark drop">
-                        <!--Clientes-->
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#customer"/></svg>Clientes</a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
-                                <li><a class="dropdown-item" routerLink="/persons">Listar Clientes</a></li>
-                                <li><a class="dropdown-item" routerLink="/persons/add">Nuevo Cliente</a></li>
-                            </ul>
-                        </li>
-                        <!--Proveedores-->
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#group"/></svg>Proveedores</a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
-                                <li><a class="dropdown-item" routerLink="/providers">Listar Proveedores</a></li>
-                                <li><a class="dropdown-item" routerLink="/providers/add">Nuevo Proveedor</a></li>
-                            </ul>
-                        </li>
-                        <!--Inventario-->
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#inventory"/></svg>Inventario</a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
-                                <li><a class="dropdown-item" routerLink="/products/add">Nuevo Producto</a></li>
-                                <li><a class="dropdown-item" routerLink="/products">Listar Productos</a></li>
-                                <li class="dropdown-divider dark"></li>
-                                <li><a class="dropdown-item" routerLink="/inventory/adjust">Ajuste de Inventario</a></li>
-                                <li class="dropdown-divider dark"></li>
-                                <li><a class="dropdown-item" routerLink="/products/categories">Categorías</a></li>
-                                <li class="dropdown-divider"></li>
-                            </ul>
-                        </li>
-                        <!--Compras-->
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#shopping-cart"/></svg>Compras</a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
-                                <li><a class="dropdown-item" href="#">Nueva Compra</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar Compra</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar Compra</a></li>
-                            </ul>
-                        </li>
-                        <!--Ventas-->
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-submenu-toggle dropdown-toggle-arrow" href="#"><svg class="icon"><use xlink:href="#bill-2"/></svg>Ventas</a>
-                            <ul class="dropdown-menu dropdown-menu-dark dropdown-submenu shadow">
-                                <li><a class="dropdown-item" routerLink="/invoice">Nueva Venta</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar Venta</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar Venta</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">Configuración</a>
-                    <ul class="dropdown-menu dropdown-menu-dark drop">
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" routerLink="/enterprise">Perfil de empresa</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" routerLink="/config">Configuración General</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" routerLink="/users">Usuarios</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a class="dropdown-item" routerLink="/roles/add">Roles y Permisos</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+<nav>
+  <ul class="nav-menu" id="nav-menu">
+    <li *ngFor="let m of menu" class="menu-item">
+      <a href="{{ m.name }}" class="open-menu-item">{{ m.name }}</a>
+      <ul class="menu" >
+        <li *ngFor="let item of m.items" [class]="item.submenu && item.submenu.length > 0 ? 'submenu-content': ''">
+          <a [routerLink]="item.to"
+             [class]="(item.submenu && item.submenu.length > 0) ? 'submenu-content-open': ''"><i [class]=" (item.prefixIcon ? item.prefixIcon : 'fa')+' '+ (item.icon ? item.icon : '')"></i>{{ item.name }}</a>
+          <ul class="submenu" *ngIf="item.submenu && item.submenu.length > 0">
+            <li class="submenu-item" *ngFor="let sub of item.submenu">
+              <a [routerLink]="sub.to"><i [class]=" (sub.prefixIcon ? sub.prefixIcon : 'fa')+' '+ (sub.icon ? sub.icon : '')"></i>{{ sub.name}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="brand">
+    <button class="btn" id="btnMenu"><i class="bi-list"></i></button>
+    <img src="assets/img/logo.svg" alt="Logo Empresa">
+    <span>Clientes</span>
+  </div>
+  <div>
+    <ul>
+      <li>
+        <a href="#" class="profile" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="mdo" height="30px" class="rounded-circle">
+        </a>
+        <ul class="dropdown-menu text-small shadow profile-ul" aria-labelledby="dropdownUser3">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="overlay">
+    <button class="close"><i class="bi bi-x-lg"></i></button>
+  </div>
 </nav>

@@ -1,0 +1,291 @@
+$item-bg-hover-dark: rgba($primary, .5);
+$aside-color: dark_light(darken($dark, 4), white);
+@mixin item-colors ($map) {
+    @each $color,
+    $value in $map {
+        &.#{$color} {
+            color: lighten($value, 15) !important;
+            &:hover {
+                color: white !important;
+                background: $value !important;
+            }
+            &:hover i {
+                color: white !important;
+            }
+        }
+    }
+}
+
+// sass
+aside {
+    background: $aside-color;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 900;
+    height: 55px;
+    @include tablet {
+        width: $asideWidth;
+        top: 0;
+        height: 100vh;
+    }
+
+    ul li a {
+         @include item-colors($colors);
+         @include item-colors($theme-colors);
+    }
+
+    ul.aside-menu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 1.4em;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        &.first {
+            flex: 2;
+            @include mobil-only {
+                flex: 3;
+            }
+        }
+        &.second {
+            flex: 1;
+        }
+        li.divider {
+            display: none;
+            background: $gray-700;
+            width: 50%;
+            height: .7px;
+            margin: 5px auto;
+            @include tablet {
+                display: block;
+            }
+        }
+        li.item-menu {
+            position: relative;
+            margin: .15rem 0;
+            width: 100%;
+            > a, >button {
+                color: dark_light($light, initial);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                transition: all 210ms ease-in;
+                padding: .1rem 0;
+                width: 100%;
+                height: 100%;
+                text-decoration: none;
+                font-size: .8em;
+                &::after {
+                    content: attr(data-name);
+                    font-size: .6em;
+                }
+                &:hover {
+                    background: dark_light($item-bg-hover-dark, lighten($color: $primary, $amount: 45));
+                }
+            }
+            >button {
+                width: 100%;
+                background: transparent;
+                border: none;
+            }
+            @include tablet {
+                >a, >button {
+                    padding: 10px 5px;
+                    font-size: .9em;
+                    height: initial;
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &.sm-hide {
+                display: none;
+                @include tablet {
+                    display: block;
+                }
+            }
+            &.xs-hide {
+                @include mobil-only {
+                    display: none;
+                }
+            }
+        }
+
+        @include tablet {
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+            &.first, &.second {
+                flex: initial;
+            }
+        }
+    }
+
+    .aside-sub-item {
+         ul.sub-item {
+             padding: 8px;
+             position: absolute;
+             left: calc(100% + 6px);
+             top: calc(0% - 8px);
+             background: darken($dark, 5);
+             width: max-content;
+             list-style: none;
+             transform: translateY(300px);
+             @include tablet {
+                 transform: translateX(calc(-100% - #{$asideWidth}));
+             }
+             opacity: 0;
+             transition: transform 2ms ease-in;
+             &.list {
+                 display: flex;
+                 flex-direction: column;
+                 li {
+                     display: contents;
+                     a {
+                        padding: 5px 10px;
+                        font-size: .7em !important;
+                        color: rgba($color: white, $alpha: .65);
+                        text-decoration: none;
+                        &:hover {
+                            color: rgba($color: white, $alpha: .8);
+                        }
+                        i {
+                            display: none;
+                        }
+                     }
+                 }
+             }
+
+             &.grid {
+                display: grid;
+                grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+                column-gap: 10px;
+                li {
+                     a {
+                         padding: 8px;
+                         display: flex;
+                         flex-direction: column;
+                         justify-content: center;
+                         align-items: center;
+                         color: rgba($color: white, $alpha: .65);
+                         border-radius: 2px;
+                         text-decoration: none;
+                         transition: all .2s ease;
+
+                         i {
+                             transition: all .2s ease;
+                             font-size: .95em;
+                         }
+
+                         span {
+                             font-size: 12px;
+                             font-weight: 400;
+                             display: block;
+                         }
+
+                         &:hover {
+                             background: $dark;
+                             color: rgba($color: white, $alpha: .8);
+
+                             i {
+                                 color: $primary;
+                             }
+                         }
+                     }
+                }
+             }
+
+             &::before {
+               position: absolute;
+               content: "";
+               background-image: url("data:image/svg+xml,<svg width='15' viewBox='0 0 16 16' fill='%23#{str_replace(darken($dark, 5)+'', '#', '')}' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z' clip-rule='evenodd'/></svg>");
+               background-position: top;
+               width: 1rem;
+               left: -8.6px;
+               top: 22px;
+               height: 15px;
+               background-repeat: no-repeat;
+               font-size: 20px;
+               background-size: 16px;
+             }
+         }
+         &.show {
+
+             background: $item-bg-hover-dark;
+
+             >a, >button {
+                 color: white !important;
+             }
+
+             ul.sub-item {
+                 opacity: 1;
+                 transform: initial;
+             }
+         }
+    }  
+
+    .aside-head {
+        display: none;
+        .logo {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: $navHeight;
+            margin-top: 1rem;
+            img {
+                margin-top: 4px;
+                width: 23px;
+            }
+        }
+        @include tablet {
+            display: initial;
+        }
+    }
+
+    .aside-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+        @include tablet {
+            height: calc(100% - #{$navHeight} );
+            padding-top: 2rem;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+    }
+
+
+
+    // aside dark
+    &.dark {
+        background: darken($dark, 4);
+        ul {
+            li.item-menu {
+                > a, >button {
+                    color: $light;
+                    &:hover {
+                        color: white;
+                        background: $item-bg-hover-dark;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+
+.show-md {
+    display: none;
+    @include tablet-only {
+        display: block;
+    }
+}

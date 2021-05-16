@@ -46,6 +46,7 @@ export class ListPersonComponent implements OnInit {
   deletePerson(person) {
     this.confirm.confirm(`¿Está seguro que desea eliminar la persona ${person.name}?`, () => {
       this.personService.deletePerson(person.id).subscribe(res => {
+        console.log(res);
         if (res.ok) {
           const index = this.persons.indexOf(person, 0);
           if (index > -1) {

@@ -13,6 +13,11 @@ export class ConfigService {
 
   public iva: number
   public decimals: number;
+  public cfdi_env: number;
+  public cfdi_send_mail: number;
+  public cfdi_sign_entity: string;
+  public cfdi_sign_expire: string;
+  public cfdi_business_key: string;
   public config: any;
   constructor(private storage: SecureStorageService, private http: HttpClient, private toast: ToastService) {
     const rawCfg = this.storage.get('config');
@@ -20,6 +25,11 @@ export class ConfigService {
       this.config = JSON.parse(rawCfg);
       this.iva = this.config.iva;
       this.decimals = this.config.decimals;
+      this.cfdi_env = this.config.cfdi_env;
+      this.cfdi_send_mail = this.config.cfdi_send_mail;
+      this.cfdi_sign_entity = this.config.cfdi_sign_entity;
+      this.cfdi_sign_expire = this.config.cfdi_sign_expire;
+      this.cfdi_business_key = this.config.cfdi_business_key;
     } else {
       this.iva = 12;
       this.decimals = 2
@@ -51,19 +61,20 @@ export class ConfigService {
 
   saveConfg(data: ConfigModel): Observable<any> {
     let formData = new FormData();
-    formData.append('iva', data.iva.toString());
-    formData.append('decimals', data.decimals.toString());
-    formData.append('cfdi_sign_expire', data.cfdi_sign_expire);
-    formData.append('cfdi_business_key', data.cfdi_business_key);
-    formData.append('cfdi_env', data.cfdi_env.toString());
-    formData.append('cfdi_send_mail', data.cfdi_send_mail.toString());
-    formData.append('cdfi_wait', data.cdfi_wait.toString());
-    formData.append('cfdi_sign_entity', data.cfdi_sign_entity);
+    data.iva != null ? formData.append('iva', data.iva.toString()) : null;
+    data.decimals != null ? formData.append('decimals', data.decimals.toString()) : null;
+    data.cfdi_sign_expire != null ? formData.append('cfdi_sign_expire', data.cfdi_sign_expire) : null;
+    data.cfdi_business_key != null ? formData.append('cfdi_business_key', data.cfdi_business_key): null;
+    data.cfdi_env != null ? formData.append('cfdi_env', data.cfdi_env.toString()): null;
+    data.cfdi_send_mail != null ? formData.append('cfdi_send_mail', data.cfdi_send_mail.toString()): null;
+    data.cdfi_wait != null ? formData.append('cdfi_wait', data.cdfi_wait.toString()): null;
+    data.cfdi_sign_entity != null ? formData.append('cfdi_sign_entity', data.cfdi_sign_entity): null;
 
     if(data.cfdi_sign != null){
       let nameFaile = data.cfdi_sign.name.replace(" ","");
       formData.append('cfdi_sign', data.cfdi_sign, nameFaile);
     }
+    console.log(formData);
     return this.http.post('enterprise/config', formData);
   }
 }

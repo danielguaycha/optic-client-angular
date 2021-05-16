@@ -15,23 +15,11 @@ export class FrmPersonComponent implements OnInit {
 
   public loader: boolean = false;
   constructor(private personService : PersonService, private toast: ToastService) {
-    this.formData = {
-      doc_type: 'CI',
-      doc: '',
-      name: '',
-      business_name: '',
-      is_provider: this.provider ? 'SI' : 'NO',
-      birthday: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      occupation: '',
-      facebook: ''
-    };
+    this.initData();
   }
 
   ngOnInit(): void {
+    this.formData.is_provider = this.provider ? 'SI' : 'NO';
   }
 
   onSubmit() {
@@ -55,13 +43,30 @@ export class FrmPersonComponent implements OnInit {
   storePerson() {
     this.personService.savePerson(this.formData).subscribe(res => {
       if (res.ok) {
-        this.create.emit(res.body);
         this.toast.ok(res.message);
+        this.initData();
+        this.create.emit(res.body);
       }
       this.loader = false;
     }, error => {
       this.loader = false;
       this.toast.err(error);
     })
+  }
+
+  initData(){
+    this.formData = {
+      doc_type: 'CI',
+      doc: '',
+      name: '',
+      business_name: '',
+      birthday: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      occupation: '',
+      facebook: ''
+    };
   }
 }

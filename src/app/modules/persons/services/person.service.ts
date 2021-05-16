@@ -27,7 +27,7 @@ export class PersonService {
   getPerson(id: string, provider: boolean = false) : Observable<any> {
     let url = `person/${id}?`;
     if (provider) {
-      url+=`providers=true`;
+      url+=`provider=true`;
     }
     return this.http.get(url);
   }

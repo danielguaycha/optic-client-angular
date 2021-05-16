@@ -18,15 +18,34 @@ const NOT_SEND_MAIL = 0;
 export class ConfigEnterpriseComponent implements OnInit {
   @Input() formData!: ConfigModel;
   public loader: boolean = false;
+  public send_mail_flag: boolean = false;
+  public env_prod_flag: boolean = false;
   public type: string = "password";
+  public newdate = new Date();
   constructor(private storage: SecureStorageService, private configService: ConfigService, private toast: ToastService) {
     this.formData = {
-      iva : configService.iva,
-      decimals: configService.decimals
+      // iva : configService.iva,
+      // decimals: configService.decimals,
+      // cfdi_env: configService.cfdi_env,
+      // cfdi_send_mail: configService.cfdi_send_mail,
+      // cfdi_sign_entity: configService.cfdi_sign_entity,
+      // cfdi_sign_expire: configService.cfdi_sign_expire,
+      // cfdi_business_key: configService.cfdi_business_key,      
     };
   }
-  ngOnInit(): void { 
-    this.initFormData();
+  ngOnInit(): void {
+    this.formData.iva = this.configService.iva;
+    this.formData.decimals = this.configService.decimals;
+    this.formData.cfdi_env = this.configService.cfdi_env;
+    this.formData.cfdi_send_mail = this.configService.cfdi_send_mail;
+    this.formData.cfdi_sign_entity = this.configService.cfdi_sign_entity;
+    this.formData.cfdi_sign_expire = this.configService.cfdi_sign_expire;
+    this.formData.cfdi_business_key = this.configService.cfdi_business_key;      
+    this.formData.cfdi_env == ENV_PRUEBAS ? this.env_prod_flag = true : this.env_prod_flag = false;
+    this.formData.cfdi_send_mail == SEND_MAIL ? this.send_mail_flag = true : this.send_mail_flag = false;
+    this.formData.cfdi_sign_expire = new Date(this.formData.cfdi_sign_expire).toISOString().split('T')[0];
+
+    // this.initFormData();
   }
 
   onSelectFile(event) {
@@ -67,9 +86,11 @@ export class ConfigEnterpriseComponent implements OnInit {
 
   onCheckTest(isChecked: boolean){
     isChecked ? this.formData.cfdi_env = ENV_PRUEBAS : this.formData.cfdi_env = ENV_PRODUCCION;
+    this.env_prod_flag = isChecked;
   }
   onCheckSendMail(isChecked: boolean){
     isChecked ? this.formData.cfdi_send_mail = SEND_MAIL : this.formData.cfdi_send_mail= NOT_SEND_MAIL;
+    this.send_mail_flag = isChecked;
   }
 
   initFormData() {

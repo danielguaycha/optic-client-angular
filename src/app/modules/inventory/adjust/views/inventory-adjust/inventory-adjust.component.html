@@ -2,7 +2,8 @@
   <div class="card-body">
     <div class="row">
       <div class="col">
-        <app-select-product #selectArticle [showCalc]="false" (onSelect)="onAddArticle($event)"></app-select-product>
+        <app-select-product #selectArticle [showCalc]="false" [validateStock]="false"
+                            (onSelect)="onAddArticle($event)"></app-select-product>
       </div>
     </div>
     <label class="label-title">Detalle de artículos</label>

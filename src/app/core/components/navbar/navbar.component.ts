@@ -1,4 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../../environments/environment';
+import {select, State, Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {take} from 'rxjs/operators';
+import {AppState} from '../../../modules/auth/store/user.reducer';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,8 +12,11 @@ import {Component, OnInit} from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   public menu: Array<any>;
+  public appName: string;
 
-  constructor() {
+  constructor(private store: Store<{data: any}>) {
+    this.configMenu();
+
     this.menu = [
       {
         name: "Registro y control",
@@ -85,22 +93,41 @@ export class NavbarComponent implements OnInit {
         items: [
           {
             name: "Perfil de empresa",
-            to: "/enterprise"
+            to: "/enterprise",
+            icon: 'fa-university'
           },
           {
             name: "Configuraciones del sistema",
-            to: "/config"
+            to: "/config",
+            icon: "fa-cog"
+          },
+          {
+            name: "Roles y permisos",
+            to: "/roles/add",
+            icon: "fa-users"
+          },
+          {
+            name: "Usuarios",
+            to: "users",
+            icon: "fa-user"
           }
         ]
       }
     ];
+    //this.appName = environment.appName;
   }
 
-  ngOnInit(): void {
-    this.configMenu();
+  ngOnInit() {
+
   }
 
   configMenu() {
-
+     this.store.select("data").subscribe(store => {
+       if(store.module !== this.appName) {
+         this.appName = store.module;
+       } else {
+         console.log('diferente ' + store.module);
+       }
+     });
   }
 }

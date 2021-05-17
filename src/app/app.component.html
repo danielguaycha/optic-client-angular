@@ -1,5 +1,5 @@
 <ngx-loading-bar color="#198754" height="1.2px" [includeSpinner]="false"></ngx-loading-bar>
-<app-sidebar></app-sidebar>
+<app-sidebar *ngIf="auth"></app-sidebar>
 <main>
   <app-navbar *ngIf="auth"></app-navbar>
   <section class="body">

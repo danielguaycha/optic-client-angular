@@ -4,7 +4,7 @@ main {
     position: relative;
     height: 100vh;
     section.body {
-        padding: 5px 0;
+        padding: 5px 0 $navHeight+20px 5px;
     }
     @include tablet {
         left: $asideWidth;

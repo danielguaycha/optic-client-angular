@@ -16,9 +16,9 @@ export class EnterpriseService {
   }
 
   updateEnterprise(formData: EnterpriseModel): Observable<any> {
-formData.authorization == null ? formData.authorization = "" : null; 
-formData.special_contrib == null ? formData.special_contrib = "" : null; 
-formData.retention_agent == null ? formData.retention_agent = "" : null; 
+formData.authorization == null ? formData.authorization = "" : null;
+formData.special_contrib == null ? formData.special_contrib = "" : null;
+formData.retention_agent == null ? formData.retention_agent = "" : null;
     const form = new FormData();
     form.append('ruc', formData.ruc);
     form.append('name', formData.name);
@@ -35,12 +35,11 @@ formData.retention_agent == null ? formData.retention_agent = "" : null;
     form.append('addressEst', formData.addressEst);
     form.append('ptoEmi', formData.ptoEmi);
 
-    if(typeof(formData.logo) != "string"){
-      let nameFaile = formData.logo.name.replace(" ","");
-      nameFaile = nameFaile.replace("_","");
-      form.append('logo', formData.logo, nameFaile);
+    if (formData.logo && typeof(formData.logo) != "string") {
+        let nameFaile = formData.logo.name.replace(" ","");
+        nameFaile = nameFaile.replace("_","");
+        form.append('logo', formData.logo, nameFaile);
     }
-    console.log(formData);
     return this.http.post(`enterprises/${formData.id}`, form);
   }
 

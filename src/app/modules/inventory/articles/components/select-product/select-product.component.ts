@@ -15,13 +15,13 @@ export class SelectProductComponent implements OnInit {
 
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   @Input() showCalc: boolean = true;
+  @Input() validateStock: boolean = true;
 
   code: string
   selectProduct: Articles;
   selectProductCalc: any;
   constructor(private articleService: ArticleService, public validate: ValidateService,
               private cfg: ConfigService, private toast: ToastService) {
-
     this.initComponents()
   }
 
@@ -65,7 +65,7 @@ export class SelectProductComponent implements OnInit {
     this.articleService.getProduct(this.code, true).subscribe(res => {
       if (res.ok && res.body) {
         this.selectProduct = res.body;
-        this.selectProduct.pvp = this.cfg.toFloat(this.selectProduct.pvp);
+        this.selectProduct.pvp = this.validate.round(this.selectProduct.pvp);
         const qty = document.getElementById('qty');
         qty.focus();
       } else {
@@ -75,14 +75,16 @@ export class SelectProductComponent implements OnInit {
   }
 
   calc() {
-
+    console.log(this.selectProduct);
     if(this.selectProductCalc.qty < 0 ){
       this.toast.warn(`No puede ingresar cantidades negativas`,"AVISO");
-      return; 
+      return;
     }
-    if( (this.selectProductCalc.qty > this.selectProduct.stock) && this.selectProduct.name.length > 0){
-      this.toast.warn(`La cantidad ingresada en stock es superior a la existencia en bodega. Cantiad maxima: ${this.selectProduct.stock}`,"AVISO");
-      return; 
+    if(this.validateStock && (this.selectProduct.type === 'PRODUCTO')
+        && (this.selectProductCalc.qty > this.selectProduct.stock)
+        && this.selectProduct.name.length > 0){
+      this.toast.warn(`La cantidad ingresada en stock es superior a la existencia en bodega. Cantidad maxima: ${this.selectProduct.stock}`,"AVISO");
+      return;
     }
 
     if (!this.showCalc) return; // en caso de solo querer seleccionar el producto
@@ -97,8 +99,7 @@ export class SelectProductComponent implements OnInit {
     let total = 0;
     let totalIva = 0;
     let desc = 0;
-
-    if (qty > this.selectProduct.stock) {
+    if (qty > this.selectProduct.stock && this.selectProduct.type === 'PRODUCTO' && this.validateStock) {
       this.toast.warn(`El cantidad ingresada (${qty}) supera el stock (${this.selectProduct.stock})`);
       this.selectProductCalc.qty = this.selectProduct.stock;
     }

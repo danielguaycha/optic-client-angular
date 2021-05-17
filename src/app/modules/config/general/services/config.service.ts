@@ -19,7 +19,10 @@ export class ConfigService {
   public cfdi_sign_expire: string;
   public cfdi_business_key: string;
   public config: any;
-  constructor(private storage: SecureStorageService, private http: HttpClient, private toast: ToastService) {
+  constructor(private storage: SecureStorageService,
+              private http: HttpClient,
+              private toast: ToastService) {
+
     const rawCfg = this.storage.get('config');
     if (rawCfg && rawCfg !== 'null') {
       this.config = JSON.parse(rawCfg);
@@ -67,7 +70,7 @@ export class ConfigService {
     data.cfdi_business_key != null ? formData.append('cfdi_business_key', data.cfdi_business_key): null;
     data.cfdi_env != null ? formData.append('cfdi_env', data.cfdi_env.toString()): null;
     data.cfdi_send_mail != null ? formData.append('cfdi_send_mail', data.cfdi_send_mail.toString()): null;
-    data.cdfi_wait != null ? formData.append('cdfi_wait', data.cdfi_wait.toString()): null;
+    data.cfdi_wait != null ? formData.append('cdfi_wait', data.cfdi_wait.toString()): null;
     data.cfdi_sign_entity != null ? formData.append('cfdi_sign_entity', data.cfdi_sign_entity): null;
 
     if(data.cfdi_sign != null){
@@ -76,5 +79,9 @@ export class ConfigService {
     }
     console.log(formData);
     return this.http.post('enterprise/config', formData);
+  }
+
+  getConfig() : Observable<any> {
+    return this.http.get('enterprise/config');
   }
 }

@@ -8,7 +8,10 @@ import {ConfigService} from '../../../config/general/services/config.service';
 import typePayment from '../../models/type.payment';
 import {MethodPaymentComponent} from '../../components/method-payment/method-payment.component';
 import {InvoiceService} from '../../services/invoice.service';
+import {Store} from '@ngrx/store';
+import {addTitle, addUser} from '../../../auth/store/user.actions';
 
+// @ts-ignore
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
@@ -28,12 +31,15 @@ export class CreateInvoiceComponent implements OnInit {
   typePayments: Array<any> = [];
   loader: boolean = false;
   constructor(private toast: ToastService, public validate: ValidateService,
-              public cfg: ConfigService, private invService: InvoiceService) {
+              public cfg: ConfigService, private invService: InvoiceService, private store: Store) {
     this.initComponents();
     this.typePayments = typePayment;
+    this.store.dispatch(addTitle({ title: "Ventas"}));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   submit(methodsPayments) {
     if (methodsPayments.length <= 0) {
@@ -89,7 +95,7 @@ export class CreateInvoiceComponent implements OnInit {
 
   //events
   onAddArticle(article: any) {
-    if (article.qty > article.stock) { // verify stock
+    if (article.qty > article.stock && article.type === 'PRODUCTO') { // verify stock
       this.toast.warn(`La cantidad ingresada (${article.qty}) es mayor al stock (${article.stock}), articulo (Cod=${article.code}) `);
       return;
     }

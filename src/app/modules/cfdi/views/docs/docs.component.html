@@ -1,0 +1,105 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <label for="doc" class="form-label">Tipo de Comprobante</label>
+        <select name="doc" id="doc" class="form-select" [(ngModel)]="model.docType">
+          <option value="1">Factura de Venta</option>
+          <option value="2" disabled>Notas de Crédito</option>
+          <option value="3" disabled>Notas de Débito</option>
+          <option value="4" disabled>Comprobante retención</option>
+          <option value="5" disabled>Guía de remisión</option>
+          <option value="6" disabled>Liquidación de compras</option>
+        </select>
+      </div>
+      <div class="col-1">
+        <label for="docId" class="form-label">ID Doc.</label>
+        <input type="text" [(ngModel)]="model.docId" name="docId" id="docId" class="form-control">
+      </div>
+      <div class="col">
+        <label for="ruc" class="form-label">RUC/CI</label>
+        <input type="text" [(ngModel)]="model.ruc" name="ruc" id="ruc" class="form-control">
+      </div>
+      <div class="col-3">
+        <label class="form-label">Filtros por fechas: </label>
+        <div class="input-group">
+          <input type="date" [(ngModel)]="model.dateInit" name="dateInit" class="form-control">
+          <input type="date" [(ngModel)]="model.dateEnd" name="dateEnd" class="form-control">
+        </div>
+      </div>
+      <div class="col">
+        <label for="docStatus" class="form-label">Estado</label>
+        <select name="docStatus" id="docStatus" class="form-select" [(ngModel)]="model.docStatus">
+          <option value="0">Ver todos</option>
+          <option value="1">Enviados</option>
+          <option value="2">No enviados</option>
+          <option value="3">Autorizados</option>
+          <option value="4">No autorizados</option>
+        </select>
+      </div>
+      <div class="col-1 d-flex flex-column justify-content-end">
+        <button class="btn btn-success" (click)="getDocs()"><i class="fa fa-share"></i></button>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th></th>
+            <th>Número</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Cliente/Proveedor</th>
+            <th>RUC/CI</th>
+            <th>Total</th>
+            <th>Clave Acceso</th>
+            <th>Estado</th>
+            <th class="text-center"><i class="fa fa-cogs"></i></th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of docs">
+              <td style="width: 1%">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="">
+                </div>
+              </td>
+              <td>{{ d.number }}</td>
+              <td>{{ d.type_ }}</td>
+              <td>{{ d.date }}</td>
+              <td>{{ d.person_name }}</td>
+              <td>{{ d.person_doc }}</td>
+              <td>{{ d.total }}</td>
+              <td><small><code>{{ d.key_access }}</code></small></td>
+              <td>{{ d.sri_status }}</td>
+              <td>
+                <button class="btn btn-sm text-primary" (click)="authInvoice(d.id)"><i class="fa fa-paper-plane"></i></button>
+                <button class="btn btn-sm text-secondary" (click)="verifyInvoice(d.id)"><i class="fas fa-exchange-alt"></i></button>
+                <button class="btn btn-sm text-danger"><i class="fa fa-envelope"></i></button>
+                <button class="btn btn-sm text-warning"><i class="fa fa-file"></i></button>
+                <button class="btn btn-sm text-warning"><i class="fa fa-file-download"></i></button>
+              </td>
+            </tr>
+            <tr *ngIf="docs.length <= 0">
+              <td colspan="10" class="text-muted text-center">Configure los parámetros y presione <i class="fa fa-share"></i> para buscar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <small class="text-muted">Seleccione uno o mas documentos para utilizar opciones en lote</small>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-primary me-3"><i class="fa fa-paper-plane me-2"></i>Enviar y Comprobar</button>
+        <button class="btn btn-success me-3"><i class="fa fa-sync me-2"></i>Comprobar</button>
+        <button class="btn btn"><i class="fa fa-envelope me-2 text-danger"></i>Enviar al cliente</button>
+      </div>
+    </div>
+  </div>
+</div>

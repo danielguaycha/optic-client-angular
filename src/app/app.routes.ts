@@ -11,11 +11,12 @@ import inventoryAdjustRoutes from './modules/inventory/adjust/inventory.adjust.r
 import rolesRoutes from './modules/roles/roles.routes';
 import userRoutes from './modules/users/users.routes';
 import enterpriseRoutes from './modules/enterprise/enterprise.routes';
+import cfdiRoutes from './modules/cfdi/cfdi.routes';
 
 const MainRoutes: Routes = [
   // {path: '/404', name: 'NotFound', component: NotFoundComponent},
   // {path: '/*path', redirectTo: ['NotFound']},
-  
+
   { path: '', component: LoginComponent },
   ...authRoutes,
   ...personRoutes,
@@ -31,6 +32,9 @@ const MainRoutes: Routes = [
   //Enterprise
   ...enterpriseRoutes,
   //Users
+
+  //Cfdi
+  ...cfdiRoutes
 ]
 
 @NgModule({

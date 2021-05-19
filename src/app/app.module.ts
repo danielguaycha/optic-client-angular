@@ -65,6 +65,7 @@ import { EditProviderComponent } from './modules/persons/views/edit-provider/edi
 import { ConfigEnterpriseComponent } from './modules/config/general/views/general-config/config.component';
 import { SidebarComponent } from './core/components/sidebar/sidebar.component';
 import { FrmSeqComponent } from './modules/config/general/components/frm-seq/frm-seq.component';
+import { DocsComponent } from './modules/cfdi/views/docs/docs.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { FrmSeqComponent } from './modules/config/general/components/frm-seq/frm
     ConfigEnterpriseComponent,
     SidebarComponent,
     FrmSeqComponent,
+    DocsComponent,
 
   ],
   imports: [

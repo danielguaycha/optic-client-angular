@@ -11,14 +11,14 @@ export class CfdiService {
   constructor(private http: HttpClient) { }
 
   getDocuments(model: CfdiModel) : Observable<any> {
-    const params = new HttpParams()
-      .set('docType', model.docType.toString() )
+    let params = new HttpParams()
+      .set('docType', model.docType.toString())
       .set('dateInit', model.dateInit );
 
-    if (model.dateEnd) params.set('dateEnd', model.dateEnd)
-    if (model.ruc) params.set('ruc', model.dateEnd)
-    if (model.docId) params.set('docId', model.dateEnd)
-    if (model.docStatus) params.set('dateEnd', model.docStatus.toString())
+    if (model.dateEnd) params = params.set('dateEnd', model.dateEnd);
+    if (model.ruc) params = params.set('ruc', model.ruc)
+    if (model.docId) params = params.set('docId', model.docId.toString())
+    if (model.docStatus) params = params.set('docStatus', model.docStatus.toString())
 
     return this.http.get(`cfdi/documents`, {params});
   }

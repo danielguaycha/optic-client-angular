@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from '../../../../environments/environment';
-import {select, State, Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
-import {take} from 'rxjs/operators';
 import {AppState} from '../../../modules/auth/store/user.reducer';
+import {AuthService} from '../../../modules/auth/services/auth.service';
+import scripts from '../../sciprts';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,11 +12,27 @@ import {AppState} from '../../../modules/auth/store/user.reducer';
 export class NavbarComponent implements OnInit {
 
   public menu: Array<any>;
-  public appName: string;
+  public appState: AppState;
 
-  constructor(private store: Store<{data: any}>) {
-    this.configMenu();
+  constructor(public auth: AuthService, public router: Router) {
+    this.auth.storeData.subscribe(res => {
+      this.appState = res.data;
+    })
+  }
 
+  ngOnInit() {
+    this.configMenu()
+  }
+  ngAfterViewInit() {
+    scripts();
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
+
+  configMenu() {
     this.menu = [
       {
         name: "Registro y control",
@@ -114,18 +130,5 @@ export class NavbarComponent implements OnInit {
         ]
       }
     ];
-    //this.appName = environment.appName;
-  }
-
-  ngOnInit() {
-
-  }
-
-  configMenu() {
-     this.store.select("data").subscribe(store => {
-       if(store.module !== this.appName) {
-         this.appName = store.module;
-       }
-     });
   }
 }

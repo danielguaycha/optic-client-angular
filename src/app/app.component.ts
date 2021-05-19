@@ -3,7 +3,7 @@ import {AuthService} from './modules/auth/services/auth.service';
 import {Store} from '@ngrx/store';
 import {addConfig, addUser} from './modules/auth/store/user.actions';
 import {SecureStorageService} from './modules/auth/services/secure-storage.service';
-import script from "./core/sciprts";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,26 +18,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.getUser();
-  }
-
-  ngAfterViewInit() {
-    script();
+    this.authService.getLoginUser();
   }
 
   ngDoCheck() {
     this.auth = !!this.authService.getToken();
-  }
-
-  getUser() {
-    this.authService.getUser().subscribe(res => {
-      if (res.ok) {
-        this.store.dispatch(addUser({ user: res.body.user }));
-        this.store.dispatch(addConfig({ cfg: res.body.config }));
-        this.storage.set('config', JSON.stringify(res.body.config));
-      }
-    }, error => {
-      // console.log(error);
-    })
   }
 }

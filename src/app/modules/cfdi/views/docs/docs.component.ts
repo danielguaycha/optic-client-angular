@@ -4,6 +4,8 @@ import {CfdiModel} from '../../models/cfdi.model';
 import {CfdiService} from '../../services/cfdi.service';
 import {ToastService} from '../../../../core/services/toast.service';
 import loader from '@angular-devkit/build-angular/src/webpack/plugins/single-test-transform';
+import {Tooltip} from 'bootstrap';
+import {DocState} from '../../models/doc_state.model';
 
 @Component({
   selector: 'app-docs',
@@ -14,6 +16,7 @@ export class DocsComponent implements OnInit {
   public model: CfdiModel;
   public docs: any;
   public loader: boolean = false;
+  public states = DocState;
   constructor(private cfdiService: CfdiService, private toast: ToastService) {
 
   }
@@ -23,7 +26,7 @@ export class DocsComponent implements OnInit {
     this.model = {
       dateInit : moment().subtract(7, 'd').format('YYYY-MM-DD'),
       dateEnd : moment().format('YYYY-MM-DD'),
-      docStatus : 1,
+      docStatus : 0,
       docType : 1,
     }
   }
@@ -48,7 +51,7 @@ export class DocsComponent implements OnInit {
     this.cfdiService.invoiceVerify(invoiceId).subscribe(res => {
       if (res.ok) {
         if (res.body.auth) {
-          this.toast.ok(`Factura ${invoiceId} autorizada correctamente`)
+          this.toast.ok(res.message)
         } else {
           this.toast.info(`La factura (${invoiceId}) no esta autorizada`)
         }

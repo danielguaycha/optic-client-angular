@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
-    <div class="row">
-      <div class="col">
+    <div class="row g-2">
+      <div class="col-12 col-md-4 col-lg-3 col-xl-2">
         <label for="doc" class="form-label">Tipo de Comprobante</label>
         <select name="doc" id="doc" class="form-select" [(ngModel)]="model.docType">
           <option value="1">Factura de Venta</option>
@@ -12,81 +12,87 @@
           <option value="6" disabled>Liquidación de compras</option>
         </select>
       </div>
-      <div class="col-1">
+      <div class="col-4 col-lg-1 col-xl-1">
         <label for="docId" class="form-label">ID Doc.</label>
         <input type="text" [(ngModel)]="model.docId" name="docId" id="docId" class="form-control">
       </div>
-      <div class="col">
+      <div class="col-8 col-md-4 col-lg-2 col-xl-2">
         <label for="ruc" class="form-label">RUC/CI</label>
         <input type="text" [(ngModel)]="model.ruc" name="ruc" id="ruc" class="form-control">
       </div>
-      <div class="col-3">
+      <div class="col-12 col-lg-4">
         <label class="form-label">Filtros por fechas: </label>
         <div class="input-group">
           <input type="date" [(ngModel)]="model.dateInit" name="dateInit" class="form-control">
           <input type="date" [(ngModel)]="model.dateEnd" name="dateEnd" class="form-control">
         </div>
       </div>
-      <div class="col">
+      <div class="col-10 col-lg-2">
         <label for="docStatus" class="form-label">Estado</label>
         <select name="docStatus" id="docStatus" class="form-select" [(ngModel)]="model.docStatus">
           <option value="0">Ver todos</option>
+          <option value="1">No enviados</option>
+          <option value="2">Autorizados</option>
           <option value="1">Enviados</option>
-          <option value="2">No enviados</option>
-          <option value="3">Autorizados</option>
           <option value="4">No autorizados</option>
         </select>
       </div>
-      <div class="col-1 d-flex flex-column justify-content-end">
-        <button class="btn btn-success" (click)="getDocs()"><i class="fa fa-share"></i></button>
+      <div class="col-2 col-lg-1 d-flex flex-column justify-content-end">
+        <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Procesar Filtros"
+                (click)="getDocs()"><i class="fa fa-share"></i></button>
       </div>
     </div>
 
     <div class="row mt-3">
       <div class="col-12">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <th></th>
-            <th>Número</th>
-            <th>Tipo</th>
-            <th>Fecha</th>
-            <th>Cliente/Proveedor</th>
-            <th>RUC/CI</th>
-            <th>Total</th>
-            <th>Clave Acceso</th>
-            <th>Estado</th>
-            <th class="text-center"><i class="fa fa-cogs"></i></th>
-          </tr>
-          </thead>
-          <tbody>
+        <div class="table-responsive">
+          <table class="table table-bordered tb-mobil">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Número</th>
+              <th>Tipo</th>
+              <th>Fecha</th>
+              <th>Cliente/Proveedor</th>
+              <th>RUC/CI</th>
+              <th>Total</th>
+              <th class="text-center">Clave Acceso</th>
+              <th>Estado</th>
+              <th class="text-center"><i class="fa fa-cogs"></i></th>
+            </tr>
+            </thead>
+            <tbody>
             <tr *ngFor="let d of docs">
-              <td style="width: 1%">
+              <td data-name="" class="no-data">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="">
                 </div>
               </td>
-              <td>{{ d.number }}</td>
-              <td>{{ d.type_ }}</td>
-              <td>{{ d.date }}</td>
-              <td>{{ d.person_name }}</td>
-              <td>{{ d.person_doc }}</td>
-              <td>{{ d.total }}</td>
-              <td><small><code>{{ d.key_access }}</code></small></td>
-              <td>{{ d.sri_status }}</td>
-              <td>
-                <button class="btn btn-sm text-primary" (click)="authInvoice(d.id)"><i class="fa fa-paper-plane"></i></button>
-                <button class="btn btn-sm text-secondary" (click)="verifyInvoice(d.id)"><i class="fas fa-exchange-alt"></i></button>
-                <button class="btn btn-sm text-danger"><i class="fa fa-envelope"></i></button>
-                <button class="btn btn-sm text-warning"><i class="fa fa-file"></i></button>
-                <button class="btn btn-sm text-warning"><i class="fa fa-file-download"></i></button>
+              <td data-name="Numero">{{ d.number }}</td>
+              <td data-name="Tipo">{{ d.type_ }}</td>
+              <td data-name="Fecha">{{ d.date }}</td>
+              <td data-name="Client/Prov.">{{ d.person_name }}</td>
+              <td data-name="CI/Ruc">{{ d.person_doc }}</td>
+              <td data-name="Total">{{ d.total }}</td>
+              <td data-name="C. Acceso"><small><code>{{ d.key_access }}</code></small></td>
+              <td data-name="Estado">{{ d.sri_status }}</td>
+              <td class="text-center no-data">
+                <button *ngIf="d.send_sri < states.AUTH" class="btn btn-sm text-primary"
+                        title="Enviar y Autorizar" (click)="authInvoice(d.id)"><i class="fa fa-paper-plane"></i></button>
+                <button class="btn btn-sm text-purple" title="Verificar"
+                        (click)="verifyInvoice(d.id)"><i class="fas fa-exchange-alt"></i></button>
+
+                <button *ngIf="d.send_sri == states.AUTH" title="Enviar al correo" class="btn btn-sm text-warning"><i class="fa fa-envelope"></i></button>
+                <button class="btn btn-sm text-success" title="Descargar XML"><i class="fa fa-file"></i></button>
+                <button class="btn btn-sm text-danger" title="Ver Ride"><i class="fa fa-file-pdf"></i></button>
               </td>
             </tr>
             <tr *ngIf="docs.length <= 0">
-              <td colspan="10" class="text-muted text-center">Configure los parámetros y presione <i class="fa fa-share"></i> para buscar</td>
+              <td colspan="10" class="text-muted text-center">Configure los parámetros y presione <i class="ms-1 fa fa-share me-1"></i> para buscar</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="col">
         <small class="text-muted">Seleccione uno o mas documentos para utilizar opciones en lote</small>

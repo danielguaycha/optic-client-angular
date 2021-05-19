@@ -1,7 +1,6 @@
+'use strict'
 import {Tooltip} from 'bootstrap';
 function init() {
-  'use strict'
-
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   tooltipTriggerList.forEach(function (tooltipTriggerEl) {
     new Tooltip(tooltipTriggerEl)

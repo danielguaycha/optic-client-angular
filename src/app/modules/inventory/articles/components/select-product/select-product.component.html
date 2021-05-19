@@ -8,39 +8,55 @@
     <input type="text" class="form-control" placeholder="Producto/Servicio" [ngModel]="selectProduct.name" readonly>
   </div>
   <div class="col-6 col-md-1">
-    <input type="number" class="form-control" placeholder="PVP" readonly [ngModel]="selectProduct.pvp">
+    <div class="input-group-min readonly">
+      <label class="form-label">Precio</label>
+      <input type="number" class="form-control" placeholder="PVP" readonly [ngModel]="selectProduct.pvp">
+    </div>
   </div>
   <div class="col-6 col-md-1">
-    <input type="number" class="form-control" placeholder="Cantidad"
-           onfocus="this.select()"
-           (input)="calc()"
-           (change)="calc()"
-           (keypress)="onEnterPress($event)"
-           [(ngModel)]="selectProductCalc.qty"
-           [max]="selectProduct.stock"
-           min="0"
-           id="qty" value="1">
+    <div class="input-group-min">
+      <label class="form-label">Cantidad</label>
+      <input type="number" class="form-control" placeholder="Cantidad"
+             onfocus="this.select()"
+             (input)="calc()"
+             (change)="calc()"
+             (keypress)="onEnterPress($event)"
+             [(ngModel)]="selectProductCalc.qty"
+             [max]="selectProduct.stock"
+             min="0"
+             id="qty" value="1">
+    </div>
   </div>
   <!--extra values-->
   <div class="col-6 col-md-1" *ngIf="showCalc">
-    <input type="number" class="form-control" placeholder="Desc %" value="0"
-           (input)="calc()"
-           (change)="calc()"
-           (keypress)="onEnterPress($event)"
-           min="0"
-           [(ngModel)]="selectProductCalc.discount">
+    <div class="input-group-min">
+      <label class="form-label">Descuento %</label>
+      <input type="number" class="form-control" placeholder="Desc %" value="0"
+             (input)="calc()"
+             (change)="calc()"
+             (keypress)="onEnterPress($event)"
+             min="0"
+             [(ngModel)]="selectProductCalc.discount">
+    </div>
+
   </div>
   <div class="col-6 col-md-1" *ngIf="showCalc">
-    <input type="number" class="form-control" placeholder="Total"
-           [value]="validate.round(selectProductCalc.total)"
-           readonly>
+    <div class="input-group-min readonly">
+      <label class="form-label">Total $</label>
+      <input type="number" class="form-control" placeholder="Total"
+             [value]="validate.round(selectProductCalc.total)"
+             readonly>
+    </div>
   </div>
   <div class="col-6 col-md-1" *ngIf="showCalc">
-    <input type="number" class="form-control" placeholder="Total+Iva"
-           [value]="validate.round(selectProductCalc.totalIva)"
-           readonly>
+    <div class="input-group-min readonly">
+      <label class="form-label">Total + Iva $</label>
+      <input type="number" class="form-control" placeholder="Total+Iva"
+             [value]="validate.round(selectProductCalc.totalIva)"
+             readonly>
+    </div>
   </div>
-  <div class="col-6 col-md-1 d-flex text-end justify-content-center">
+  <div class="col-6 col-md-1 d-flex justify-content-center">
     <button type="button" class="btn btn-light text-success" (click)="emitArticle()"
             [disabled]="code && selectProduct.id && selectProductCalc.qty > 0"><i class="fa fa-plus"></i></button>
     <button type="button" class="btn btn-light text-warning" (click)="initComponents()" *ngIf="code && selectProduct.id"

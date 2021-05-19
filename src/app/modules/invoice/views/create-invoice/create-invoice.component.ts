@@ -9,7 +9,9 @@ import typePayment from '../../models/type.payment';
 import {MethodPaymentComponent} from '../../components/method-payment/method-payment.component';
 import {InvoiceService} from '../../services/invoice.service';
 import {Store} from '@ngrx/store';
-import {addTitle, addUser} from '../../../auth/store/user.actions';
+import {addTitle} from '../../../auth/store/user.actions';
+import {SequencesService} from '../../../config/general/services/sequences.service';
+import {Sequence} from '../../../config/general/models/sequence.model';
 
 // @ts-ignore
 @Component({
@@ -30,15 +32,17 @@ export class CreateInvoiceComponent implements OnInit {
   total: number;
   typePayments: Array<any> = [];
   loader: boolean = false;
+  sequence: string = "001-001-00000001";
   constructor(private toast: ToastService, public validate: ValidateService,
-              public cfg: ConfigService, private invService: InvoiceService, private store: Store) {
-    this.initComponents();
+              public cfg: ConfigService, private seqService: SequencesService,
+              private invService: InvoiceService, private store: Store) {
+
     this.typePayments = typePayment;
     this.store.dispatch(addTitle({ title: "Ventas"}));
   }
 
   ngOnInit(): void {
-
+    this.initComponents();
   }
 
   submit(methodsPayments) {
@@ -86,6 +90,15 @@ export class CreateInvoiceComponent implements OnInit {
   confirmPayment() {
     if (!this.validFrm()) { return; }
     this.MethodPaymentCmp.open(this.formData.methodPay);
+  }
+
+  // get seq
+  getSeq() {
+    this.seqService.getByType(Sequence.SEQ_INVOICE).subscribe(res => {
+      if (res.ok) {
+        this.sequence = res.body;
+      }
+    })
   }
 
   //events
@@ -174,6 +187,7 @@ export class CreateInvoiceComponent implements OnInit {
     this.descuento = 0;
     this.iva12 = 0;
     this.total = 0;
+    this.getSeq();
   }
 
   //validate invoice

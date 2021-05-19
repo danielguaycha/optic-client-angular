@@ -40,18 +40,18 @@ function init() {
   document.addEventListener('click', function (e: any) {
 
     const compList = e.target;
-    const paretnClass = e.target.parentNode;
+    const parent = e.target.parentNode;
 
-    if (compList && !compList.classList.contains('sub-item-btn') && paretnClass && !paretnClass.classList.contains('sub-item-btn')) {
+    if (compList && !compList.classList.contains('sub-item-btn') &&
+          parent && !parent.classList.contains('sub-item-btn')) {
         document.querySelectorAll('.aside-sub-item').forEach(e => e.classList.remove('show'));
     }
 
-    if (compList && !compList.classList.contains('submenu-content') && paretnClass && !paretnClass.classList.contains('submenu-content')) {
+    if (compList && !compList.classList.contains('submenu-content') && parent && !parent.classList.contains('submenu-content')) {
       document.querySelectorAll('.submenu-content').forEach(e => e.classList.remove('show'));
       if (!compList.classList.contains('open-menu-item')) {
         document.querySelectorAll('.menu-item').forEach(e => e.classList.remove('show'));
       }
-
     }
   });
 

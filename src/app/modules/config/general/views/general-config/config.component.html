@@ -1,10 +1,13 @@
 <with-loader [loader]="configLoader">
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#iva">IVA</a>
+        <a class="nav-link active" data-bs-toggle="tab" href="#iva"><i class="fa fa-cogs me-2"></i>Generales</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#factElect">Fact. Electrónica</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#factElect"><i class="fas fa-file-contract me-2"></i>Fact. Electrónica</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#sequences"><i class="fas fa-list-ol me-2"></i>Secuenciales</a>
     </li>
 </ul>
 <div class="tab-content">
@@ -133,6 +136,11 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <!-- Secuencias -->
+    <div class="tab-pane" id="sequences">
+      <app-frm-seq></app-frm-seq>
     </div>
 </div>
 </with-loader>

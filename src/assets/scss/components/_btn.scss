@@ -20,3 +20,14 @@
         cursor: crosshair;
     }
 }
+
+.btn-light {
+  @if($themeDark) {
+    background: darken($dark, 4) !important;
+    border-color: darken($dark, 4) !important;
+    color: $light;
+    &:hover, &:active, &:focus {
+      color: darken($light, 3);
+    }
+  }
+}

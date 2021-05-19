@@ -64,6 +64,7 @@ import { AddProviderComponent } from './modules/persons/views/add-provider/add-p
 import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
 import { ConfigEnterpriseComponent } from './modules/config/general/views/general-config/config.component';
 import { SidebarComponent } from './core/components/sidebar/sidebar.component';
+import { FrmSeqComponent } from './modules/config/general/components/frm-seq/frm-seq.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { SidebarComponent } from './core/components/sidebar/sidebar.component';
     EditProviderComponent,
     ConfigEnterpriseComponent,
     SidebarComponent,
+    FrmSeqComponent,
 
   ],
   imports: [

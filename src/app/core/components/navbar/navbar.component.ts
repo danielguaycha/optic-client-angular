@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit {
             icon: 'fa-university'
           },
           {
-            name: "Configuraciones del sistema",
+            name: "Configuraciones",
             to: "/config",
             icon: "fa-cog"
           },
@@ -125,8 +125,6 @@ export class NavbarComponent implements OnInit {
      this.store.select("data").subscribe(store => {
        if(store.module !== this.appName) {
          this.appName = store.module;
-       } else {
-         console.log('diferente ' + store.module);
        }
      });
   }

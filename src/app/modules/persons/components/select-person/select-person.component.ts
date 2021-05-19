@@ -41,6 +41,7 @@ export class SelectPersonComponent implements OnInit {
       this.personServ.getPerson(this.person.doc).subscribe(res => {
         if (res.ok && res.body) {
           this.person = res.body
+          this.onSelect(this.person);
         } else {
 
         }

@@ -11,7 +11,7 @@
       <thead>
       <tr>
         <th>Cod</th>
-        <th>Nombres y Apellidos</th>
+        <th>Producto/Servicio</th>
         <th>Desc.</th>
         <th>Categoría</th>
         <th class="text-center">Stock</th>
@@ -22,7 +22,7 @@
       <tr *ngFor="let p of articles; index as i">
         <td>{{ p.code }}</td>
         <td>{{ p.name }}</td>
-        <td>{{ p.desc }}</td>
+        <td>{{ p.desc ? p.desc : 'Ninguna' }}</td>
         <td>{{ p.category }}</td>
         <td [class]="'text-center fw-bold '+(p.stock > 0 ? 'text-success' : 'text-danger') ">{{ p.stock }}</td>
         <td class="text-end">

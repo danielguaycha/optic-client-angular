@@ -2,9 +2,9 @@ $font-size-base: .91rem;
 $body-bg: #fafafa;
 $input-focus-box-shadow: none;
 
-$themeDark: false;
+$themeDark: true;
 $primary: #7289da;
-//$light: #99aab5;
+$light: #99aab5;
 $dark: #23272a;
 $dark-2: #2c2f33;
 
@@ -30,7 +30,7 @@ $input-focus-box-shadow: initial;
 $font-size-base: .92rem !default;
 
 //dark mode
-/*
+
 $body-bg: $dark;
 $body-color: $light;
 $border-color: rgba($light, .3) !important;
@@ -41,6 +41,9 @@ $input-bg:  $dark-2;
 $input-border-color: lighten($dark-2, 5);
 $input-box-shadow: initial;
 $input-focus-box-shadow: initial;
+$input-disabled-bg: darken($dark, 5);
+$form-select-disabled-bg: darken($dark, 5);
+$form-select-indicator-color: $light;
 
 $dropdown-bg: $dark-2;
 $dropdown-color: $light !important;
@@ -48,10 +51,13 @@ $dropdown-link-color: $light;
 $dropdown-link-hover-bg: $dark;
 $dropdown-link-hover-color: $light;
 
-
-
 $card-bg: darken($dark, 1);
 $accordion-bg: darken($dark, 1);
 $modal-content-bg: $card-bg;
 $input-group-addon-bg: $card-bg;
-*/
+
+$nav-tabs-border-color: lighten($dark, 4);
+$nav-tabs-link-active-border-color: darken($dark, 1);
+$nav-tabs-link-active-bg: darken($dark, 1);
+$nav-tabs-link-active-color: $light;
+$nav-tabs-link-hover-border-color: lighten($dark, 8);

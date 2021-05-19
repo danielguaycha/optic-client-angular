@@ -48,14 +48,17 @@ nav {
         z-index: 1000;
         width: $mobil-nav-width;
         transition: all .2s ease;
-        background: white;
+        @if $themeDark {
+          background: darken($dark, 3);
+        } @else {
+          background: white;
+        }
         padding: $dropdown-padding-y $dropdown-padding-x;
         @include tablet {
             padding: 0;
             position: initial;
             flex-direction: row;
             width: initial;
-            background: white;
         }
         li.menu-item {
             font-size: .9em;
@@ -91,7 +94,12 @@ nav {
                 display: flex;
                 align-items: center;
                 &:hover {
+                  @if $themeDark {
+                    background: darken($dark, 6);
+                  } @else {
                     background: rgba(white, .2);
+                  }
+
                     border-bottom: 3px solid $primary;
                     color: darken($primary, 10);
                 }

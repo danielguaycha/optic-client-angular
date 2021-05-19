@@ -7,14 +7,23 @@
       <div class="col-12 col-md-6">
         <div class="row g-2">
           <div class="col-12 col-md-4">
-            <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="formData.date">
+            <div class="input-group-min">
+              <label class="form-label">Fecha: </label>
+              <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="formData.date">
+            </div>
           </div>
           <div class="col-12 col-md-4">
-            <input type="text" class="form-control" placeholder="N. Factura" readonly>
+            <div class="input-group-min readonly">
+              <label class="form-label"># Documento: </label>
+              <input type="text" class="form-control" [value]="sequence" placeholder="N. Factura" readonly>
+            </div>
           </div>
 
           <div class="col-12 col-md-4">
-            <input type="text" class="form-control" placeholder="Vendedor" readonly>
+            <div class="input-group-min readonly">
+              <label class="form-label">Vendedor</label>
+              <input type="text" class="form-control" placeholder="Vendedor" readonly>
+            </div>
           </div>
 
           <div class="col-12 col-md-4">
@@ -24,7 +33,6 @@
           </div>
           <div class="col-12 col-md-4">
             <select class="form-select" [(ngModel)]="formData.methodPay">
-
               <ng-container *ngIf="typePayments && typePayments.length > 0">
                 <option *ngFor="let pay of typePayments" [value]="pay.id">{{pay.text}}</option>
               </ng-container>

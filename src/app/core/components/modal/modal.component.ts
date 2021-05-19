@@ -24,7 +24,8 @@ export class ModalComponent implements OnInit {
 
   ngAfterViewInit() {
     const el = document.getElementById(this.idModal);
-    this.modal = new Modal(el);
+    if (el)
+      this.modal = new Modal(el);
   }
 
   close() {

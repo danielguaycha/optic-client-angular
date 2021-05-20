@@ -1,0 +1,255 @@
+<!-- <form class="row g-2" #invoiceBuysForm='ngForm' ngNativeValidate>
+    <div class="card">
+        <div class="card-body">
+            <label class="label-title"><span>CFDI-COMPROBANTES ELECTRONICOS</span></label>
+
+            <div class="col-12 col-md-12 row g-2">
+
+                <div class="col-12 col-md-2 mt-2">
+                    <label for="" class="form-label">Tipo de Comprobante</label>
+                    <select [(ngModel)]="formData" name="" id="" class="form-select" required>
+                        <option value="value1" selected>Value 1</option>
+                        <option value="value2">Value 2</option>
+                        <option value="value3">Value 3</option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-2 mt-2">
+                    <label for="" class="form-label">ID Doc.</label>
+                    <input type="text" id="" [(ngModel)]="formData" name="" class="form-control">
+                </div>
+
+                <div class="col-12 col-md-1 mt-2">
+                    <label for="special_contrib" class="form-label">RUC/CI</label>
+                    <input type="text" id="special_contrib" [(ngModel)]="formData.special_contrib" name="special_contrib" class="form-control">
+                </div>
+
+                <div class="col-12 col-md-2 mt-2">
+                    <label for="" class="form-label">Desde:</label>
+                    <input type="date" id="" [(ngModel)]="formData" name="" class="form-control">
+                </div>
+
+                <div class="col-12 col-md-2 mt-2">
+                    <label for="" class="form-label">Hasta: </label>
+                    <input type="date" id="" [(ngModel)]="formData" name="" class="form-control">
+                </div>
+
+                <div class="col-12 col-md-2 mt-2">
+                    <select [(ngModel)]="formData" name="" id="" class="form-select" required>
+                            <option value="value1" selected>Value 1</option>
+                            <option value="value2">Value 2</option>
+                            <option value="value3">Value 3</option>
+                        </select>
+                </div>
+                <div class="col-12 col-md-1 mt-2">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"><i
+                            class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <br>
+            <div class="card pt-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Cliente/Proveedor</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Clave de acceso</th>
+                                <th scope="col">Estado</th>
+                                <th class="text-center"><i class="fa fa-cog"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked="true" id=""> 001-001
+                                    </div>
+                                </td>
+                                <td>Factura</td>
+                                <td>01/01/2022</td>
+                                <td>Daniel Guaycha</td>
+                                <td>20.00</td>
+                                <td>01da5sd156asdasdasdasd</td>
+                                <td>No autorizado</td>
+                                <td class="text-center">
+                                    <button class="s-btn text-black btn-sm" type="button" data-bs-toggle="modal"><i class="fa fa-envelope"></i></button>
+                                    <button class="s-btn text-success btn-sm" type="button" data-bs-toggle="modal"><i class="fa fa-paper-plane"></i></button>
+                                    <button class="s-btn text-danger btn-sm" type="button" data-bs-toggle="modal"><i class="fa fa-file-pdf"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" class="text-center text-muted">Aún no se han registrado documentos</td>
+                            </tr> -->
+
+<!-- <tr *ngIf="persons.length <= 0">
+                                <td *ngIf="provider" colspan="6" class="text-center text-muted">Aun no se han registrado proveedores</td>
+                                <td *ngIf="!provider" colspan="6" class="text-center text-muted">Aun no se han registrado clientes</td>
+                            </tr> -->
+<!-- </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 text-start mt-4">
+                <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">ENVIAR Y
+                    COMPROBAR</button>
+                <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">COMPROBAR</button>
+                <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">ENVIAR RIDE A
+                    CLIENTE</button>
+            </div>
+        </div>
+    </div>
+</form> -->
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <label for="" class="form-label">Datos de Proveedor</label>
+                <app-select-person></app-select-person>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="row g-2">
+                    <div class="col-12 col-md-4">
+                        <label for="" class="form-label">Fecha de Emision</label>
+                        <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="formData.date">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="" class="form-label">Fecha de Vencimiento</label>
+                        <input type="text" class="form-control" placeholder="N. Factura" readonly>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="" class="form-label">Forma de Pago</label>
+                        <select class="form-select">
+                            <option value="FACTURA" selected>Factura</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="" class="form-label"># Factura</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="" class="form-label">Autorización</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12 mt-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo</th>
+                            <th>Descripción</th>
+                            <th class="text-center">P. Unitario</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">DESC %</th>
+                            <th class="text-center">ICE $</th>
+                            <th class="text-center">IRBP$</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center"><i class="fa fa-cog"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>001</td>
+                            <td>Producto</td>
+                            <td>20.00</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>20.00</td>
+                            <td class="text-end">
+                                <button class="s-btn text-danger btn-sm" type="button" data-bs-toggle="modal"><i
+                                            class="fa fa-trash"></i></button>
+                                <button class="s-btn text-primary btn-sm" type="button" data-bs-toggle="modal"><i
+                                            class="fa fa-exchange-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" class="text-center text-muted">Agregue productos a la Factura</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <!-- <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">Agregar producto</button> -->
+                <div class="row g-2">
+                    <div class="col-12 col-md-6">
+                        <div class="row g-2">
+                            <div class="col-12 col-md-4">
+                                <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">Agregar producto</button>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">Cargar XML</button>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">Cargar Clave de Acceso</button>
+                            </div>
+                            <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">Procesar
+                                Documento</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked="true" id="">Actualizar precios al finalizar
+                        </div>
+                        <button type="button" class="btn btn-primary text-white me-2" data-bs-dismiss="modal">Limpiar todo</button>
+                    </div>
+                    <div class="col-12 col-md-3 text-end align-items-end">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal 0% </td>
+                                    <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Subtotal 12 % </td>
+                                    <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ICE</td>
+                                    <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Iva 12 %</td>
+                                    <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>I.R.B.P.</td>
+                                    <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Descuento</td>
+                                    <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total A Pagar </td>
+                                    <td><input type="text" class="form-control form-control-sm text-end text-primary fw-bold" readonly value="0.0"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

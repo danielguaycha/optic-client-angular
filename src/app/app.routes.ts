@@ -11,6 +11,9 @@ import inventoryAdjustRoutes from './modules/inventory/adjust/inventory.adjust.r
 import rolesRoutes from './modules/roles/roles.routes';
 import userRoutes from './modules/users/users.routes';
 import enterpriseRoutes from './modules/enterprise/enterprise.routes';
+import electVochuersRoutes from './modules/elect_vouchers/elect_vouchers.routes';
+import invoiceBuysRoutes from './modules/invoice-buys/invoice-buys.routes';
+import monitorVouchersRoutes from './modules/monitor-vouchers/monitor-vouchers.routes';
 
 const MainRoutes: Routes = [
   // {path: '/404', name: 'NotFound', component: NotFoundComponent},
@@ -20,6 +23,7 @@ const MainRoutes: Routes = [
   ...authRoutes,
   ...personRoutes,
   ...invoiceRoutes,
+  ...invoiceBuysRoutes,
   //inventory
   ...categoryRoutes,
   ...articlesRoutes,
@@ -30,6 +34,8 @@ const MainRoutes: Routes = [
   ...userRoutes,
   //Enterprise
   ...enterpriseRoutes,
+  ...electVochuersRoutes,
+  ...monitorVouchersRoutes
   //Users
 ]
 

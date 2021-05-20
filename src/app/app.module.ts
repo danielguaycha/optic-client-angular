@@ -64,6 +64,9 @@ import { AddProviderComponent } from './modules/persons/views/add-provider/add-p
 import { EditProviderComponent } from './modules/persons/views/edit-provider/edit-provider.component';
 import { ConfigEnterpriseComponent } from './modules/config/general/views/general-config/config.component';
 import { SidebarComponent } from './core/components/sidebar/sidebar.component';
+import { ElectVouchersComponent } from './modules/elect_vouchers/views/elect_vouchers.component';
+import { InvoiceBuysComponent } from './modules/invoice-buys/views/invoice-buys.component';
+import { MonitorVouchersComponent } from './modules/monitor-vouchers/views/monitor-vouchers.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +118,9 @@ import { SidebarComponent } from './core/components/sidebar/sidebar.component';
     EditProviderComponent,
     ConfigEnterpriseComponent,
     SidebarComponent,
+    ElectVouchersComponent,
+    InvoiceBuysComponent,
+    MonitorVouchersComponent,
 
   ],
   imports: [

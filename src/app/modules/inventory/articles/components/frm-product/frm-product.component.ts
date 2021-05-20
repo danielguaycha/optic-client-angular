@@ -39,7 +39,7 @@ export class FrmProductComponent implements OnInit {
       this.initFormData();
     }
   }
-  
+
   ngOnInit(): void {
     this.loader = false;
     if(this.edit){
@@ -65,8 +65,8 @@ export class FrmProductComponent implements OnInit {
       return;
     }
   }
-  if (!this.edit) this.storeProduct();
-  if (this.edit) this.updateProduct();
+    if (!this.edit) this.storeProduct();
+    if (this.edit) this.updateProduct();
 }
 
 //products
@@ -103,7 +103,7 @@ updateProduct() {
       this.toast.err(error);
     });
   }
-  
+
   //events for category
   onSelectCategory(category) {
     this.category = category;
@@ -120,22 +120,22 @@ updateProduct() {
     }, error => {
       // console.log(error);
     })
-    
+
   }
-  
+
   // calc
   onChangeIVA(value:string){
     this.iva = this.validate.parseDouble(value);
     this.formData.iva = this.iva;
     this.calcIva();
   }
-  
+
   calcIva() {
     this.pvp = this.validate.addPercent(this.price, this.iva);
     this.pvpIva = this.validate.addPercent(this.pvp, this.utility);
   }
 
-  // events  
+  // events
   onInputPrice(value: string) {
     this.price = this.validate.parseDouble(value);
     this.calcIva();

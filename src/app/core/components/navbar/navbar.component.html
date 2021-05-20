@@ -1,4 +1,11 @@
-<nav>
+<nav *ngIf="appState && appState.user">
+  <div class="brand-container">
+    <div class="brand">
+      <button class="btn" id="btnMenu"><i class="bi-list"></i></button>
+      <img src="assets/img/logo.svg" alt="Logo Empresa">
+    </div>
+    <span class="page-title">{{  appState.module  }}</span>
+  </div>
   <ul class="nav-menu" id="nav-menu">
     <li *ngFor="let m of menu" class="menu-item">
       <a href="{{ m.name }}" class="open-menu-item">{{ m.name }}</a>
@@ -8,36 +15,29 @@
              [class]="(item.submenu && item.submenu.length > 0) ? 'submenu-content-open': ''"><i [class]=" (item.prefixIcon ? item.prefixIcon : 'fa')+' '+ (item.icon ? item.icon : '')"></i>{{ item.name }}</a>
           <ul class="submenu" *ngIf="item.submenu && item.submenu.length > 0">
             <li class="submenu-item" *ngFor="let sub of item.submenu">
-              <a [routerLink]="sub.to"><i [class]=" (sub.prefixIcon ? sub.prefixIcon : 'fa')+' '+ (sub.icon ? sub.icon : '')"></i>{{ sub.name}}</a>
+              <a [routerLink]="sub.to"><i [class]="''+ (sub.prefixIcon ? sub.prefixIcon : 'fa')+' '+ (sub.icon ? sub.icon : '')"></i>{{ sub.name}}</a>
             </li>
           </ul>
         </li>
       </ul>
     </li>
   </ul>
-  <div class="brand">
-    <button class="btn" id="btnMenu"><i class="bi-list"></i></button>
-    <img src="assets/img/logo.svg" alt="Logo Empresa">
-    <span>Clientes</span>
-  </div>
-  <div>
-    <ul>
+  <ul *ngIf="appState.user">
       <li>
         <a href="#" class="profile" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="https://github.com/mdo.png" alt="mdo" height="30px" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small shadow profile-ul" aria-labelledby="dropdownUser3">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><button class="dropdown-item text-muted" disabled>@{{ appState.user.username }}</button></li>
+          <li><a class="dropdown-item" href="#">Configuraciones</a></li>
+          <li><a class="dropdown-item" href="#">Perfil</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+          <li><button class="dropdown-item" (click)="logout()">Cerrar Sesión</button></li>
         </ul>
       </li>
     </ul>
-  </div>
   <div class="overlay">
     <button class="close"><i class="bi bi-x-lg"></i></button>
   </div>

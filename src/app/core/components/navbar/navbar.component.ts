@@ -1,4 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {AppState} from '../../../modules/auth/store/user.reducer';
+import {AuthService} from '../../../modules/auth/services/auth.service';
+import scripts from '../../sciprts';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,8 +12,27 @@ import {Component, OnInit} from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   public menu: Array<any>;
+  public appState: AppState;
 
-  constructor() {
+  constructor(public auth: AuthService, public router: Router) {
+    this.auth.storeData.subscribe(res => {
+      this.appState = res.data;
+    })
+  }
+
+  ngOnInit() {
+    this.configMenu()
+  }
+  ngAfterViewInit() {
+    scripts();
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
+
+  configMenu() {
     this.menu = [
       {
         name: "Registro y control",
@@ -85,22 +109,26 @@ export class NavbarComponent implements OnInit {
         items: [
           {
             name: "Perfil de empresa",
-            to: "/enterprise"
+            to: "/enterprise",
+            icon: 'fa-university'
           },
           {
-            name: "Configuraciones del sistema",
-            to: "/config"
+            name: "Configuraciones",
+            to: "/config",
+            icon: "fa-cog"
+          },
+          {
+            name: "Roles y permisos",
+            to: "/roles/add",
+            icon: "fa-users"
+          },
+          {
+            name: "Usuarios",
+            to: "users",
+            icon: "fa-user"
           }
         ]
       }
     ];
-  }
-
-  ngOnInit(): void {
-    this.configMenu();
-  }
-
-  configMenu() {
-
   }
 }

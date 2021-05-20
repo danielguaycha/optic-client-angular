@@ -14,11 +14,12 @@ import enterpriseRoutes from './modules/enterprise/enterprise.routes';
 import electVochuersRoutes from './modules/elect_vouchers/elect_vouchers.routes';
 import invoiceBuysRoutes from './modules/invoice-buys/invoice-buys.routes';
 import monitorVouchersRoutes from './modules/monitor-vouchers/monitor-vouchers.routes';
+import cfdiRoutes from './modules/cfdi/cfdi.routes';
 
 const MainRoutes: Routes = [
   // {path: '/404', name: 'NotFound', component: NotFoundComponent},
   // {path: '/*path', redirectTo: ['NotFound']},
-  
+
   { path: '', component: LoginComponent },
   ...authRoutes,
   ...personRoutes,
@@ -35,8 +36,11 @@ const MainRoutes: Routes = [
   //Enterprise
   ...enterpriseRoutes,
   ...electVochuersRoutes,
-  ...monitorVouchersRoutes
+  ...monitorVouchersRoutes,
   //Users
+
+  //Cfdi
+  ...cfdiRoutes
 ]
 
 @NgModule({

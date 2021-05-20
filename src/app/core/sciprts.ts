@@ -1,7 +1,6 @@
+'use strict'
 import {Tooltip} from 'bootstrap';
 function init() {
-  'use strict'
-
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   tooltipTriggerList.forEach(function (tooltipTriggerEl) {
     new Tooltip(tooltipTriggerEl)
@@ -21,6 +20,7 @@ function init() {
   menus.forEach(m => {
     m.addEventListener('click', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       document.querySelectorAll('.menu-item').forEach(e => e.classList.remove('show'));
       this.parentNode.classList.toggle('show');
     })
@@ -38,19 +38,19 @@ function init() {
 
   document.addEventListener('click', function (e: any) {
 
-    const compList = e.target.classList;
-    const paretnClass = e.target.parentNode.classList;
+    const compList = e.target;
+    const parent = e.target.parentNode;
 
-    if (!compList.contains('sub-item-btn') && !paretnClass.contains('sub-item-btn')) {
-      document.querySelectorAll('.aside-sub-item').forEach(e => e.classList.remove('show'));
+    if (compList && !compList.classList.contains('sub-item-btn') &&
+          parent && !parent.classList.contains('sub-item-btn')) {
+        document.querySelectorAll('.aside-sub-item').forEach(e => e.classList.remove('show'));
     }
 
-    if (!compList.contains('submenu-content') && !paretnClass.contains('submenu-content')) {
+    if (compList && !compList.classList.contains('submenu-content') && parent && !parent.classList.contains('submenu-content')) {
       document.querySelectorAll('.submenu-content').forEach(e => e.classList.remove('show'));
-      if (!compList.contains('open-menu-item')) {
+      if (!compList.classList.contains('open-menu-item')) {
         document.querySelectorAll('.menu-item').forEach(e => e.classList.remove('show'));
       }
-
     }
   });
 
@@ -60,7 +60,8 @@ function init() {
     const overlay =  document.querySelector('.overlay');
     menu.classList.toggle('show');
     overlay.classList.toggle('show');
-    overlay.addEventListener('click', function () {
+    overlay.addEventListener('click', function (e) {
+      e.preventDefault();
       menu.classList.remove('show');
       overlay.classList.remove('show');
     })

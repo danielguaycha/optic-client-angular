@@ -31,9 +31,9 @@ export class EnterpriseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loader = false;
-    this.micro_enterprise = this.formData.micro_enterprise == "SI" ? true : false;
-    this.accounting = this.formData.accounting == "SI" ? true : false;
-    this.imageProfile = `${environment.apiUrl}/image?path=/${this.formData.logo}`
+    this.micro_enterprise = this.formData.micro_enterprise == "SI" ;
+    this.accounting = this.formData.accounting == "SI";
+    this.imageProfile = `${environment.apiUrl}/image?path=/${this.formData.logo}&default=true`
     this.formData.authorization == "null" ? this.formData.authorization = "" : null ;
     this.formData.special_contrib == "null" ? this.formData.special_contrib = "" : null ;
     this.formData.retention_agent == "null" ? this.formData.retention_agent = "" : null ;
@@ -116,7 +116,7 @@ export class EnterpriseComponent implements OnInit {
       this.formData.accounting = "NO"
     }
   }
-  
+
   onInputCode(value) {
     this.isNumber(value)? this.cod_est = value : this.cod_est = "0";
     this.addSerie();

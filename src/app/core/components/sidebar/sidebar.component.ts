@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+
   }
 
 }

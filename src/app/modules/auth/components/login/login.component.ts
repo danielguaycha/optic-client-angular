@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  startImageUrl = '../assets/img/startlogin.png';
+  startImageUrl = '../assets/img/logo.svg';
 
   public user:string;
   public password:string;
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
     this.authService.login({username: this.user, password: this.password}).subscribe(res =>{
       if (res.body) {
         this.authService.setToken(res.body.token);
+        this.authService.getLoginUser();
         this.router.navigate(['/persons']);
       }
       this.loader = false;

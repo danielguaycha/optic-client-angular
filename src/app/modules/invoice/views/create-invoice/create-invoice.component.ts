@@ -8,7 +8,12 @@ import {ConfigService} from '../../../config/general/services/config.service';
 import typePayment from '../../models/type.payment';
 import {MethodPaymentComponent} from '../../components/method-payment/method-payment.component';
 import {InvoiceService} from '../../services/invoice.service';
+import {Store} from '@ngrx/store';
+import {addTitle} from '../../../auth/store/user.actions';
+import {SequencesService} from '../../../config/general/services/sequences.service';
+import {Sequence} from '../../../config/general/models/sequence.model';
 
+// @ts-ignore
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
@@ -27,13 +32,18 @@ export class CreateInvoiceComponent implements OnInit {
   total: number;
   typePayments: Array<any> = [];
   loader: boolean = false;
+  sequence: string = "001-001-00000001";
   constructor(private toast: ToastService, public validate: ValidateService,
-              public cfg: ConfigService, private invService: InvoiceService) {
-    this.initComponents();
+              public cfg: ConfigService, private seqService: SequencesService,
+              private invService: InvoiceService, private store: Store) {
+
     this.typePayments = typePayment;
+    this.store.dispatch(addTitle({ title: "Ventas"}));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initComponents();
+  }
 
   submit(methodsPayments) {
     if (methodsPayments.length <= 0) {
@@ -82,6 +92,15 @@ export class CreateInvoiceComponent implements OnInit {
     this.MethodPaymentCmp.open(this.formData.methodPay);
   }
 
+  // get seq
+  getSeq() {
+    this.seqService.getByType(Sequence.SEQ_INVOICE).subscribe(res => {
+      if (res.ok) {
+        this.sequence = res.body;
+      }
+    })
+  }
+
   //events
   onSelectPerson(person){
     this.formData.client_id = person.id;
@@ -89,7 +108,7 @@ export class CreateInvoiceComponent implements OnInit {
 
   //events
   onAddArticle(article: any) {
-    if (article.qty > article.stock) { // verify stock
+    if (article.qty > article.stock && article.type === 'PRODUCTO') { // verify stock
       this.toast.warn(`La cantidad ingresada (${article.qty}) es mayor al stock (${article.stock}), articulo (Cod=${article.code}) `);
       return;
     }
@@ -168,6 +187,7 @@ export class CreateInvoiceComponent implements OnInit {
     this.descuento = 0;
     this.iva12 = 0;
     this.total = 0;
+    this.getSeq();
   }
 
   //validate invoice

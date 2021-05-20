@@ -67,6 +67,8 @@ import { SidebarComponent } from './core/components/sidebar/sidebar.component';
 import { ElectVouchersComponent } from './modules/elect_vouchers/views/elect_vouchers.component';
 import { InvoiceBuysComponent } from './modules/invoice-buys/views/invoice-buys.component';
 import { MonitorVouchersComponent } from './modules/monitor-vouchers/views/monitor-vouchers.component';
+import { FrmSeqComponent } from './modules/config/general/components/frm-seq/frm-seq.component';
+import { DocsComponent } from './modules/cfdi/views/docs/docs.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +123,8 @@ import { MonitorVouchersComponent } from './modules/monitor-vouchers/views/monit
     ElectVouchersComponent,
     InvoiceBuysComponent,
     MonitorVouchersComponent,
+    FrmSeqComponent,
+    DocsComponent,
 
   ],
   imports: [

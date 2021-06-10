@@ -18,9 +18,7 @@ export class DialogSearchCategoryComponent implements OnInit {
     this.search = ``;
   }
 
-  ngOnInit(): void {
-    this.ListCategory();
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     // const modal = document.getElementById('modalSearchCategory');

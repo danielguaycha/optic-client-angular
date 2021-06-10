@@ -8,9 +8,11 @@
         <label for="category_id" class="form-label">Categoría: *</label>
         <div class="input-group">
             <div class="col-12 col-md-2">
-                <input type="text" id="category_id" [(ngModel)]="formData.category_id? formData.category_id : category.id" (keypress)="onSearchCategory($event)" name="category_id" class="form-control">
+                <input type="text" id="category_id" [(ngModel)]="formData.category_id ? formData.category_id : category.id"
+                       (keypress)="onSearchCategory($event)" name="category_id" class="form-control">
             </div>
-            <input type="text" id="category" [(ngModel)]="formData.category? formData.category : category.name" name="category" class="form-control" readonly>
+            <input type="text" id="category" [(ngModel)]="formData.category? formData.category : category.name"
+                   name="category" class="form-control" readonly>
             <app-add-category (create)="onSelectCategory($event)"></app-add-category>
             <app-dialog-search-category (select)="onSelectCategory($event)"></app-dialog-search-category>
         </div>
@@ -57,7 +59,9 @@
 
             <div class="div col-3 col-md-3">
                 <label for="pvpIva" class="form-label">PVP + Iva</label>
-                <input type="number" min="0" id="pvpIva" name="pvpIva" (input)="onInputFinalPrice($event.target.value)" class="form-control" [value]="validate.round(pvpIva)" (change)="onInputFinalPrice($event.target.value)" step="any">
+                <input type="number" min="0" id="pvpIva" name="pvpIva"
+                       class="form-control" [value]="validate.round(pvpIva)"
+                       step="any">
             </div>
         </div>
     </div>

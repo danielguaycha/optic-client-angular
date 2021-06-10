@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() idModal:string;
   @Input() showFooter:boolean = true;
   @Input() extraClass: string = '';
+  @Input() secondary: boolean = false;
   @ViewChild('closebutton') closebutton;
   public appName: string
   private modal;
@@ -23,12 +24,24 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
+    this.getModal();
+  }
+
+  getModal() {
     const el = document.getElementById(this.idModal);
     if (el)
-      this.modal = new Modal(el);
+      this.modal = new Modal(el, {
+        keyboard: false
+      });
+  }
+
+  getInstance() {
+    const myModalEl = document.getElementById(this.idModal)
+    this.modal = Modal.getInstance(myModalEl)
   }
 
   close() {
+    this.getInstance();
     this.modal.hide();
   }
 

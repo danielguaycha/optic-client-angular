@@ -59,12 +59,12 @@ export class NavbarComponent implements OnInit {
             submenu: [
               {
                 name: "Registrar",
-                to: "/providers/add",
+                to: "/persons/provider/add",
                 icon: 'fa-plus',
               },
               {
                 name: "Listar",
-                to: "/providers",
+                to: "/persons/providers",
                 icon: 'fa-list'
               }
             ]
@@ -76,12 +76,12 @@ export class NavbarComponent implements OnInit {
             submenu: [
               {
                 name: "Agregar producto",
-                to: "/products/add",
+                to: "/inventory/articles/add",
                 icon: 'fa-plus',
               },
               {
                 name: "Listar Productos",
-                to: "/products",
+                to: "/inventory/articles",
                 icon: 'fa-list'
               },
               {
@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit {
             submenu: [
               {
                 name: 'Nueva Factura de venta',
-                to: '/invoice',
+                to: '/doc/invoice',
                 icon: 'fa-cart-plus'
               }
             ]
@@ -109,17 +109,17 @@ export class NavbarComponent implements OnInit {
         items: [
           {
             name: "Perfil de empresa",
-            to: "/enterprise",
+            to: "config/enterprise",
             icon: 'fa-university'
           },
           {
             name: "Configuraciones",
-            to: "/config",
+            to: "/config/general",
             icon: "fa-cog"
           },
           {
             name: "Roles y permisos",
-            to: "/roles/add",
+            to: "users/roles/add",
             icon: "fa-users"
           },
           {

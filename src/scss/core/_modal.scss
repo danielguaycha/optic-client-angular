@@ -1,0 +1,11 @@
+.modal {
+  &.secondary {
+    content: " ";
+    background: #090909bf;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+

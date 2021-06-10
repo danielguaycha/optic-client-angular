@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Articles} from '../../models/articles.model';
-import {ConfigService} from '../../../../config/general/services/config.service';
+import {ConfigService} from '../../../../enterprise/config/services/config.service';
 import { ArticleService } from '../../services/articles.service';
 import {ValidateService} from '../../../../../core/services/validate.service';
 import {ToastService} from '../../../../../core/services/toast.service';
@@ -75,7 +75,6 @@ export class SelectProductComponent implements OnInit {
   }
 
   calc() {
-    console.log(this.selectProduct);
     if(this.selectProductCalc.qty < 0 ){
       this.toast.warn(`No puede ingresar cantidades negativas`,"AVISO");
       return;
@@ -104,13 +103,12 @@ export class SelectProductComponent implements OnInit {
       this.selectProductCalc.qty = this.selectProduct.stock;
     }
 
-    desc = this.validate.calcPercent(pvp, this.selectProductCalc.discount);
     total = (pvp * qty);
+    desc = this.validate.calcPercent(total, this.selectProductCalc.discount);
     if (p.iva === 1) {
       totalIva = this.validate.calcPercent((total - desc), iva);
     }
     total = total - desc;
-
     this.selectProductCalc.totalIva = totalIva+total;
     this.selectProductCalc.total = total;
   }

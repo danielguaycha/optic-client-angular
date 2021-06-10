@@ -1,4 +1,4 @@
 <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalAddCategory"><i class="fa fa-plus"></i></button>
-<app-modal idModal="modalAddCategory" [showFooter]="false" title="Agregar Categoria">
+<app-modal idModal="modalAddCategory" [showFooter]="false" [secondary]="true" title="Agregar Categoria">
     <app-frm-category body (create)="onCreateCategory($event)"></app-frm-category>
 </app-modal>

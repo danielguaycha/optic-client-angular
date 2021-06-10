@@ -22,7 +22,7 @@
              (change)="calc()"
              (keypress)="onEnterPress($event)"
              [(ngModel)]="selectProductCalc.qty"
-             [max]="selectProduct.stock"
+             [max]=" (selectProduct.type == 'PRODUCTO' ? selectProduct.stock : 999999 )"
              min="0"
              id="qty" value="1">
     </div>
@@ -58,9 +58,9 @@
   </div>
   <div class="col-6 col-md-1 d-flex justify-content-center">
     <button type="button" class="btn btn-light text-success" (click)="emitArticle()"
-            [disabled]="code && selectProduct.id && selectProductCalc.qty > 0"><i class="fa fa-plus"></i></button>
+            [disabled]="!(code && selectProduct.id && selectProductCalc.qty > 0)"><i class="fa fa-plus"></i></button>
     <button type="button" class="btn btn-light text-warning" (click)="initComponents()" *ngIf="code && selectProduct.id"
-            [disabled]="code && selectProduct.id"><i class="fa fa-eraser"></i></button>
+            [disabled]="!(code && selectProduct.id)"><i class="fa fa-eraser"></i></button>
     <app-dialog-search-product [search]="code" (onSelect)="onSelectProduct($event)"></app-dialog-search-product>
   </div>
 </div>

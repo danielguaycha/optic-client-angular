@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Articles } from '../../models/articles.model';
 import { ArticleService } from '../../services/articles.service';
-import {ConfigService} from '../../../../config/general/services/config.service';
+import {ConfigService} from '../../../../enterprise/config/services/config.service';
 import {ValidateService} from '../../../../../core/services/validate.service';
 import { Category } from '../../../category/models/categories.model';
 import { CategoryService } from '../../../category/services/category.service';
@@ -146,9 +146,10 @@ updateProduct() {
     this.formData.pvp = this.pvpIva;
   }
 
-  onInputFinalPrice(value: string) {
-    this.utility = this.validate.round(this.validate.getPercent(this.validate.parseDouble(value), this.pvp));
-    this.pvpIva = this.validate.parseDouble(value);
+  onInputFinalPrice(event) {
+    const value = event.target.value;
+   /* if (this.utility <= 0)
+      this.utility = this.validate.round(this.validate.getPercent(this.validate.parseDouble(value), this.pvp));*/
   }
 
   initFormData() {

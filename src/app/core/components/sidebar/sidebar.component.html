@@ -12,13 +12,13 @@
         </a>
       </li>
       <li class="item-menu">
-        <a routerLink="/invoice" title="Ventas" data-name="Ventas" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a routerLink="/doc/invoice" title="Ventas" data-name="Ventas" data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-cart2"></i>
         </a>
       </li>
       <li class="divider"></li>
       <li class="item-menu xs-hide">
-        <a routerLink="/products" title="Productos" data-name="Productos" class="green" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a routerLink="/inventory/articles" title="Productos" data-name="Productos" class="green" data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-archive"></i>
         </a>
       </li>
@@ -28,7 +28,7 @@
         </a>
       </li>
       <li class="item-menu sm-hide">
-        <a routerLink="/providers" title="Proveedores" data-name="Proveedores" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a routerLink="/persons/providers" title="Proveedores" data-name="Proveedores" data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-person-badge"></i>
         </a>
       </li>
@@ -38,7 +38,7 @@
                 data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-file-earmark-lock"></i></button>
         <ul class="sub-item grid">
-          <li><a routerLink="/cfdi" [queryParams]="{doc: 1}"><i class="bi bi-receipt"></i><span>Facturas</span></a></li>
+          <li><a routerLink="/doc/cfdi" [queryParams]="{doc: 1}"><i class="bi bi-receipt"></i><span>Facturas</span></a></li>
           <li><a href="#"><i class="bi bi-receipt"></i><span>Guias de Remision</span></a></li>
           <li><a href="#"><i class="bi bi-receipt"></i><span>Notas de Credito</span></a></li>
           <li><a href="#"><i class="bi bi-receipt"></i><span>Notas de Debito</span></a></li>

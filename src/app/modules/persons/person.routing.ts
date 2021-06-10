@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {EditPersonComponent} from './views/edit-person/edit-person.component';
-import {AuthGuard} from '../auth/services/auth.guard';
 import {AddPersonComponent} from './views/add-person/add-person.component';
 import {ListPersonComponent} from './views/list-person/list-person.component';
 import {ListProviderComponent} from './views/list-provider/list-provider.component';

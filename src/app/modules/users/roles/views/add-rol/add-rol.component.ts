@@ -1,7 +1,5 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { ValidateService } from 'src/app/core/services/validate.service';
 import { PermissionModel } from '../../models/permission.model';
 import { RolesModel } from '../../models/roles.model';
 import { RoleService } from '../../services/roles.service';
@@ -10,6 +8,7 @@ import { RoleService } from '../../services/roles.service';
     selector: 'frm-add-rol',
     templateUrl: './add-rol.component.html',
 })
+
 export class AddRolComponent implements OnInit {
     @ViewChild('permiso2') myDiv: ElementRef;
     @Input() formData!: RolesModel;
@@ -31,7 +30,7 @@ export class AddRolComponent implements OnInit {
     onSubmit() {
         this.savePermissions();
     }
-    
+
     savePermissions(){
         this.loader = true;
         this.roleService.saveRoles(this.formData).subscribe(res => {
@@ -44,7 +43,7 @@ export class AddRolComponent implements OnInit {
         }, error => {
           this.loader = false;
           this.toast.err(error);
-        })        
+        })
     }
 
     getPermissions() {

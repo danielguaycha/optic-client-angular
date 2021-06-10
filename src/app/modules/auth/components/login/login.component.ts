@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {AlertService} from '../../../../core/services/alert.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  providers: [ AuthService ]
+  providers: []
 })
 export class LoginComponent implements OnInit {
 

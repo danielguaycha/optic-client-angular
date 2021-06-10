@@ -6,13 +6,12 @@
 
         <label for="description" class="form-label">Descripción:</label>
         <input type="text" id="description" [(ngModel)]="formData.description" name="description" class="form-control" required>
-
     </div>
 
     <div class="divider-vertical"></div>
 
     <div class="col-12 col-md-5 text-center" *ngIf="permissions.length <= 0">
-        <H5 for="name" class="form-label">Aún no se han agregado permisos</H5>
+        <h5  class="form-label">Aún no se han agregado permisos</h5>
     </div>
 
     <!-- '#collapse' + tM[1]  data-bs-target-->
@@ -23,10 +22,10 @@
 
                 <h2 class="accordion-header" id="{{'heading'+tM[1]}}">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+tM[1]" aria-expanded="true" [attr.aria-controls]="'collapse' + tM[1]">
-                        <div class="form-check">
+                        <span class="form-check">
                             <input class="form-check-input" type="checkbox" id="checkTest"
                                 (change)="checkAllPermissions(tM, $event.target.checked)">
-                        </div>
+                        </span>
                         Modulo {{tM[1]}}
                     </button>
                 </h2>

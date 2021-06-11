@@ -45,6 +45,10 @@ const routes: Routes = [
           {
             path: 'cfdi',
             loadChildren: () => import('./modules/docs/cfdi/cfdi.module').then(m => m.CfdiModule)
+          },
+          {
+            path: 'buys',
+            loadChildren: () => import('./modules/docs/buys/buys.module').then(m => m.BuysModule)
           }
         ]
       },
@@ -64,7 +68,7 @@ const routes: Routes = [
       },
       // users
       {
-        path: 'users',
+        path: '',
         children: [
           {
             path: '',

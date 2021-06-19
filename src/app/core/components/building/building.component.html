@@ -1,0 +1,18 @@
+<div class="container-fluid h-100">
+  <div class="card py-5">
+    <div class="card-body text-center py-5">
+      <h1 class="text-secondary">🚀</h1>
+      <h3 class="mb-3">Trabajamos en ello!</h3>
+      <code class="fs-4">{{ module }}</code>
+      <p class="text-muted">Estamos construyendo este modulo en este momento, podemos sugerirte revisar los siguientes</p>
+      <div class="btn-group">
+        <a routerLink="/doc/invoice" class="btn btn-primary mx-1">Ventas</a>
+        <a routerLink="/inventory/articles" class="btn btn-primary mx-1">Productos</a>
+        <a routerLink="/inventory/adjust" class="btn btn-primary mx-1">Ajuste de inventario</a>
+        <a routerLink="/config/general" class="btn btn-primary mx-1">Configuraciones</a>
+        <a routerLink="/config/enterprise" class="btn btn-primary mx-1">Perfil de empresa</a>
+        <a routerLink="/doc/cfdi" [queryParams]="{'doc': 1}" class="btn btn-primary mx-1">Facturas electrónicas</a>
+      </div>
+    </div>
+  </div>
+</div>

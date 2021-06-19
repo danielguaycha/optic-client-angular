@@ -12,6 +12,7 @@ import {Store} from '@ngrx/store';
 import {addTitle} from '../../../../auth/store/user.actions';
 import {SequencesService} from '../../../../enterprise/config/services/sequences.service';
 import {Sequence} from '../../../../enterprise/config/models/sequence.model';
+import {SelectPersonComponent} from '../../../../persons/components/select-person/select-person.component';
 
 // @ts-ignore
 @Component({
@@ -21,6 +22,7 @@ import {Sequence} from '../../../../enterprise/config/models/sequence.model';
 export class CreateInvoiceComponent implements OnInit {
   @ViewChild(SelectProductComponent) SelectArticleCmp;
   @ViewChild(MethodPaymentComponent) MethodPaymentCmp;
+  @ViewChild(SelectPersonComponent) SelectPersonCmp;
 
   articles: Array<any>;
   formData: any;
@@ -36,7 +38,6 @@ export class CreateInvoiceComponent implements OnInit {
   constructor(private toast: ToastService, public validate: ValidateService,
               public cfg: ConfigService, private seqService: SequencesService,
               private invService: InvoiceService, private store: Store) {
-
     this.typePayments = typePayment;
     this.store.dispatch(addTitle({ title: "Ventas"}));
   }
@@ -46,7 +47,7 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   submit(methodsPayments) {
-    if (methodsPayments.length <= 0) {
+    if (methodsPayments.pays.length <= 0) {
       this.toast.err('Seleccione un método de pago');
       return;
     }
@@ -62,7 +63,8 @@ export class CreateInvoiceComponent implements OnInit {
       iva_percent: this.cfg.iva,
       pto_emi: 1,
       articles: [],
-      payments: methodsPayments
+      payments: methodsPayments.pays,
+      change: methodsPayments.change
     };
     // prebuild products
     for (let art of this.articles) {
@@ -151,7 +153,8 @@ export class CreateInvoiceComponent implements OnInit {
       } else {
         this.subtotal0 += p.total;
       }
-      this.descuento += this.validate.calcPercent(p.total, p.discount);
+     // this.descuento += this.validate.calcPercent(p.total, p.discount);
+      this.descuento += p.discount;
       this.total += p.totalIva;
     });
     this.iva12 = this.validate.calcPercent(this.subtotal12, this.cfg.iva);
@@ -160,7 +163,13 @@ export class CreateInvoiceComponent implements OnInit {
   reCalcItem(article) {
     let totalIva = 0;
     let total = (article.pvp * article.qty);
-    let desc = this.validate.calcPercent(total, article.discount);
+    //let desc = this.validate.calcPercent(total, article.discount);
+    let desc = article.discount;
+    if (desc > total) {
+      desc = 0;
+      article.discount = 0;
+      this.toast.warn(`El descuento no puede ser mayor al total del item`)
+    }
 
     if (article.iva === 1) {
       totalIva = this.validate.calcPercent((total - desc), this.cfg.iva);
@@ -168,7 +177,7 @@ export class CreateInvoiceComponent implements OnInit {
     total = total - desc;
     article.totalIva = totalIva+total;
     article.total = total;
-    if (article.qty > article.stock) {
+    if (article.qty > article.stock && article.type === `PRODUCTO`) {
       this.toast.warn(`La cantidad ingresada (${article.qty}) en mayor al stock (${article.stock})`);
       article.qty = article.stock;
     }
@@ -189,6 +198,15 @@ export class CreateInvoiceComponent implements OnInit {
     this.iva12 = 0;
     this.total = 0;
     this.getSeq();
+    if (this.SelectArticleCmp)
+      this.SelectPersonCmp.initComponents();
+    if (this.SelectArticleCmp)
+      this.SelectArticleCmp.initComponents();
+  }
+
+  // open search article
+  openSearchArticle() {
+    this.SelectArticleCmp.openSearch();
   }
 
   //validate invoice

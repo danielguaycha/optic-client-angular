@@ -1,6 +1,6 @@
 'use strict'
 import {Tooltip} from 'bootstrap';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 function init() {
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   tooltipTriggerList.forEach(function (tooltipTriggerEl) {

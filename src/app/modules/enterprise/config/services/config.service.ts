@@ -72,12 +72,12 @@ export class ConfigService {
     data.cfdi_send_mail != null ? formData.append('cfdi_send_mail', data.cfdi_send_mail.toString()): null;
     data.cfdi_wait != null ? formData.append('cdfi_wait', data.cfdi_wait.toString()): null;
     data.cfdi_sign_entity != null ? formData.append('cfdi_sign_entity', data.cfdi_sign_entity): null;
+    data.cfdi_sign_pw ? formData.append("cfdi_sign_pw", data.cfdi_sign_pw) : null;
 
     if(data.cfdi_sign != null){
       let nameFaile = data.cfdi_sign.name.replace(" ","");
       formData.append('cfdi_sign', data.cfdi_sign, nameFaile);
     }
-    console.log(formData);
     return this.http.post('enterprise/config', formData);
   }
 

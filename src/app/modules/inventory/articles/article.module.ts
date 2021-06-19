@@ -9,6 +9,7 @@ import {DialogSearchProductComponent} from './components/dialog-search-product/d
 import {CoreModule} from '../../../core/core.module';
 import {ArticleRouting} from './article.routing';
 import {CategoryModule} from '../category/category.module';
+import { FrmPricesComponent } from './components/frm-product/frm-prices/frm-prices.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {CategoryModule} from '../category/category.module';
     ListProductsComponent,
     FrmProductComponent,
     AddProductComponent,
-    SelectProductComponent
+    SelectProductComponent,
+    FrmPricesComponent
   ],
   providers: [],
 })

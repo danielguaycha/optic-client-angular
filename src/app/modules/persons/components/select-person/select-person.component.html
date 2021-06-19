@@ -2,12 +2,17 @@
   <input type="text" placeholder="CI/Ruc." class="form-control"
          (keypress)="onPressVerify($event)" autocomplete="off"
          [(ngModel)]="person.doc" name="doc">
-  <app-add-client (create)="onSelect($event)"></app-add-client>
-  <app-dialog-search-person (select)="onSelect($event)"></app-dialog-search-person>
+  <app-add-client (create)="onSelect($event)"
+                  [provider]="provider"
+                  [formData]="formDataPerson"></app-add-client>
+  
+  <app-dialog-search-person (select)="onSelect($event)" [provider]="provider"></app-dialog-search-person>
 </div>
 <div class="row g-1">
   <div class="col-12 col-md-6">
-    <input type="text" class="form-control" readonly placeholder="Cliente" [value]="person.name ? person.name : ''">
+    <input type="text" class="form-control" readonly
+           [placeholder]="provider ? 'Proveedor': 'Cliente'"
+           [value]="person.name ? person.name : ''">
   </div>
   <div class="col-12 col-md-6">
     <input type="email" class="form-control" readonly placeholder="Correo" [value]="person.email ? person.email : ''">

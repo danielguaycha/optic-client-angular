@@ -39,7 +39,7 @@
             </tr>
           </ng-container>
           <tr *ngIf="payments.length <= 0">
-            <td colspan="4" class="text-center text-muted">Presione en botón "+" para agregar otras formas de pago</td>
+            <td colspan="5" class="text-center text-muted">Presione en botón "+" para agregar otras formas de pago</td>
           </tr>
           </tbody>
         </table>
@@ -53,6 +53,8 @@
         <div class="input-group">
           <span class="input-group-text" id="label-total">Total Pago $:</span>
           <input type="number" class="form-control"
+                 (focusout)="calc()"
+                 min="0"
                  [(ngModel)]="totalPay" (input)="calc()" onfocus="this.select()"
                  id="totalPay"  aria-describedby="total">
         </div>
@@ -75,6 +77,6 @@
   <div btn>
     <button class="btn btn-primary" type="button"
             (click)="onSubmit()"
-            [disabled]="(total < totalAPagar)"><i class="fa fa-check me-2"></i>Guardar Factura</button>
+            [disabled]="(validate.round(total) < validate.round(totalAPagar))"><i class="fa fa-check me-2"></i>Guardar Factura</button>
   </div>
 </app-modal>

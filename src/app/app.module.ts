@@ -16,6 +16,7 @@ import {environment} from '../environments/environment';
 import {MainRoute} from './app.routing';
 import {PersonModule} from './modules/persons/person.module';
 import {ToastNotificationsModule} from 'ngx-toast-notifications';
+import {UserModule} from './modules/users/index/users.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {ToastNotificationsModule} from 'ngx-toast-notifications';
     CoreModule,
     AuthModule,
     PersonModule,
+    UserModule,
     StoreModule.forRoot({data: userReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],

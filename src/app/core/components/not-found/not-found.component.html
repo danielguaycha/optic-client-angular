@@ -1,0 +1,19 @@
+<div class="container-fluid h-100">
+  <div class="card py-5">
+    <div class="card-body text-center py-5">
+      <h1 class="text-secondary">🤷‍♀️</h1>
+      <h3 class="mb-3">Upps! No logramos encontrar lo que buscas</h3>
+      <p class="text-muted">
+        ¿Estás algo perdido?, te ofrecemos los siguientes enlaces, tal vez te ayuden a re-ubicarte en el sistema
+      </p>
+      <div class="btn-group" *ngIf="authServ.getToken()">
+        <a routerLink="/doc/invoice" class="btn btn-primary mx-1">Ventas</a>
+        <a routerLink="/inventory/articles" class="btn btn-primary mx-1">Productos</a>
+        <a routerLink="/inventory/adjust" class="btn btn-primary mx-1">Ajuste de inventario</a>
+        <a routerLink="/config/general" class="btn btn-primary mx-1">Configuraciones</a>
+        <a routerLink="/config/enterprise" class="btn btn-primary mx-1">Perfil de empresa</a>
+        <a routerLink="/doc/cfdi" [queryParams]="{'doc': 1}" class="btn btn-primary mx-1">Facturas electrónicas</a>
+      </div>
+    </div>
+  </div>
+</div>

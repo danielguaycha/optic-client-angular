@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       }
       this.loader = false;
     }, err => {
-      this.alert.error(err);
+      this.alert.error("El usuario o contraseña son incorrectos");
       this.loader = false;
     });
   }

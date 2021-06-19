@@ -31,8 +31,8 @@
                         <td>{{ p.email }}</td>
                         <td class="text-center">
                             <button class="s-btn text-danger" (click)="deletePerson(p)"><i class="fa fa-trash"></i></button>
-                            <a *ngIf="provider" class="s-btn text-info" [routerLink]="'/providers/'+p.doc+'/edit'"><i class="fa fa-trash"></i></a>
-                            <a *ngIf="!provider" class="s-btn text-info" [routerLink]="'/persons/'+p.doc+'/edit'"><i class="fa fa-trash"></i></a>
+                            <a *ngIf="provider" class="s-btn text-info" [routerLink]="'/persons/provider/'+p.doc+'/edit'"><i class="fa fa-pen"></i></a>
+                            <a *ngIf="!provider" class="s-btn text-info" [routerLink]="'/persons/'+p.doc+'/edit'"><i class="fa fa-pen"></i></a>
                         </td>
                     </tr>
                     <tr *ngIf="persons.length <= 0">

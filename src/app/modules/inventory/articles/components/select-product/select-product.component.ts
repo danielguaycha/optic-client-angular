@@ -18,32 +18,31 @@ export class SelectProductComponent implements OnInit {
   @Input() validateStock: boolean = true;
 
   code: string
-  selectProduct: Articles;
-  selectProductCalc: any;
+  currentArt: Articles;
+  calcArt: any;
   constructor(private articleService: ArticleService, public validate: ValidateService,
               private cfg: ConfigService, private toast: ToastService) {
     this.initComponents()
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   emitArticle() {
-      if (this.selectProduct.id <= 0) {
+      if (this.currentArt.id <= 0) {
         this.toast.info('Seleccione un producto primero');
         return;
       }
-      if (this.selectProductCalc.qty <= 0) {
-        this.toast.warn('La cantidad debe ser mayor a 0');
+      if (this.calcArt.qty <= 0) {
+        this.toast.warn('La cantidad ingresada debe ser mayor a 0');
         return;
       }
       this.calc();
       this.onSelect.emit({
-        ...this.selectProduct,
-        qty: this.selectProductCalc.qty,
-        discount: this.selectProductCalc.discount,
-        total: this.selectProductCalc.total,
-        totalIva: this.selectProductCalc.totalIva,
+        ...this.currentArt,
+        qty: this.calcArt.qty,
+        discount: this.calcArt.discount,
+        total: this.calcArt.total,
+        totalIva: this.calcArt.totalIva,
       });
   }
 
@@ -53,10 +52,12 @@ export class SelectProductComponent implements OnInit {
   }
 
   onSelectProduct(product: any) {
-    this.selectProduct = product;
-    this.searchProductCmp.hide();
-    const qty = document.getElementById('qty');
-    qty.focus();
+    this.currentArt = product;
+    if (this.hasStock()) {
+      this.searchProductCmp.hide();
+      const qty = document.getElementById('qty');
+      qty.focus();
+    }
   }
 
   searchProduct(key) {
@@ -64,10 +65,13 @@ export class SelectProductComponent implements OnInit {
     if (this.code.trim().length <= 0) return;
     this.articleService.getProduct(this.code, true).subscribe(res => {
       if (res.ok && res.body) {
-        this.selectProduct = res.body;
-        this.selectProduct.pvp = this.validate.round(this.selectProduct.pvp);
-        const qty = document.getElementById('qty');
-        qty.focus();
+        const article = res.body;
+        if (this.hasStock(article)) {
+          this.currentArt = res.body;
+          this.currentArt.pvp = this.validate.round(this.currentArt.pvp);
+          const qty = document.getElementById('qty');
+          qty.focus();
+        }
       } else {
         this.searchProductCmp.show();
       }
@@ -75,47 +79,61 @@ export class SelectProductComponent implements OnInit {
   }
 
   calc() {
-    if(this.selectProductCalc.qty < 0 ){
+    if(this.calcArt.qty < 0 || this.calcArt.discount < 0 ){
       this.toast.warn(`No puede ingresar cantidades negativas`,"AVISO");
       return;
     }
-    if(this.validateStock && (this.selectProduct.type === 'PRODUCTO')
-        && (this.selectProductCalc.qty > this.selectProduct.stock)
-        && this.selectProduct.name.length > 0){
-      this.toast.warn(`La cantidad ingresada en stock es superior a la existencia en bodega. Cantidad maxima: ${this.selectProduct.stock}`,"AVISO");
+    if(this.validateStock && (this.currentArt.type === 'PRODUCTO')
+        && (this.calcArt.qty > this.currentArt.stock)
+        && this.currentArt.name.length > 0){
+      this.toast.warn(`La cantidad ingresada en stock es superior a la existencia en bodega. Cantidad maxima: ${this.currentArt.stock}`,"AVISO");
       return;
     }
 
     if (!this.showCalc) return; // en caso de solo querer seleccionar el producto
 
-    const p = this.selectProduct;
+    const p = this.currentArt;
     if (!p.id) return;
 
     const iva = this.cfg.iva;
-    let qty = this.selectProductCalc.qty;
+    let qty = this.calcArt.qty;
     let pvp = p.pvp; // precio neto, sin impuestos
 
-    let total = 0;
+    let total, desc = 0;
     let totalIva = 0;
-    let desc = 0;
-    if (qty > this.selectProduct.stock && this.selectProduct.type === 'PRODUCTO' && this.validateStock) {
-      this.toast.warn(`El cantidad ingresada (${qty}) supera el stock (${this.selectProduct.stock})`);
-      this.selectProductCalc.qty = this.selectProduct.stock;
+    if (qty > this.currentArt.stock && this.currentArt.type === 'PRODUCTO' && this.validateStock) {
+      this.toast.warn(`El cantidad ingresada (${qty}) supera el stock (${this.currentArt.stock})`);
+      this.calcArt.qty = this.currentArt.stock;
     }
 
     total = (pvp * qty);
-    desc = this.validate.calcPercent(total, this.selectProductCalc.discount);
+    //desc = this.validate.calcPercent(total, this.selectProductCalc.discount);
+    desc = this.calcArt.discount;
+    if (desc > total) {
+      this.calcArt.discount = 0;
+      this.toast.warn(`El descuento no puede ser mayor al total`);
+      return;
+    }
     if (p.iva === 1) {
       totalIva = this.validate.calcPercent((total - desc), iva);
     }
     total = total - desc;
-    this.selectProductCalc.totalIva = totalIva+total;
-    this.selectProductCalc.total = total;
+    this.calcArt.totalIva = totalIva+total;
+    this.calcArt.total = total;
+  }
+
+  hasStock(product: Articles = null) {
+    if (!product) product = this.currentArt;
+    if (product.type === 'PRODUCTO' && product.stock <= 0 && this.validateStock) {
+      this.toast.warn(`El producto (${product.code}) no tiene stock`);
+      return false;
+    }
+    return true;
   }
 
   initComponents() {
     this.code = '';
-    this.selectProduct = {
+    this.currentArt = {
       category_id: 0,
       code: '',
       description: '',
@@ -130,11 +148,15 @@ export class SelectProductComponent implements OnInit {
       stock: 0,
       type: ''
     };
-    this.selectProductCalc = {
+    this.calcArt = {
       discount: 0,
       qty: 1,
       total: 0,
       totalIva: 0
     }
+  }
+
+  openSearch() {
+    this.searchProductCmp.show();
   }
 }

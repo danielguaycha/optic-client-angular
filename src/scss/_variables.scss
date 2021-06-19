@@ -3,7 +3,10 @@ $body-bg: #fafafa;
 $input-focus-box-shadow: none;
 
 $themeDark: true;
-$primary: #7289da;
+//$primary: darken(#0085ad, 2);
+$primary: lighten(#0085ad, 10);
+$secondary: darken(#00aea4, 5);
+//$secondary: #00aea4;
 $light: #99aab5;
 $dark: #23272a;
 $dark-2: #2c2f33;

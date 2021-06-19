@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {CfdiModel} from '../models/cfdi.model';
 import {Observable} from 'rxjs';
+import {AuthService} from '../../../auth/services/auth.service';
+import {environment} from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CfdiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getDocuments(model: CfdiModel) : Observable<any> {
     let params = new HttpParams()
@@ -32,11 +34,19 @@ export class CfdiService {
   }
 
   verifyKeyAccess(keyAccess: string) : Observable<any> {
-    return this.http.get(`invoice/verify?key=${keyAccess}`);
+    return this.http.get(`invoice/verify/key-access?key=${keyAccess}`);
   }
 
   getDocFromSRI (keyAccess: string) : Observable<any> {
     return this.http.get(`invoice/sri/?key=${keyAccess}`);
   }
 
+  // documents view
+  getIRide(docId: number) {
+    return `${environment.apiUrl}/ride/${docId}?token=${this.authService.getToken()}`;
+  }
+
+  getXML(docId: number) {
+    return `${environment.apiUrl}/xml/${docId}?token=${this.authService.getToken()}`;
+  }
 }

@@ -20,5 +20,5 @@ import {ListUserComponent} from './views/list-user/list-user.component';
   ],
   providers: [],
 })
-export class UserModuleModule {
+export class UserModule {
 }

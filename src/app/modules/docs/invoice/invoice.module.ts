@@ -5,14 +5,21 @@ import {CreateInvoiceComponent} from './views/create-invoice/create-invoice.comp
 import {InvoiceRouting} from './invoice.routing';
 import {PersonModule} from '../../persons/person.module';
 import {ArticleModule} from '../../inventory/articles/article.module';
+import { SelectInvoiceComponent } from './components/select-invoice/select-invoice.component';
+import { DialogSearchInvoiceComponent } from './components/dialog-search-invoice/dialog-search-invoice.component';
 
 @NgModule({
-  declarations: [
-    MethodPaymentComponent,
-    CreateInvoiceComponent
-  ],
-  imports: [
-    CoreModule, InvoiceRouting, PersonModule, ArticleModule,
-  ]
+    declarations: [
+        MethodPaymentComponent,
+        CreateInvoiceComponent,
+        SelectInvoiceComponent,
+        DialogSearchInvoiceComponent
+    ],
+    exports: [
+        SelectInvoiceComponent
+    ],
+    imports: [
+        CoreModule, InvoiceRouting, PersonModule, ArticleModule,
+    ]
 })
 export class InvoiceModule { }

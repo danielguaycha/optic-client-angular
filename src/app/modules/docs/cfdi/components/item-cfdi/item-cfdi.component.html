@@ -1,0 +1,37 @@
+<td data-name="" class="no-data">
+  <div class="form-check">
+    <input class="form-check-input" disabled (change)="onSelect($event)" type="checkbox" value="">
+  </div>
+</td>
+<td data-name="Numero">{{ doc.number }}</td>
+<td data-name="Tipo">{{ doc.type_ }}</td>
+<td data-name="Fecha">{{ doc.date }}</td>
+<td data-name="Client/Prov.">{{ doc.person_name }}</td>
+<td data-name="CI/Ruc">{{ doc.person_doc }}</td>
+<td data-name="Total">{{ doc.total }}</td>
+<td data-name="C. Acceso"><small><code>{{ doc.key_access }}</code></small></td>
+<td data-name="Estado">{{ doc.sri_status }}</td>
+<td class="text-end no-data">
+  {{'' // actions for docs}}
+  <button *ngIf="doc.send_sri < states.AUTH"
+          (click)="authInvoice(doc.id)"
+          [disabled]="loader"
+          class="btn btn-sm text-primary"
+          title="Enviar y Autorizar" ><i class="fa fa-paper-plane"></i></button>
+
+  <button *ngIf="doc.send_sri !== states.AUTH"
+          (click)="verifyInvoiceKey(doc.key_access)"
+          [disabled]="loader"
+          class="btn btn-sm text-purple" title="Verificar"><i class="fas fa-exchange-alt"></i></button>
+
+  <button *ngIf="doc.send_sri == states.AUTH"
+          [disabled]="loader"
+          title="Enviar al correo" class="btn btn-sm text-warning"><i class="fa fa-envelope"></i></button>
+
+  <a [href]="downloadXML(doc.id)"
+     class="btn btn-sm text-success" title="Descargar XML"><i class="fa fa-file"></i></a>
+
+  {{''//View Ride}}
+  <button (click)="viewRide(doc.id)" class="btn btn-sm text-danger"
+          title="Ver Ride"><i class="fa fa-file-pdf"></i></button>
+</td>

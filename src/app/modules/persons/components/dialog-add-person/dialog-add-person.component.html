@@ -1,4 +1,6 @@
 <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalAddPerson"><i class="fa fa-plus"></i></button>
 <app-modal idModal="modalAddPerson" [showFooter]="false" [title]="title">
-    <app-frm-client [provider]="provider" body (create)="onCreateClient($event)"></app-frm-client>
+    <app-frm-client body [formData]="formData"
+      [provider]="provider"
+      (create)="onCreateClient($event)"></app-frm-client>
 </app-modal>

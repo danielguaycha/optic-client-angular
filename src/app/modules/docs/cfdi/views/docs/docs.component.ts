@@ -3,9 +3,6 @@ import * as moment from 'moment';
 import {CfdiModel} from '../../models/cfdi.model';
 import {CfdiService} from '../../services/cfdi.service';
 import {ToastService} from '../../../../../core/services/toast.service';
-import loader from '@angular-devkit/build-angular/src/webpack/plugins/single-test-transform';
-import {Tooltip} from 'bootstrap';
-import {DocState} from '../../models/doc_state.model';
 
 @Component({
   selector: 'app-docs',
@@ -16,10 +13,9 @@ export class DocsComponent implements OnInit {
   public model: CfdiModel;
   public docs: any;
   public loader: boolean = false;
-  public states = DocState;
-  constructor(private cfdiService: CfdiService, private toast: ToastService) {
+  public checked: Array<any> = [];
 
-  }
+  constructor(private cfdiService: CfdiService, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.docs = [];
@@ -33,6 +29,7 @@ export class DocsComponent implements OnInit {
 
   getDocs() {
     this.loader = true;
+    this.checked = [];
     this.cfdiService.getDocuments(this.model).subscribe(res => {
       if (res.ok) {
         this.docs = res.body;
@@ -45,35 +42,16 @@ export class DocsComponent implements OnInit {
     })
   }
 
-  // invoice
-  verifyInvoice(invoiceId: number) {
-    this.loader = true;
-    this.cfdiService.invoiceVerify(invoiceId).subscribe(res => {
-      if (res.ok) {
-        if (res.body.auth) {
-          this.toast.ok(res.message)
-        } else {
-          this.toast.info(`La factura (${invoiceId}) no esta autorizada`)
-        }
-      }
-      this.loader = false;
-    }, error =>  {
-      this.loader = false;
-      this.toast.err(error);
-    })
+  sendLote() {
+    console.log(this.checked);
   }
 
-  authInvoice(invoiceId) {
-    this.loader = true;
-    this.cfdiService.invoiceAuth(invoiceId).subscribe(res => {
-      if (res.ok) {
-        this.toast.ok(res.message)
-      }
-      this.loader = false;
-    }, error =>  {
-      this.loader = false;
-      this.toast.err(error);
-    })
+  onCheckItem(item) {
+    if (item.check) {
+      this.checked.push(item.doc);
+    } else {
+      const index = this.checked.findIndex(i => i.id === item.doc.id);
+      if (index>=0) this.checked.splice(index, 1);
+    }
   }
-
 }

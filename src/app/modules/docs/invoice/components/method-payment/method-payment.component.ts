@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import banks from '../../models/banks';
 import typePayment from '../../models/type.payment';
 import {ValidateService} from '../../../../../core/services/validate.service';
-import {Modal} from 'bootstrap';
 import {ModalComponent} from '../../../../../core/components/modal/modal.component';
 
 @Component({
@@ -51,13 +50,13 @@ export class MethodPaymentComponent implements OnInit {
       formatPays.push({
         code: tp.code,
         name: tp.text,
-        desc: '',
+        desc: tp.value,
         extraInfo: '',
-        total: this.totalPay
+        total: this.totalPay,
       })
     }
 
-    this.onComplete.emit(formatPays);
+    this.onComplete.emit({pays: formatPays, change: this.change});
     this.close()
   }
 
@@ -84,8 +83,10 @@ export class MethodPaymentComponent implements OnInit {
       this.total+= pay.total;
     }
     this.total+= this.totalPay;
-    if (this.total >= this.totalAPagar) {
+    if (this.total >= this.totalAPagar && this.totalPay > 0) {
       this.change = this.total - this.totalAPagar;
+    } else {
+      this.change = 0;
     }
   }
 

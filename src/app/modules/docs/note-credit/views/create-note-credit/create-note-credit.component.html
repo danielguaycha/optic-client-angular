@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <label class="label-title">Factura: </label>
+        <app-select-invoice [withDetails]="true" (onSelect)="onSelectInvoice($event)"></app-select-invoice>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="label-title">Nota de Crédito: </label>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="input-group-min">
+              <label for="date" class="form-label">Fecha: </label>
+              <input type="date" name="date" id="date" class="form-control">
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="input-group-min">
+              <label for="number" class="form-label">Numero: </label>
+              <input type="text" name="number" id="number" class="form-control">
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="input-group-min">
+              <label for="user" class="form-label">Usuario: </label>
+              <input type="text" readonly name="user" id="user" class="form-control">
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+    <label class="label-title">Detalles</label>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Cod</th>
+        <th>Descripción</th>
+        <th>P. Unitario</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+        <th>Total + Iva</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let det of invoice.details">
+        <td style="width: 1%">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" checked>
+          </div>
+        </td>
+        <td>Code</td>
+        <td>* {{ det.description }}</td>
+        <td>{{ det.pvp | round:2 }}</td>
+        <td>
+          <input type="number" class="form-control-plaintext form-control-sm text-center fw-bold" min="0" [max]="det.qty" [value]="det.qty">
+        </td>
+        <td>{{ det.pvp * det.qty | round: 2 }}</td>
+        <td>{{ det.pvp * det.qty | round: 2}}</td>
+        <td>
+
+        </td>
+      </tr>
+      <tr *ngIf="invoice.details.length <= 0">
+        <td colspan="8" class="text-center text-muted">No se ha cargado la factura, presione el botón <i class="fa fa-search me-1"></i> para iniciar la busqueda</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-md-8">
+        <div>
+          <label for="observation" class="form-label">Motivo/Observación</label>
+          <input name="observation" id="observation" type="text" class="form-control">
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <label for="total">Total Factura: </label>
+            <input type="text" [value]="((invoice.subtotal0 + invoice.subtotalIva) - invoice.discount) | round:4" id="total" name="total" class="form-control" readonly>
+          </div>
+          <div class="col">
+            <label for="saldo">Saldo Factura: </label>
+            <input type="text" id="saldo" name="saldo" class="form-control" readonly>
+          </div>
+          <div class="col d-flex align-items-end">
+            <button class="btn btn-primary w-100"><i class="fa fa-save me-2"></i>Registrar N. Crédito</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <table class="table table-sm table-borderless">
+          <tbody>
+          <tr>
+            <td>Subtotal 0% </td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            </td>
+          </tr>
+          <tr>
+            <td>Subtotal 12 % </td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            </td>
+          </tr>
+          <tr>
+            <td>ICE</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            </td>
+          </tr>
+          <tr>
+            <td>Iva 12 %</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            </td>
+          </tr>
+          <tr>
+            <td>I.R.B.P.</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            </td>
+          </tr>
+          <tr>
+            <td>Descuento</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            </td>
+          </tr>
+          <tr>
+            <td>Total $</td>
+            <td><input type="text" class="form-control form-control-sm text-end text-primary fw-bold" readonly value="0.0"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

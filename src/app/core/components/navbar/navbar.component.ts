@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppState} from '../../../modules/auth/store/user.reducer';
 import {AuthService} from '../../../modules/auth/services/auth.service';
-import scripts from '../../sciprts';
+import scripts from '../../utils/sciprts';
 import {Router} from '@angular/router';
 
 @Component({
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.auth.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   configMenu() {
@@ -99,6 +99,11 @@ export class NavbarComponent implements OnInit {
                 name: 'Nueva Factura de venta',
                 to: '/doc/invoice',
                 icon: 'fa-cart-plus'
+              },
+              {
+                name: 'Nota de Crédito (Devolución)',
+                to: '/doc/note-credit',
+                icon: 'fa-file'
               }
             ]
           }
@@ -109,12 +114,12 @@ export class NavbarComponent implements OnInit {
         items: [
           {
             name: "Perfil de empresa",
-            to: "config/enterprise",
+            to: "enterprise",
             icon: 'fa-university'
           },
           {
             name: "Configuraciones",
-            to: "/config/general",
+            to: "enterprise/config",
             icon: "fa-cog"
           },
           {

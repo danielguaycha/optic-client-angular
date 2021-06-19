@@ -33,7 +33,7 @@
                         <td>{{ p.office }}</td>
                         <td class="text-center">
                             <button class="s-btn text-danger" (click)="deleteProduct(p)"><i class="fa fa-trash"></i></button>
-                            <a class="s-btn text-info" [routerLink]="'/products/'+p.id.toString()+'/edit'"><i class="fa fa-pencil"></i></a>
+                            <a class="s-btn text-info" [routerLink]="'/inventory/articles/'+p.id.toString()+'/edit'"><i class="fa fa-pen"></i></a>
                         </td>
                     </tr>
                     <tr *ngIf="products.length <= 0">

@@ -6,12 +6,13 @@ import {ModalComponent} from '../../../../core/components/modal/modal.component'
   templateUrl: './dialog-add-person.component.html',
 })
 export class DialogAddPersonComponent implements OnInit {
-  @Input() provider: boolean = false
-  @Output() create : EventEmitter<any> = new EventEmitter<any>();
   @ViewChild(ModalComponent) child:ModalComponent;
 
-  public title: string;
+  @Input() provider: boolean = false
+  @Output() create : EventEmitter<any> = new EventEmitter<any>();
+  @Input() formData: any = {};
 
+  public title: string;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,4 +24,7 @@ export class DialogAddPersonComponent implements OnInit {
     this.child.close();
   }
 
+  open() {
+    this.child.open();
+  }
 }

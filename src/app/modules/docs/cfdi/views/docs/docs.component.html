@@ -32,9 +32,9 @@
         <select name="docStatus" id="docStatus" class="form-select" [(ngModel)]="model.docStatus">
           <option value="0">Ver todos</option>
           <option value="1">No enviados</option>
-          <option value="2">Autorizados</option>
-          <option value="1">Enviados</option>
-          <option value="4">No autorizados</option>
+          <option value="4">Autorizados</option>
+          <option value="2">Enviados</option>
+          <option value="3">No autorizados</option>
         </select>
       </div>
       <div class="col-2 col-lg-1 d-flex flex-column justify-content-end">
@@ -62,49 +62,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let d of docs">
-              <td data-name="" class="no-data">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="">
-                </div>
-              </td>
-              <td data-name="Numero">{{ d.number }}</td>
-              <td data-name="Tipo">{{ d.type_ }}</td>
-              <td data-name="Fecha">{{ d.date }}</td>
-              <td data-name="Client/Prov.">{{ d.person_name }}</td>
-              <td data-name="CI/Ruc">{{ d.person_doc }}</td>
-              <td data-name="Total">{{ d.total }}</td>
-              <td data-name="C. Acceso"><small><code>{{ d.key_access }}</code></small></td>
-              <td data-name="Estado">{{ d.sri_status }}</td>
-              <td class="text-center no-data">
-                <button *ngIf="d.send_sri < states.AUTH" class="btn btn-sm text-primary"
-                        title="Enviar y Autorizar" (click)="authInvoice(d.id)"><i class="fa fa-paper-plane"></i></button>
-                <button class="btn btn-sm text-purple" title="Verificar"
-                        (click)="verifyInvoice(d.id)"><i class="fas fa-exchange-alt"></i></button>
-
-                <button *ngIf="d.send_sri == states.AUTH" title="Enviar al correo" class="btn btn-sm text-warning"><i class="fa fa-envelope"></i></button>
-                <button class="btn btn-sm text-success" title="Descargar XML"><i class="fa fa-file"></i></button>
-                <button class="btn btn-sm text-danger" title="Ver Ride"><i class="fa fa-file-pdf"></i></button>
-              </td>
-            </tr>
-            <tr *ngIf="docs.length <= 0">
-              <td colspan="10" class="text-muted text-center">Configure los parámetros y presione <i class="ms-1 fa fa-share me-1"></i> para buscar</td>
-            </tr>
+              <ng-container *ngFor="let d of docs">
+                <tr app-item-cfdi [doc]="d" (onCheck)="onCheckItem($event)"></tr>
+              </ng-container>
+              <tr *ngIf="docs.length <= 0">
+                <td colspan="10" class="text-muted text-center">Configure los parámetros y presione <i class="ms-1 fa fa-share me-1"></i> para buscar</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="col">
-        <small class="text-muted">Seleccione uno o mas documentos para utilizar opciones en lote</small>
+        <small *ngIf="checked.length <=0" class="text-muted">Seleccione uno o mas documentos para utilizar opciones en lote</small>
+        <small *ngIf="checked.length > 0" class="text-success"> [{{ checked.length }}] item (s) seleccionado(s)</small>
       </div>
     </div>
   </div>
   <div class="card-footer">
     <div class="row">
       <div class="col">
-        <button class="btn btn-primary me-3"><i class="fa fa-paper-plane me-2"></i>Enviar y Comprobar</button>
-        <button class="btn btn-success me-3"><i class="fa fa-sync me-2"></i>Comprobar</button>
-        <button class="btn btn"><i class="fa fa-envelope me-2 text-danger"></i>Enviar al cliente</button>
+        <button [disabled]="checked.length <= 0"
+                (click)="sendLote()"
+                class="btn btn-primary me-3"><i class="fa fa-paper-plane me-2"></i>Enviar y Comprobar</button>
+        <button [disabled]="checked.length <= 0" class="btn btn-success me-3"><i class="fa fa-sync me-2"></i>Comprobar</button>
+        <button [disabled]="checked.length <= 0" class="btn btn"><i class="fa fa-envelope me-2 text-danger"></i>Enviar al cliente</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PersonService} from '../../services/person.service';
 import {ModalComponent} from '../../../../core/components/modal/modal.component';
 
@@ -8,6 +8,7 @@ import {ModalComponent} from '../../../../core/components/modal/modal.component'
 })
 export class DialogSearchPersonComponent implements OnInit {
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
+  @Input() provider: boolean = false;
   @ViewChild(ModalComponent) child:ModalComponent;
 
   search:string;
@@ -31,7 +32,7 @@ export class DialogSearchPersonComponent implements OnInit {
     this.persons = [];
     if (this.search.length < 2) return;
     this.loader = true;
-    this.personServ.getPersons(this.search).subscribe(res => {
+    this.personServ.getPersons(this.search, this.provider).subscribe(res => {
       if (res.ok) {
         this.persons = res.body.data;
         this.loader = false;

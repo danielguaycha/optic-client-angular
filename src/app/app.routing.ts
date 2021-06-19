@@ -2,6 +2,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AuthLayoutComponent} from './modules/auth/pages/auth-layout/auth-layout.component';
 import {AuthGuard} from './modules/auth/services/auth.guard';
+import {BuildingComponent} from './core/components/building/building.component';
+import {NotFoundComponent} from './core/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -49,38 +51,46 @@ const routes: Routes = [
           {
             path: 'buys',
             loadChildren: () => import('./modules/docs/buys/buys.module').then(m => m.BuysModule)
+          },
+          {
+            path: 'note-credit',
+            loadChildren: () => import('./modules/docs/note-credit/note-credit.module').then(m => m.NoteCreditModule)
           }
         ]
       },
       // config
       {
-        path: 'config',
+        path: 'enterprise',
         children: [
           {
-            path: 'enterprise',
+            path: '',
             loadChildren: () => import('./modules/enterprise/index/enterprise.module').then(m => m.EnterpriseModule)
           },
           {
-            path: 'general',
+            path: 'config',
             loadChildren: () => import('./modules/enterprise/config/config.module').then(m => m.ConfigModule)
           }
         ]
       },
       // users
       {
-        path: '',
+        path: 'users',
         children: [
           {
             path: '',
             pathMatch: 'full',
-            loadChildren: () => import('./modules/users/index/users.module').then(m => m.UserModuleModule)
+            loadChildren: () => import('./modules/users/index/users.module').then(m => m.UserModule)
           },
           {
             path: 'roles',
             loadChildren: () => import('./modules/users/roles/roles.module').then(m => m.RolesModule)
           }
         ]
-      }
+      },
+      {
+        path: 'building',
+        component: BuildingComponent
+      },
     ]
   },
   {
@@ -91,7 +101,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'auth/login'
+    component: NotFoundComponent
   }
 ]
 

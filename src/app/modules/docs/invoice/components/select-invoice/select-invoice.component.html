@@ -1,0 +1,20 @@
+<div class="row gx-1 gy-3">
+  <div class="col-12">
+    <div class="input-group">
+      <input type="text" [value]="invoice.number" readonly class="form-control" placeholder="# Factura">
+      <app-dialog-search-invoice (onSelect)="onSelectInvoice($event)"></app-dialog-search-invoice>
+    </div>
+  </div>
+  <div class="col-12 col-md-8">
+    <div class="input-group-min">
+      <label class="form-label" for="business_name">Razón Social (Cliente)</label>
+      <input [value]="invoice.client" id="business_name" name="business_name" class="form-control" readonly  type="text">
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="input-group-min">
+      <label class="form-label" for="ruc">Ruc/CI</label>
+      <input [value]="invoice.ruc" id="ruc" name="ruc" class="form-control" readonly  type="text">
+    </div>
+  </div>
+</div>

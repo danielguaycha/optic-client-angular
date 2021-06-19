@@ -1,5 +1,6 @@
 export enum DocState {
-  NO_SEND = 0,
-  SEND    = 1,
-  AUTH    = 2
+  NO_SEND = 1,
+  SEND    = 2,
+  DENIED  = 3,
+  AUTH    = 4
 }

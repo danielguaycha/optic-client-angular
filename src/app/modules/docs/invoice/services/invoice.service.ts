@@ -12,4 +12,12 @@ export class InvoiceService {
   store(data: any) : Observable<any> {
     return this.http.post(`invoice`, data);
   }
+
+  search(query: string) : Observable<any> {
+    return this.http.get(`invoice/find?search=${query}`);
+  }
+
+  show(id: number) : Observable<any> {
+    return this.http.get(`invoice/${id}`);
+  }
 }

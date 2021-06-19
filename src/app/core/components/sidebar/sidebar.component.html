@@ -7,7 +7,7 @@
   <div class="aside-body">
     <ul class="aside-menu first">
       <li class="item-menu">
-        <a href="/" title="Compras" data-name="Compras" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a [routerLink]="'/doc/buys'" title="Compras" data-name="Compras" data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-bag-plus"></i>
         </a>
       </li>
@@ -39,20 +39,20 @@
           <i class="bi bi-file-earmark-lock"></i></button>
         <ul class="sub-item grid">
           <li><a routerLink="/doc/cfdi" [queryParams]="{doc: 1}"><i class="bi bi-receipt"></i><span>Facturas</span></a></li>
-          <li><a href="#"><i class="bi bi-receipt"></i><span>Guias de Remision</span></a></li>
-          <li><a href="#"><i class="bi bi-receipt"></i><span>Notas de Credito</span></a></li>
-          <li><a href="#"><i class="bi bi-receipt"></i><span>Notas de Debito</span></a></li>
+          <li><a [routerLink]="'/building'" [queryParams]="{'module': 'G. Remision'}"><i class="bi bi-receipt"></i><span>Guias de Remision</span></a></li>
+          <li><a [routerLink]="'/building'" [queryParams]="{'module': 'N. Debito'}"><i class="bi bi-receipt"></i><span>Notas de Credito</span></a></li>
+          <li><a [routerLink]="'/building'" [queryParams]="{'module': 'N. Credito'}"><i class="bi bi-receipt"></i><span>Notas de Debito</span></a></li>
         </ul>
       </li>
     </ul>
     <ul class="aside-menu second">
       <li class="item-menu">
-        <a href="/" title="Notificaciones" data-name="Alertas" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a [routerLink]="'/enterprise/notifies'" title="Notificaciones" data-name="Alertas" data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-bell"></i>
         </a>
       </li>
       <li class="item-menu xs-hide">
-        <a routerLink="/config" title="Config" data-name="Config" data-bs-toggle="tooltip" data-bs-placement="right">
+        <a routerLink="/enterprise/config" title="Config" data-name="Config" data-bs-toggle="tooltip" data-bs-placement="right">
           <i class="bi bi-gear"></i>
         </a>
       </li>

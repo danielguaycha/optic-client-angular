@@ -1,0 +1,49 @@
+<button class="btn btn-success" data-bs-target="#modalSearchInvoice" data-bs-toggle="modal">
+  <i class="fa fa-search me-1"> </i>Buscar Factura</button>
+<app-modal idModal="modalSearchInvoice" title="Buscar Factura">
+    <div body>
+      <div>
+        <form ngForm (ngSubmit)="search()" class="input-group mb-1">
+          <input [(ngModel)]="query" name="search" id="search" type="search" class="form-control" placeholder="Buscar por cliente o numero">
+          <button type="submit" class="btn btn-success btn-group-sm"><i class="fa fa-search"></i></button>
+        </form>
+
+        <table class="table table-bordered mb-0">
+          <thead>
+          <tr>
+            <th>Numero</th>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Ruc</th>
+            <th>Estado</th>
+            <th>Total</th>
+            <th class="text-center text-muted"><i class="fa fa-cogs"></i></th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of invoices">
+              <td>{{ i.number }}</td>
+              <td>{{ i.date }}</td>
+              <td>{{ i.client }}</td>
+              <td>{{ i.ruc }}</td>
+              <td>{{ i.status }}</td>
+              <td>{{ i.total }}</td>
+              <td>
+                <button (click)="emit(i)" class="btn btn-sm text-primary"><i class="fa fa-plus"></i></button>
+              </td>
+            </tr>
+            <tr *ngIf="loader">
+              <td colspan="8">
+                <loader [loader]="loader" [dense]="true"></loader>
+              </td>
+            </tr>
+          <tr *ngIf="invoices.length <= 0 && !loader">
+            <td colspan="8" class="text-center text-muted">
+              Ingrese el numero o cliente de la factura para iniciar la búsqueda
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</app-modal>

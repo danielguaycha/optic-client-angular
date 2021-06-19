@@ -1,8 +1,8 @@
 <button class="btn btn-{{variant}} btn-loader {{ width ? 'w-'+width: '' }}" [disabled]="loader"
         [type]="type">
-  <div class="spinner-border text-light spinner-border-sm me-2" role="status" *ngIf="loader">
+  <span class="spinner-border text-light spinner-border-sm me-2" role="status" *ngIf="loader">
     <span class="visually-hidden">Loading...</span>
-  </div>
+  </span>
   <ng-content *ngIf="!loader" ></ng-content>
   <span *ngIf="loader">
     {{ loadingMsg }}

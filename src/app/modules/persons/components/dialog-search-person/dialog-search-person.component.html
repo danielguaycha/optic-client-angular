@@ -1,13 +1,14 @@
 <button class="btn btn-primary" type="button" data-bs-toggle="modal"
         data-bs-target="#modalSearchPerson"><i class="fa fa-search"></i></button>
-<app-modal idModal="modalSearchPerson" [showFooter]="false" title="Buscar Cliente">
+<app-modal idModal="modalSearchPerson" [showFooter]="false" [title]="provider ? 'Buscar Proveedor' : 'Buscar Cliente'">
     <div body>
-      <input type="search"
-             [(ngModel)]="search"
-             (input)="searchClient()"
-             (keypress)="onEnterPress($event)"
-             name="search" id="search"
-             autofocus class="form-control" placeholder="Buscar por: nombres, ruc, ci, cod">
+      <form ngForm (ngSubmit)="searchClient()" class="input-group">
+        <input type="search"
+               [(ngModel)]="search"
+               name="search" id="search"
+               autofocus class="form-control" placeholder="Buscar por: nombres, ruc, ci, cod">
+        <button class="btn btn-success"><i class="fa fa-search"></i></button>
+      </form>
       <table class="table table-hover">
         <thead>
           <tr>

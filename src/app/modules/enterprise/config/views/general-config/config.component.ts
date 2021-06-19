@@ -5,7 +5,7 @@ import { ConfigService } from '../../services/config.service';
 import { SecureStorageService } from '../../../../auth/services/secure-storage.service';
 import { ConfigModel } from '../../models/config-general.model';
 
-const MAXIMO_TAMANIO_BYTES = 5000000; // 1MB = 1 millón de bytes
+
 
 @Component({
   selector: 'app-general-config',
@@ -13,12 +13,9 @@ const MAXIMO_TAMANIO_BYTES = 5000000; // 1MB = 1 millón de bytes
 })
 
 export class ConfigGeneralComponent implements OnInit {
-  @Input() formData!: ConfigModel;
+ public formData: ConfigModel;
 
   public loader: boolean = false;
-  public send_mail_flag: boolean = false;
-  public env_prod_flag: boolean = false;
-
   public type: string = "password";
 
   public config: any;
@@ -73,26 +70,5 @@ export class ConfigGeneralComponent implements OnInit {
     })
   }
 
-  // events
-  onSelectFile(event) {
-    let file = event.target.files[0];
 
-    if (file.size > MAXIMO_TAMANIO_BYTES) {
-      this.toast.warn("El archivo seleccionado excede el tamaño permitido. MAX: 5 MB")
-    } else {
-      this.formData.cfdi_sign = file;
-    }
-  }
-
-  onChangeCheck(event) {
-    event.target.checked ? this.type = "text" : this.type = "password";
-  }
-
-  onCheckEnv(number: number){
-    this.formData.cfdi_env = number;
-  }
-
-  onCheckSendMail(event){
-    event.target.checked ? this.formData.cfdi_send_mail = 1 : this.formData.cfdi_send_mail= 0;
-  }
 }

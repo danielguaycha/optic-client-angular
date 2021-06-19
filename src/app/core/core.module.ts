@@ -13,8 +13,11 @@ import {WithLoaderComponent} from './components/with-loader/with-loader.componen
 import {AlertService} from './services/alert.service';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from '../modules/auth/services/jwt.interceptor';
-import {ErrorInterceptor} from './err.interceptor';
+import {ErrorInterceptor} from './utils/err.interceptor';
 import {ToastService} from './services/toast.service';
+import { BuildingComponent } from './components/building/building.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RoundPipe } from './pipes/round.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import {ToastService} from './services/toast.service';
     ModalConfirmComponent,
     NavbarComponent,
     SidebarComponent,
-    WithLoaderComponent
+    WithLoaderComponent,
+    BuildingComponent,
+    NotFoundComponent,
+    RoundPipe
   ],
   imports: [
     CommonModule,
@@ -52,6 +58,9 @@ import {ToastService} from './services/toast.service';
     NavbarComponent,
     SidebarComponent,
     WithLoaderComponent,
+    BuildingComponent,
+    NotFoundComponent,
+    RoundPipe
   ]
 })
 export class CoreModule { }

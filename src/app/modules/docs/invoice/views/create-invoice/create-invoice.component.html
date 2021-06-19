@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-12 col-md-6">
-        <app-select-person (select)="onSelectPerson($event)"></app-select-person>
+        <app-select-person #selectPerson (select)="onSelectPerson($event)"></app-select-person>
       </div>
       <div class="col-12 col-md-6">
         <div class="row g-2">
@@ -46,6 +46,7 @@
 
       </div>
       <app-select-product (onSelect)="onAddArticle($event)"></app-select-product>
+
       <label class="label-title">Detalles</label>
       <div class="col-12">
         <div class="table-responsive">
@@ -56,7 +57,7 @@
               <th>DETALLE</th>
               <th>P. UNIT</th>
               <th class="text-center">CANTIDAD</th>
-              <th class="text-center">DESC %</th>
+              <th class="text-center">DESC $</th>
               <th>TOTAL</th>
               <th>TOTAL+IVA</th>
               <th></th>
@@ -69,7 +70,7 @@
               <td>{{ p.pvp }}</td>
               <td><input type="number" min="0"
                          class="form-control-plaintext form-control-sm text-center"
-                         [(ngModel)]="p.qty" [max]="p.stock" (input)="reCalcItem(p)"></td>
+                         [(ngModel)]="p.qty" [max]=" (p.type === 'PRODUCTO') ? p.stock : 999999999" (input)="reCalcItem(p)"></td>
               <td><input type="number" min="0" max="100"
                          class="form-control-plaintext form-control-sm text-center"
                          [(ngModel)]="p.discount" (input)="reCalcItem(p)"></td>
@@ -94,8 +95,8 @@
             <input type="text" id="desc" class="form-control">
           </div>
           <div class="col-12 btn-group align-items-start">
-            <button class="btn btn-light me-2"><i class="fa fa-plus me-1 text-success"></i>Agregar artículos</button>
-            <button class="btn btn-light me-2"><i class="fa fa-eraser me-1 text-warning"></i>Limpiar todo</button>
+            <button (click)="openSearchArticle()" class="btn btn-light me-2"><i class="fa fa-plus me-1 text-success"></i>Agregar artículos</button>
+            <button (click)="initComponents()" class="btn btn-light me-2"><i class="fa fa-eraser me-1 text-warning"></i>Limpiar todo</button>
             <bs-button (click)="confirmPayment()" [loader]="loader"><i class="fa fa-save me-1"></i>Guardar Factura</bs-button>
           </div>
         </div>

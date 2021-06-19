@@ -14,7 +14,7 @@ export class ValidateService {
     if (useConfig)
       return this.roundTo(number, this.cfg.decimals);
 
-    return this.roundTo(number, 6);
+    return this.roundTo(number, 4);
   }
 
   toIntDefault(number: any, default_: number = 0) {
@@ -41,19 +41,23 @@ export class ValidateService {
 
   // percent calc
   addPercent(valueNeto: number, tarifa: number) {
-    return (valueNeto * (1 + (tarifa/100)));
+    return this.round(valueNeto * (1 + (tarifa/100)), false);
+  }
+
+  addIva(valueNeto: number) {
+    return this.addPercent(valueNeto, this.cfg.iva);
   }
 
   calcPercent(valueNeto: number, tarifa: number) {
-    return (valueNeto * (tarifa/100));
+    return this.round(valueNeto * (tarifa/100), false);
   }
 
   getNeto(total: number, tarifaPercent: number) {
-    return (total / (1 + (tarifaPercent/100)));
+    return this.round(this.parseDouble(total) / (1 + (this.parseDouble(tarifaPercent)/100)), false);
   }
 
   getPercent(total: number, valueNeto: number) {
-    return ((total / valueNeto) - 1) * 100;
+    return this.round((( this.parseDouble(total) / this.parseDouble(valueNeto)) - 1) * 100, false);
   }
 
   // parse

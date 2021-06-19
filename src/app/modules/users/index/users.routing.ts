@@ -5,7 +5,7 @@ import {ListUserComponent} from './views/list-user/list-user.component';
 import {EditUserComponent} from './views/edit-user/edit-user.component';
 
 const routes: Routes = [
-  {path: '', component: ListUserComponent},
+  {path: '', component: ListUserComponent, pathMatch: 'full'},
   {path: 'add', component: AddUserComponent},
   {path: ':id/edit', component: EditUserComponent},
 ];

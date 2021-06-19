@@ -4,12 +4,13 @@ import {GetEnterpriseComponent} from './views/get-enterprise/get-enterprise.comp
 import {CoreModule} from '../../../core/core.module';
 import {EnterpriseRouting} from './enterprise.routing';
 import {NgxImageCompressService} from 'ngx-image-compress';
+import { NotifyComponent } from './views/notify/notify.component';
 
 @NgModule({
   imports: [CoreModule, EnterpriseRouting],
   exports: [],
   declarations: [
-    EnterpriseComponent, GetEnterpriseComponent
+    EnterpriseComponent, GetEnterpriseComponent, NotifyComponent
   ],
   providers: [NgxImageCompressService],
 })

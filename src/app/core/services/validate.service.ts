@@ -49,15 +49,15 @@ export class ValidateService {
   }
 
   calcPercent(valueNeto: number, tarifa: number) {
-    return this.round(valueNeto * (tarifa/100), false);
+    return (valueNeto * (tarifa/100));
   }
 
   getNeto(total: number, tarifaPercent: number) {
-    return this.round(this.parseDouble(total) / (1 + (this.parseDouble(tarifaPercent)/100)), false);
+    return (this.parseDouble(total) / (1 + (this.parseDouble(tarifaPercent)/100)));
   }
 
   getPercent(total: number, valueNeto: number) {
-    return this.round((( this.parseDouble(total) / this.parseDouble(valueNeto)) - 1) * 100, false);
+    return ((( this.parseDouble(total) / this.parseDouble(valueNeto)) - 1) * 100);
   }
 
   // parse

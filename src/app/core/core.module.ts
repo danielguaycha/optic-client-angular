@@ -11,7 +11,7 @@ import {ModalConfirmComponent} from './components/modal-confirm/modal-confirm.co
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {WithLoaderComponent} from './components/with-loader/with-loader.component';
 import {AlertService} from './services/alert.service';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from '../modules/auth/services/jwt.interceptor';
 import {ErrorInterceptor} from './utils/err.interceptor';
 import {ToastService} from './services/toast.service';

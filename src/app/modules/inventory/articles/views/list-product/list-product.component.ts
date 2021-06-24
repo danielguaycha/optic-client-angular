@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../services/articles.service';
 import {ConfirmService} from '../../../../../core/services/confirm.service';
 import {ToastService} from '../../../../../core/services/toast.service';
-import { Articles } from '../../models/articles.model';
+import { Article } from '../../models/articles.model';
 import {ValidateService} from '../../../../../core/services/validate.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {ValidateService} from '../../../../../core/services/validate.service';
   export class ListProductsComponent implements OnInit {
 
     public loader:boolean;
-    public products:Array<Articles> = [];
+    public products:Array<Article> = [];
     constructor(
         private articleService: ArticleService,
         public validate: ValidateService,
@@ -40,7 +40,7 @@ import {ValidateService} from '../../../../../core/services/validate.service';
       this.products.push(event);
     }
 
-    deleteProduct(product:Articles) {
+    deleteProduct(product:Article) {
       this.confirm.confirm(`¿Está seguro que desea eliminar ${product.name.toUpperCase()}?`, () => {
         // this.toast.err("Borrado con exito!! Pero falta agregar este metodo en el api");
         this.articleService.deleteProduct(product.id).subscribe(res => {

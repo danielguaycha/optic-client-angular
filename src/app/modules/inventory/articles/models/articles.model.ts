@@ -1,4 +1,4 @@
-export interface Articles{
+export interface Article {
     id?: number,
     code: number | string,
     name: string,

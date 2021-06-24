@@ -22,12 +22,12 @@
            class="form-control"
            step="any">
   </div>
-  <div class="div col-3 col-md-3">
+  <!--<div class="div col-3 col-md-3">
     <label for="pvpIva" class="form-label">PVP</label>
     <input [(ngModel)]="pvp1"  type="number" min="0" id="pvp" name="pvp"
            class="form-control"
            step="any">
-  </div>
+  </div>-->
   <div class="div col-3 col-md-3">
     <label for="pvpIva" class="form-label">PVP + Iva</label>
     <input [(ngModel)]="pvp1Iva" (focusout)="emit()" (input)="calcFinalPrice()" type="number" min="0" id="pvpIva" name="pvpIva"

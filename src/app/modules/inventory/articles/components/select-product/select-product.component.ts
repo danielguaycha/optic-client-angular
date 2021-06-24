@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Articles} from '../../models/articles.model';
+import {Article} from '../../models/articles.model';
 import {ConfigService} from '../../../../enterprise/config/services/config.service';
 import { ArticleService } from '../../services/articles.service';
 import {ValidateService} from '../../../../../core/services/validate.service';
@@ -18,7 +18,7 @@ export class SelectProductComponent implements OnInit {
   @Input() validateStock: boolean = true;
 
   code: string
-  currentArt: Articles;
+  currentArt: Article;
   calcArt: any;
   constructor(private articleService: ArticleService, public validate: ValidateService,
               private cfg: ConfigService, private toast: ToastService) {
@@ -92,37 +92,19 @@ export class SelectProductComponent implements OnInit {
 
     if (!this.showCalc) return; // en caso de solo querer seleccionar el producto
 
-    const p = this.currentArt;
-    if (!p.id) return;
+    if (!this.currentArt) return;
 
-    const iva = this.cfg.iva;
-    let qty = this.calcArt.qty;
-    let pvp = p.pvp; // precio neto, sin impuestos
-
-    let total, desc = 0;
-    let totalIva = 0;
-    if (qty > this.currentArt.stock && this.currentArt.type === 'PRODUCTO' && this.validateStock) {
-      this.toast.warn(`El cantidad ingresada (${qty}) supera el stock (${this.currentArt.stock})`);
+    if (this.calcArt.qty > this.currentArt.stock && this.currentArt.type === 'PRODUCTO' && this.validateStock) {
+      this.toast.warn(`El cantidad ingresada (${this.calcArt.qty}) supera el stock (${this.currentArt.stock})`);
       this.calcArt.qty = this.currentArt.stock;
     }
 
-    total = (pvp * qty);
-    //desc = this.validate.calcPercent(total, this.selectProductCalc.discount);
-    desc = this.calcArt.discount;
-    if (desc > total) {
-      this.calcArt.discount = 0;
-      this.toast.warn(`El descuento no puede ser mayor al total`);
-      return;
-    }
-    if (p.iva === 1) {
-      totalIva = this.validate.calcPercent((total - desc), iva);
-    }
-    total = total - desc;
-    this.calcArt.totalIva = totalIva+total;
+    const {total, totalIva} = this.articleService.calcTotals(this.currentArt, this.calcArt.qty, this.calcArt.discount);
     this.calcArt.total = total;
+    this.calcArt.totalIva = (totalIva + total);
   }
 
-  hasStock(product: Articles = null) {
+  hasStock(product: Article = null) {
     if (!product) product = this.currentArt;
     if (product.type === 'PRODUCTO' && product.stock <= 0 && this.validateStock) {
       this.toast.warn(`El producto (${product.code}) no tiene stock`);

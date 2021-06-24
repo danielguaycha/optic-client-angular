@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { Articles } from '../../models/articles.model';
+import { Article } from '../../models/articles.model';
 import { ArticleService } from '../../services/articles.service';
 import { ConfigService } from '../../../../enterprise/config/services/config.service';
 import { ValidateService } from '../../../../../core/services/validate.service';
@@ -15,7 +15,7 @@ import {FrmPricesComponent} from './frm-prices/frm-prices.component';
 export class FrmProductComponent implements OnInit {
   @ViewChild(FrmPricesComponent) FrmPrices: FrmPricesComponent;
   @Output() create: EventEmitter<any> = new EventEmitter();
-  @Input() formData!:Articles;
+  @Input() formData!:Article;
 
   @Input() category!:Category;
   @Input() edit:boolean = false;

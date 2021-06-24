@@ -4,7 +4,7 @@
     <div body>
       <div>
         <form ngForm (ngSubmit)="search()" class="input-group mb-1">
-          <input [(ngModel)]="query" name="search" id="search" type="search" class="form-control" placeholder="Buscar por cliente o numero">
+          <input [(ngModel)]="query" autocomplete="off" name="search" id="search" type="search" class="form-control" placeholder="Buscar por cliente o numero">
           <button type="submit" class="btn btn-success btn-group-sm"><i class="fa fa-search"></i></button>
         </form>
 

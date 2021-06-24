@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Articles } from '../../models/articles.model';
+import { Article } from '../../models/articles.model';
 import { ArticleService } from '../../services/articles.service';
 import { Category } from '../../../category/models/categories.model';
 
@@ -10,7 +10,7 @@ import { Category } from '../../../category/models/categories.model';
 })
 export class EditArticleComponent implements OnInit {
   public articleId: string;
-  public article: Articles;
+  public article: Article;
   public category: Category;
   public loader: boolean;
 

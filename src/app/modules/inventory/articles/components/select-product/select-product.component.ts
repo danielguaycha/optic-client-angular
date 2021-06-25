@@ -99,9 +99,9 @@ export class SelectProductComponent implements OnInit {
       this.calcArt.qty = this.currentArt.stock;
     }
 
-    const {total, totalIva} = this.articleService.calcTotals(this.currentArt, this.calcArt.qty, this.calcArt.discount);
+    const {total, iva} = this.articleService.calcTotalsArticle(this.currentArt, this.calcArt.qty, this.calcArt.discount);
     this.calcArt.total = total;
-    this.calcArt.totalIva = (totalIva + total);
+    this.calcArt.totalIva = (iva + total);
   }
 
   hasStock(product: Article = null) {

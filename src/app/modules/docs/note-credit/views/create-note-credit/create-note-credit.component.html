@@ -11,7 +11,7 @@
           <div class="col-12 col-md-6">
             <div class="input-group-min">
               <label for="date" class="form-label">Fecha: </label>
-              <input type="date" name="date" id="date" class="form-control">
+              <input type="date" name="date" disabled id="date" [value]="dateNow" class="form-control">
             </div>
           </div>
           <div class="col-12 col-md-6">
@@ -44,7 +44,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let det of invoice.details">
+      <tr *ngFor="let det of invoice.details; index as i;">
         <td style="width: 1%">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" checked>
@@ -54,10 +54,11 @@
         <td>* {{ det.description }}</td>
         <td>{{ det.pvp | round:2 }}</td>
         <td>
-          <input type="number" class="form-control-plaintext form-control-sm text-center fw-bold" min="0" [max]="det.qty" [value]="det.qty">
+          <input type="number" (change)="onChangeEventCalcDetail($event, i)" class="form-control-plaintext form-control-sm text-center fw-bold" min="0" [max]="det.qty"
+                 [(ngModel)]="det.qty_note_credit">
         </td>
-        <td>{{ det.pvp * det.qty | round: 2 }}</td>
-        <td>{{ det.pvp * det.qty | round: 2}}</td>
+        <td>{{ det.subtotal | round: 2 }}</td>
+        <td>{{ det.total | round: 2}}</td>
         <td>
 
         </td>
@@ -71,7 +72,7 @@
       <div class="col-md-8">
         <div>
           <label for="observation" class="form-label">Motivo/Observación</label>
-          <input name="observation" id="observation" type="text" class="form-control">
+          <input name="observation" id="observation" autocomplete="off" type="text" class="form-control">
         </div>
         <div class="row mt-2">
           <div class="col">
@@ -91,13 +92,28 @@
         <table class="table table-sm table-borderless">
           <tbody>
           <tr>
-            <td>Subtotal 0% </td>
-            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            <td>Subtotal</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly [value]="validate.round(invoice.subtotal)">
             </td>
           </tr>
           <tr>
-            <td>Subtotal 12 % </td>
-            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            <td>Descuento</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly [value]="validate.round(invoice.discount)">
+            </td>
+          </tr>
+          <tr>
+            <td>Base Imponible</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly [value]="validate.round(invoice.base)">
+            </td>
+          </tr>
+          <tr>
+            <td>Base Imp. 0% </td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly [value]="validate.round(invoice.subtotal0)">
+            </td>
+          </tr>
+          <tr>
+            <td>Base Imp. {{ invoice.iva_percent}} % </td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly [value]="validate.round(invoice.subtotalIva)">
             </td>
           </tr>
           <tr>
@@ -106,8 +122,8 @@
             </td>
           </tr>
           <tr>
-            <td>Iva 12 %</td>
-            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
+            <td>Iva {{ invoice.iva_percent}} %</td>
+            <td><input type="text" class="form-control form-control-sm text-end" readonly [value]="validate.round(invoice.iva_valor)">
             </td>
           </tr>
           <tr>
@@ -116,13 +132,9 @@
             </td>
           </tr>
           <tr>
-            <td>Descuento</td>
-            <td><input type="text" class="form-control form-control-sm text-end" readonly value="0.0">
-            </td>
-          </tr>
-          <tr>
             <td>Total $</td>
-            <td><input type="text" class="form-control form-control-sm text-end text-primary fw-bold" readonly value="0.0"></td>
+            <td><input type="text" class="form-control form-control-sm text-end text-primary fw-bold" readonly [value]="validate.round(invoice.total)">
+            </td>
           </tr>
           </tbody>
         </table>

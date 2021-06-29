@@ -72,7 +72,7 @@
       <div class="col-md-8">
         <div>
           <label for="observation" class="form-label">Motivo/Observación</label>
-          <input name="observation" id="observation" autocomplete="off" type="text" class="form-control">
+          <input name="observation" id="observation" autocomplete="off" [(ngModel)]="formData.observation" type="text" class="form-control">
         </div>
         <div class="row mt-2">
           <div class="col">
@@ -84,7 +84,7 @@
             <input type="text" id="saldo" name="saldo" class="form-control" readonly>
           </div>
           <div class="col d-flex align-items-end">
-            <button class="btn btn-primary w-100"><i class="fa fa-save me-2"></i>Registrar N. Crédito</button>
+            <bs-button (click)="onSave()"  [loader]="loader"  class="btn btn-primary w-100"><i class="fa fa-save me-2"></i>Registrar N. Crédito</bs-button>
           </div>
         </div>
       </div>

@@ -33,20 +33,22 @@ export class CreateInvoiceComponent implements OnInit {
   iva12: number;
   total: number;
   typePayments: Array<any> = [];
-  loader: boolean = false;
-  sequence: string = "001-001-00000001";
+  loader: boolean;
+  sequence: string;
   constructor(private toast: ToastService, public validate: ValidateService,
               public cfg: ConfigService, private seqService: SequencesService,
               private invService: InvoiceService, private store: Store) {
     this.typePayments = typePayment;
-    this.store.dispatch(addTitle({ title: "Ventas"}));
+    this.store.dispatch(addTitle({ title: 'Ventas'}));
+    this.loader = false;
+    this.sequence = '001-001-00000001';
   }
 
   ngOnInit(): void {
     this.initComponents();
   }
 
-  submit(methodsPayments) {
+  submit(methodsPayments): void {
     if (methodsPayments.pays.length <= 0) {
       this.toast.err('Seleccione un método de pago');
       return;
@@ -88,14 +90,14 @@ export class CreateInvoiceComponent implements OnInit {
     });
   }
 
-  //confirm payments
-  confirmPayment() {
+  // confirm payments
+  confirmPayment(): void {
     if (!this.validFrm()) { return; }
     this.MethodPaymentCmp.open(this.formData.methodPay);
   }
 
   // get seq
-  getSeq() {
+  getSeq(): void {
     this.seqService.getByType(Sequence.SEQ_INVOICE).subscribe(res => {
       if (res.ok) {
         this.sequence = res.body;
@@ -103,13 +105,13 @@ export class CreateInvoiceComponent implements OnInit {
     })
   }
 
-  //events
-  onSelectPerson(person){
+  // events
+  onSelectPerson(person): void{
     this.formData.client_id = person.id;
   }
 
-  //events
-  onAddArticle(article: any) {
+  // events
+  onAddArticle(article: any): any {
     if (article.qty > article.stock && article.type === 'PRODUCTO') { // verify stock
       this.toast.warn(`La cantidad ingresada (${article.qty}) es mayor al stock (${article.stock}), articulo (Cod=${article.code}) `);
       return;
@@ -126,22 +128,22 @@ export class CreateInvoiceComponent implements OnInit {
     }
   }
 
-  onRemoveArticle(article){
+  onRemoveArticle(article): void {
     const index = this.articles.findIndex(i => i.id == article.id);
     this.articles.splice(index, 1);
     this.calc();
   }
 
-  //helpers
-  getAddedArticle(articleId) {
-    const index = this.articles.find(i => i.id == articleId);
+  // helpers
+  getAddedArticle(articleId): any {
+    const index = this.articles.find(i => i.id === articleId);
     if (index) {
       return index;
     }
     return null;
   }
 
-  calc() {
+  calc(): void {
     this.subtotal0 = 0;
     this.subtotal12 = 0;
     this.descuento = 0;
@@ -160,10 +162,10 @@ export class CreateInvoiceComponent implements OnInit {
     this.iva12 = this.validate.calcPercent(this.subtotal12, this.cfg.iva);
   }
 
-  reCalcItem(article) {
+  reCalcItem(article): void {
     let totalIva = 0;
     let total = (article.pvp * article.qty);
-    //let desc = this.validate.calcPercent(total, article.discount);
+    // let desc = this.validate.calcPercent(total, article.discount);
     let desc = article.discount;
     if (desc > total) {
       desc = 0;
@@ -175,7 +177,7 @@ export class CreateInvoiceComponent implements OnInit {
       totalIva = this.validate.calcPercent((total - desc), this.cfg.iva);
     }
     total = total - desc;
-    article.totalIva = totalIva+total;
+    article.totalIva = totalIva + total;
     article.total = total;
     if (article.qty > article.stock && article.type === `PRODUCTO`) {
       this.toast.warn(`La cantidad ingresada (${article.qty}) en mayor al stock (${article.stock})`);
@@ -185,7 +187,7 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   //resets
-  initComponents() {
+  initComponents(): void {
     this.articles = [];
     this.formData = {
       date: moment().format('YYYY-MM-DD'),
@@ -198,18 +200,20 @@ export class CreateInvoiceComponent implements OnInit {
     this.iva12 = 0;
     this.total = 0;
     this.getSeq();
-    if (this.SelectArticleCmp)
+    if (this.SelectArticleCmp) {
       this.SelectPersonCmp.initComponents();
-    if (this.SelectArticleCmp)
+    }
+    if (this.SelectArticleCmp) {
       this.SelectArticleCmp.initComponents();
+    }
   }
 
   // open search article
-  openSearchArticle() {
+  openSearchArticle(): void {
     this.SelectArticleCmp.openSearch();
   }
 
-  //validate invoice
+  // validate invoice
   validFrm(): boolean {
     const data = this.formData;
     if (!data.date) {

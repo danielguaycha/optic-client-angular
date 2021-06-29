@@ -1,13 +1,13 @@
 export interface NoteCreditModel {
   invoice_id: number;
-  date: number;
+  date: string;
   observation: string;
   subtotal0: number;
   subtotalIva: number;
   iva: number;
   discount: number;
   iva_percent: number;
-  articles: DetailNoteCreditModel;
+  articles: Array<DetailNoteCreditModel>;
 }
 
 export interface DetailNoteCreditModel {

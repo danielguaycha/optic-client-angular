@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AppState} from '../../../modules/auth/store/user.reducer';
 import {AuthService} from '../../../modules/auth/services/auth.service';
 import scripts from '../../utils/sciprts';
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
   public menu: Array<any>;
   public appState: AppState;
@@ -17,39 +17,39 @@ export class NavbarComponent implements OnInit {
   constructor(public auth: AuthService, public router: Router) {
     this.auth.storeData.subscribe(res => {
       this.appState = res.data;
-    })
+    });
   }
 
-  ngOnInit() {
-    this.configMenu()
+  ngOnInit(): void {
+    this.configMenu();
   }
-  ngAfterViewInit() {
+  ngAfterViewInit(): void{
     scripts();
   }
 
-  logout() {
+  logout(): void {
     this.auth.logout();
     this.router.navigate(['/auth/login']);
   }
 
-  configMenu() {
+  configMenu(): void{
     this.menu = [
       {
-        name: "Registro y control",
+        name: 'Registro y control',
         items: [
           { // clientes
             name: 'Clientes',
             icon: 'fa-user',
             submenu: [
               {
-                name: "Registrar",
-                to: "/persons/add",
+                name: 'Registrar',
+                to: '/persons/add',
                 icon: 'fa-plus',
               },
               {
-                name: "Listar",
-                to: "/persons",
-                icon: "fa-list"
+                name: 'Listar',
+                to: '/persons',
+                icon: 'fa-list'
               }
             ]
           },
@@ -58,13 +58,13 @@ export class NavbarComponent implements OnInit {
             icon: 'fa-book',
             submenu: [
               {
-                name: "Registrar",
-                to: "/persons/provider/add",
+                name: 'Registrar',
+                to: '/persons/provider/add',
                 icon: 'fa-plus',
               },
               {
-                name: "Listar",
-                to: "/persons/providers",
+                name: 'Listar',
+                to: '/persons/providers',
                 icon: 'fa-list'
               }
             ]
@@ -75,18 +75,18 @@ export class NavbarComponent implements OnInit {
             prefixIcon: 'fas',
             submenu: [
               {
-                name: "Agregar producto",
-                to: "/inventory/articles/add",
+                name: 'Agregar producto',
+                to: '/inventory/articles/add',
                 icon: 'fa-plus',
               },
               {
-                name: "Listar Productos",
-                to: "/inventory/articles",
+                name: 'Listar Productos',
+                to: '/inventory/articles',
                 icon: 'fa-list'
               },
               {
-                name: "Ajustes de inventario",
-                to: "/inventory/adjust",
+                name: 'Ajustes de inventario',
+                to: '/inventory/adjust',
                 icon: 'fa-list'
               }
             ]
@@ -106,31 +106,53 @@ export class NavbarComponent implements OnInit {
                 icon: 'fa-file'
               }
             ]
-          }
+          },
         ]
       },
       {
-        name: "Configuración",
+        name: 'Configuración',
         items: [
           {
-            name: "Perfil de empresa",
-            to: "enterprise",
+            name: 'Perfil de empresa',
+            to: 'enterprise',
             icon: 'fa-university'
           },
           {
-            name: "Configuraciones",
-            to: "enterprise/config",
-            icon: "fa-cog"
+            name: 'Configuraciones',
+            to: 'enterprise/config',
+            icon: 'fa-cog'
           },
           {
-            name: "Roles y permisos",
-            to: "users/roles/add",
-            icon: "fa-users"
+            name: 'Roles y permisos',
+            to: 'users/roles/add',
+            icon: 'fa-users'
           },
           {
-            name: "Usuarios",
-            to: "users",
-            icon: "fa-user"
+            name: 'Usuarios',
+            to: 'users',
+            icon: 'fa-user'
+          }
+        ]
+      },
+
+      {
+        name: 'Medicina',
+        items: [
+          {
+            name: 'Optometría',
+            icon: 'fa-eye',
+            submenu: [
+              {
+                name: 'Nueva Ficha Clínica',
+                to: '/medical/optometry',
+                icon: 'fa-plus'
+              },
+              {
+                name: 'Historial Clínico',
+                to: '/medical/optometry',
+                icon: 'fa-file'
+              }
+            ]
           }
         ]
       }

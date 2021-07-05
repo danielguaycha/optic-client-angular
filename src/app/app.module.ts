@@ -17,6 +17,7 @@ import {MainRoute} from './app.routing';
 import {PersonModule} from './modules/persons/person.module';
 import {ToastNotificationsModule} from 'ngx-toast-notifications';
 import {UserModule} from './modules/users/index/users.module';
+import {OptometryModule} from './modules/medical/optometry/optometry.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {UserModule} from './modules/users/index/users.module';
     AuthModule,
     PersonModule,
     UserModule,
+    OptometryModule,
     StoreModule.forRoot({data: userReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],

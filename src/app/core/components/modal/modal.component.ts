@@ -8,13 +8,13 @@ import {Modal} from 'bootstrap';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  @Input() title:string = environment.appName;
-  @Input() idModal:string;
-  @Input() showFooter:boolean = true;
-  @Input() extraClass: string = '';
-  @Input() secondary: boolean = false;
+  @Input() title: string = environment.appName;
+  @Input() idModal: string;
+  @Input() showFooter: boolean | true;
+  @Input() extraClass: string | '';
+  @Input() secondary: boolean | false;
   @ViewChild('closebutton') closebutton;
-  public appName: string
+  public appName: string;
   private modal;
   constructor() {
     this.idModal = 'modal';

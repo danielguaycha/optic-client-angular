@@ -9,12 +9,13 @@ import {ToastService} from '../../../../core/services/toast.service';
 export class FrmPersonComponent implements OnInit {
 
   @Output() create: EventEmitter<any> = new EventEmitter();
-  @Input() formData!:any;
-  @Input() edit:boolean = false;
-  @Input() provider: boolean = false
+  @Input() formData!: any;
+  @Input() edit: boolean | false;
+  @Input() provider: boolean | false;
 
-  public loader: boolean = false;
-  constructor(private personService : PersonService, private toast: ToastService) {
+  public loader: boolean | false;
+
+  constructor(private personService: PersonService, private toast: ToastService) {
     this.initData();
   }
 
@@ -22,16 +23,16 @@ export class FrmPersonComponent implements OnInit {
     this.formData.is_provider = this.provider ? 'SI' : 'NO';
   }
 
-  onSubmit() {
+  onSubmit(): void{
     this.loader = true;
     if (!this.edit) this.storePerson();
     if (this.edit) this.updatePerson();
   }
 
-  updatePerson() {
+  updatePerson(): void{
     this.personService.updatePerson(this.formData.id, this.formData).subscribe(res => {
       if (res.ok) {
-        this.toast.ok(res.message)
+        this.toast.ok(res.message);
       }
       this.loader = false;
     }, error => {
@@ -40,7 +41,7 @@ export class FrmPersonComponent implements OnInit {
     });
   }
 
-  storePerson() {
+  storePerson(): void{
     this.personService.savePerson(this.formData).subscribe(res => {
       if (res.ok) {
         this.toast.ok(res.message);
@@ -51,10 +52,10 @@ export class FrmPersonComponent implements OnInit {
     }, error => {
       this.loader = false;
       this.toast.err(error);
-    })
+    });
   }
 
-  initData(){
+  initData(): void{
     this.formData = {
       doc_type: 'CI',
       doc: '',

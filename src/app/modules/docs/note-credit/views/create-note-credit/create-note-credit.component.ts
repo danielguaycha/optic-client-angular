@@ -115,7 +115,7 @@ export class CreateNoteCreditComponent implements OnInit {
     this.formData.iva = this.invoice.iva_valor;
     this.formData.iva_percent = this.invoice.iva_percent;
     this.formData.subtotal0 = this.invoice.subtotal0;
-    this.formData.subtotalIva = this.invoice.subtotalIva; 
+    this.formData.subtotalIva = this.invoice.subtotalIva;
     this.formData.discount = this.invoice.discount;
     this.formData.articles = [];
     this.invoice.details.forEach(detail => {

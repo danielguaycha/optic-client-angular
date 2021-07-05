@@ -1,0 +1,145 @@
+<form class="row g-2" #clientForm='ngForm' (ngSubmit)="onSubmit()" ngNativeValidate>
+  <label class="label-title"><span>Datos del cliente</span></label>
+  <div class="col-12 col-md-12" *ngIf="!edit">
+    <app-select-person #selectPerson (select)="onSelectPerson($event)"></app-select-person>
+  </div>
+  <div class="col-12 col-md-12" *ngIf="edit && fileClinical !== undefined">
+      {{ fileClinical.client.id }} | {{ fileClinical.client.doc }} | {{ fileClinical.client.business_name }}
+  </div>
+  <label class="label-title"><span>Ficha Integral | Rx Final</span></label>
+
+  <div class="col-12 col-md-12">
+    <label for="motivo" class="form-label">Motivo de Consulta:</label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <textarea placeholder="Ingrese el Motivo de consulta" [(ngModel)]="formData.description" type="text" id="motivo" name="motivo" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label for="od_esfera" class="form-label">(od) esfera:</label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese la Esfera" [(ngModel)]="formData.od_esfera" type="text" id="od_esfera" name="od_esfera" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label for="oi_esfera" class="form-label">(oi) esfera: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese la Esfera" [(ngModel)]="formData.oi_esfera" type="text" id="oi_esfera" name="oi_esfera" class="form-control">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="col-12 col-md-6">
+    <label for="od_cilindro" class="form-label">(od) cilindro:</label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el Cilindro" [(ngModel)]="formData.od_cilindro" type="text" id="od_cilindro" name="od_cilindro" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label for="oi_cilindro" class="form-label">(oi) cilindro: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el Cilindro" [(ngModel)]="formData.oi_cilindro" type="text" id="oi_cilindro" name="oi_cilindro" class="form-control">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-12 col-md-6">
+    <label for="od_eje" class="form-label">(od) eje: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el Eje" [(ngModel)]="formData.od_eje" type="text" id="od_eje" name="od_eje" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <label for="oi_eje" class="form-label">(oi) eje: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el Eje" [(ngModel)]="formData.oi_eje" type="text" id="oi_eje" name="oi_eje" class="form-control">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-12 col-md-6">
+    <label for="od_dnp" class="form-label">(od) dnp: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el dnp" [(ngModel)]="formData.od_dne" type="text" id="od_dnp" name="od_dnp" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <label for="oi_dnp" class="form-label">(oi) dnp: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el dnp" [(ngModel)]="formData.oi_dne" type="text" id="oi_dnp" name="oi_dnp" class="form-control">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="col-12 col-md-6">
+    <label for="alt" class="form-label">Alt: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese el Alt" [(ngModel)]="formData.alt" type="text" id="alt" name="all" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <label for="Add" class="form-label">add: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese la Add" [(ngModel)]="formData.add" type="text" id="add" name="add" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-12">
+    <label for="tipo_lente" class="form-label">Tipo de Lente: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <input placeholder="Ingrese " [(ngModel)]="formData.tipo_lente" type="text" id="tipo_lente" name="tipo_lente" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-12">
+    <label for="observacion" class="form-label">observacion: </label>
+    <div class="input-group">
+      <div class="col-12 col-md-12">
+        <textarea type="text" id="observacion" [(ngModel)]="formData.observacion" name="observacion" class="form-control">
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-12 text-end mt-4">
+    <button class="btn btn-outline-danger me-2" type="button" data-bs-dismiss="modal">Cancelar</button>
+    <bs-button [loader]="loader" *ngIf="!edit" variant="primary"><i class="fa fa-save me-1"></i> Registrar Ficha Clínica</bs-button>
+    <bs-button [loader]="loader" *ngIf="edit" variant="success"><i class="fa fa-refresh me-1"></i> Actualizar Ficha Clínica</bs-button>
+  </div>
+</form>

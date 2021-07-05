@@ -186,7 +186,7 @@ export class CreateInvoiceComponent implements OnInit {
     this.calc();
   }
 
-  //resets
+  // resets
   initComponents(): void {
     this.articles = [];
     this.formData = {

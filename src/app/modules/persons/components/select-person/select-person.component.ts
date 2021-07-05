@@ -11,18 +11,18 @@ export class SelectPersonComponent implements OnInit {
   @ViewChild(DialogAddPersonComponent) PersonCmp: DialogAddPersonComponent;
 
   @Output() select: EventEmitter<any> = new EventEmitter<any>();
-  @Input() loadFinalCostumer?: boolean = true;
-  @Input() provider: boolean = false;
+  @Input() loadFinalCostumer?: boolean | true;
+  @Input() provider: boolean | false;
   formDataPerson: any = {};
   person: any;
-  constructor(private personServ : PersonService) {}
+  constructor(private personServ: PersonService) {}
 
   ngOnInit(): void {
     this.initComponents();
     this.select.emit(this.person);
   }
 
-  initComponents() {
+  initComponents(): void{
     if (this.loadFinalCostumer) {
       this.person = {
         id: 1,
@@ -32,23 +32,24 @@ export class SelectPersonComponent implements OnInit {
         email: ''
       };
     } else {
-      this.person = {}
+      this.person = {};
     }
   }
 
-  onSelect(person) {
+  onSelect(person): void{
     this.person = person;
     this.select.emit(person);
   }
 
-  onPressVerify(key) {
-    if (key.keyCode !== 13)
+  onPressVerify(key): void{
+    if (key.keyCode !== 13){
       return;
+    }
 
     this.verifyClient();
   }
 
-  verifyClient(doc: string = null, setExtra = {}) {
+  verifyClient(doc: string = null, setExtra = {}): void{
       if (!doc) doc = this.person.doc;
       else this.person.doc = doc;
       this.personServ.getPerson(doc, this.provider).subscribe(res => {

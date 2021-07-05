@@ -88,6 +88,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'medical',
+        children: [
+          {
+            path: 'optometry',
+            pathMatch: 'full',
+            loadChildren: () => import('./modules/medical/optometry/optometry.module').then(m => m.OptometryModule)
+          }
+        ]
+      },
+      {
         path: 'building',
         component: BuildingComponent
       },
@@ -103,7 +113,7 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

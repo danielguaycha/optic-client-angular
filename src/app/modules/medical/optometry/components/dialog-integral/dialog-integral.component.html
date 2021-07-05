@@ -1,0 +1,5 @@
+<button *ngIf="!edit" class="btn btn-sm btn-success" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#'+idModal"><i class="fa fa-plus"></i></button>
+<button *ngIf="edit" class="btn btn-sm text-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#'+idModal" title="Detalle" ><i class="fa fa-edit"></i></button>
+<app-modal [idModal]="idModal" [showFooter]="false" [title]="title">
+  <app-frm-integral [edit]="edit" [fileClinical]="fileClinical" body></app-frm-integral>
+</app-modal>

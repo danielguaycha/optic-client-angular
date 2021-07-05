@@ -9,7 +9,7 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) { }
 
-  store(data: any) : Observable<any> {
+  store(data: any): Observable<any> {
     return this.http.post(`invoice`, data);
   }
 

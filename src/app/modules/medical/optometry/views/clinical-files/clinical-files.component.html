@@ -1,0 +1,45 @@
+<with-loader [loader]="false">
+  <div class="page-header">
+    <h5>Listado de Fichas Clinicas</h5>
+    <app-dialog-integral modalId="addClinicalFile" [edit]="false"></app-dialog-integral>
+  </div>
+  <div class="card pt-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover mb-0">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">ID</th>
+          <th scope="col">Nombres y Apellidos</th>
+          <th scope="col">RUC/CI</th>
+          <th scope="col">Motivos de Consulta</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">(OD) Esfera</th>
+          <th scope="col">(OD) Cilindro</th>
+          <th scope="col">(OI) Esfera</th>
+          <th scope="col">(OI) Cilindro</th>
+          <th class="text-center"><i class="fa fa-cog"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let clinicalfile of clinicalFiles">
+          <td>{{ clinicalfile.id }}</td>
+          <td>{{ clinicalfile.client.business_name }}</td>
+          <td>{{ clinicalfile.client.doc }}</td>
+          <td>{{ clinicalfile.description }}</td>
+          <td>{{ clinicalfile.date }}</td>
+          <td>{{ clinicalfile.integral_rxs!=null ?clinicalfile.integral_rxs.od_esfera:'--' }}</td>
+          <td>{{ clinicalfile.integral_rxs!=null ?clinicalfile.integral_rxs.od_cilindro:'--' }}</td>
+          <td>{{ clinicalfile.integral_rxs!=null ?clinicalfile.integral_rxs.oi_esfera:'--' }}</td>
+          <td>{{ clinicalfile.integral_rxs!=null ?clinicalfile.integral_rxs.oi_cilindro:'--' }}</td>
+          <td>
+            <app-dialog-integral [idModal]="'clinical-'+clinicalfile.id" [edit]="true" [fileClinical]="clinicalfile"></app-dialog-integral>
+            <button (click)="onClickDelete(clinicalfile.id)" class="btn btn-sm text-danger" title="Eliminar"><i class="fa fa-trash"></i></button>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <app-modal-confirm></app-modal-confirm>
+    </div>
+  </div>
+</with-loader>

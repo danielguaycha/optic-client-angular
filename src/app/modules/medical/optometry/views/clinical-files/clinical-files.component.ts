@@ -10,8 +10,11 @@ import {ToastService} from '../../../../../core/services/toast.service';
 })
 export class ClinicalFilesComponent implements OnInit {
 
+  public page: number |1;
+  public limit: any = 5;
   public loader: boolean;
   public search: string;
+  public clientId: number | -1;
   public clinicalFiles: Array<ClinicalFileModel>;
 
   constructor(
@@ -24,17 +27,32 @@ export class ClinicalFilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+
+  }
+
+  onSelectPatient(event): void{
+    this.clientId = event.id;
+    this.load();
   }
 
   load(): void{
-    this.optometryService.getClinicalFiles(this.search).subscribe(data => {
-      this.clinicalFiles = data.body;
-    });
+    // if (this.clientId !== -1 && this.clientId !== undefined){
+      this.optometryService.getClinicalFiles().subscribe(data => {
+        console.log(data);
+        this.clinicalFiles = data.body;
+      });
+    // }
+  }
+  onSelect($event): void{
+    console.log('gola');
+  }
+  onKeyPressEnterSearchFileClinical(event: any): void{
+    if (event.charCode === 13){
+      this.load();
+    }
   }
 
-  onClickEdit(): void{
-    console.log('event edition..!');
-  }
+
 
   onClickDelete(id: number): void{
     this.optometryService.delete(id).subscribe(res => {

@@ -9,12 +9,18 @@ export class OptometryService {
 
   constructor(private http: HttpClient) { }
 
+
   getClinicalFiles(search: string = ''): Observable<any> {
     let url = `medical/optometry?`;
     if (search.trim().length > 0) {
       url += `search=${search}`;
     }
     return this.http.get(url);
+  }
+
+
+  getClinicalFilesForPatient(clientId: number): Observable<any> {
+    return this.http.get(  `medical/optometry/` + clientId);
   }
 
   store(data: any): Observable<any> {

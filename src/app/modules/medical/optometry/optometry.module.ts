@@ -6,6 +6,7 @@ import { ClinicalFilesComponent } from './views/clinical-files/clinical-files.co
 import { FrmIntegralComponent } from './components/frm-integral/frm-integral.component';
 import { DialogIntegralComponent } from './components/dialog-integral/dialog-integral.component';
 import {PersonModule} from '../../persons/person.module';
+import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -18,7 +19,8 @@ import {PersonModule} from '../../persons/person.module';
     imports: [
         CoreModule,
         OptometryRouting,
-        PersonModule
+        PersonModule,
+        NgbPaginationModule
     ]
 })
 export class OptometryModule { }

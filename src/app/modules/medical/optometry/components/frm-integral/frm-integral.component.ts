@@ -24,12 +24,14 @@ export class FrmIntegralComponent implements OnInit {
     this.initComponents();
     if (this.fileClinical !== undefined){
       this.loadData(this.fileClinical);
+      console.log('this.fileClinical');
       console.log(this.fileClinical);
     }
 
   }
 
   initComponents(): void {
+    console.log('limpiar');
     this.formData = {
       client_id: -1,
       date: moment().format('YYYY-MM-DD'),
@@ -51,6 +53,7 @@ export class FrmIntegralComponent implements OnInit {
   }
 
   loadData(data: any): void{
+    console.log('accedió');
     this.formData.client_id = data.client.id;
     this.formData.integral_rxs_id = data.integral_rxs.id;
     this.formData.date = data.date;
@@ -72,16 +75,21 @@ export class FrmIntegralComponent implements OnInit {
 
 
   // events
-  onSelectPerson(person): void{
-    this.formData.client_id = person.id;
+  onSelectPerson(person: any): void{
+    console.log(person);
+    if (person.id !== undefined){
+      console.log('Accedio a ingresar la persona');
+      this.formData.client_id = person.id;
+    }
   }
 
   onSubmit(): void{
+    console.log(this.formData);
     if (this.formData.client_id === -1){
       this.toast.warn('Debe seleccionar un Paciente');
       return;
     }
-    if (this.edit){
+    if (this.edit === true){
       this.integralService.update(this.formData).subscribe(res => {
         if (res.ok) {
           this.toast.ok(res.message);
@@ -95,6 +103,7 @@ export class FrmIntegralComponent implements OnInit {
       this.integralService.store(this.formData).subscribe(res => {
         if (res.ok) {
           this.toast.ok(res.message);
+          console.log(res);
           this.initComponents();
         }
         this.loader = false;

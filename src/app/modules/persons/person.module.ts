@@ -32,8 +32,9 @@ import {EditProviderComponent} from './views/edit-provider/edit-provider.compone
     CoreModule,
     PersonRouting,
   ],
-  exports: [
-    SelectPersonComponent
-  ]
+    exports: [
+        SelectPersonComponent,
+        DialogSearchPersonComponent
+    ]
 })
 export class PersonModule { }
